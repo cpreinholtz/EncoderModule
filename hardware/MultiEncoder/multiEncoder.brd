@@ -38,7 +38,7 @@
 <layer number="42" name="bRestrict" color="1" fill="10" visible="yes" active="yes"/>
 <layer number="43" name="vRestrict" color="2" fill="10" visible="yes" active="yes"/>
 <layer number="44" name="Drills" color="7" fill="1" visible="no" active="yes"/>
-<layer number="45" name="Holes" color="7" fill="1" visible="no" active="yes"/>
+<layer number="45" name="Holes" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="46" name="Milling" color="3" fill="1" visible="no" active="yes"/>
 <layer number="47" name="Measures" color="7" fill="1" visible="no" active="yes"/>
 <layer number="48" name="Document" color="7" fill="1" visible="yes" active="yes"/>
@@ -59,13 +59,21 @@
 </layers>
 <board>
 <plain>
-<wire x1="0" y1="0" x2="80" y2="0" width="0" layer="20"/>
-<wire x1="80" y1="0" x2="80" y2="100" width="0" layer="20"/>
-<wire x1="80" y1="100" x2="0" y2="100" width="0" layer="20"/>
-<wire x1="0" y1="100" x2="0" y2="0" width="0" layer="20"/>
-<dimension x1="0" y1="0" x2="0" y2="10" x3="84" y3="5" textsize="1.778" layer="20"/>
-<dimension x1="0" y1="100" x2="0" y2="90" x3="88" y3="95" textsize="1.778" layer="20"/>
-<dimension x1="83" y1="90" x2="83" y2="10" x3="84" y3="50" textsize="1.778" layer="20"/>
+<wire x1="0" y1="0" x2="100" y2="0" width="0" layer="20"/>
+<wire x1="100" y1="0" x2="100" y2="80" width="0" layer="20"/>
+<wire x1="100" y1="80" x2="0" y2="80" width="0" layer="20"/>
+<wire x1="0" y1="80" x2="0" y2="0" width="0" layer="20"/>
+<hole x="6" y="6" drill="5"/>
+<hole x="94" y="6" drill="5"/>
+<hole x="6" y="74" drill="5"/>
+<hole x="94" y="74" drill="5"/>
+<hole x="50" y="74" drill="5"/>
+<hole x="50" y="6" drill="5"/>
+<text x="57" y="9" size="1.778" layer="21"> ADRR = 0 1 0 0 A2 A1 A0</text>
+<text x="46" y="11" size="1.778" layer="21">SHORT ONLY ONE RESISTOR PER ADDR LINE</text>
+<text x="16" y="11" size="1.778" layer="21">A2</text>
+<text x="29" y="11" size="1.778" layer="21">A1</text>
+<text x="41" y="11" size="1.778" layer="21">A0</text>
 </plain>
 <libraries>
 <library name="90325-0004">
@@ -138,87 +146,59 @@
 </package>
 </packages>
 </library>
-<library name="PCA9698DGG_518">
+<library name="MCP23017T-E_SS">
 <packages>
-<package name="SOP50P810X120-56N">
-<wire x1="-3.1" y1="-7.05" x2="-3.1" y2="7.05" width="0.127" layer="51"/>
-<wire x1="-3.1" y1="7.05" x2="3.1" y2="7.05" width="0.127" layer="51"/>
-<wire x1="3.1" y1="7.05" x2="3.1" y2="-7.05" width="0.127" layer="51"/>
-<wire x1="3.1" y1="-7.05" x2="-3.1" y2="-7.05" width="0.127" layer="51"/>
-<wire x1="-4.76" y1="7.15" x2="-3.35" y2="7.15" width="0.05" layer="39"/>
-<wire x1="-3.35" y1="7.15" x2="-3.35" y2="7.3" width="0.05" layer="39"/>
-<wire x1="-3.35" y1="7.3" x2="3.35" y2="7.3" width="0.05" layer="39"/>
-<wire x1="3.35" y1="7.3" x2="3.35" y2="7.15" width="0.05" layer="39"/>
-<wire x1="3.35" y1="7.15" x2="4.76" y2="7.15" width="0.05" layer="39"/>
-<wire x1="4.76" y1="-7.15" x2="3.35" y2="-7.15" width="0.05" layer="39"/>
-<wire x1="3.35" y1="-7.15" x2="3.35" y2="-7.3" width="0.05" layer="39"/>
-<wire x1="3.35" y1="-7.3" x2="-3.35" y2="-7.3" width="0.05" layer="39"/>
-<wire x1="-3.35" y1="-7.3" x2="-3.35" y2="-7.15" width="0.05" layer="39"/>
-<wire x1="-3.35" y1="-7.15" x2="-4.76" y2="-7.15" width="0.05" layer="39"/>
-<wire x1="-4.76" y1="-7.15" x2="-4.76" y2="7.15" width="0.05" layer="39"/>
-<wire x1="4.76" y1="7.15" x2="4.76" y2="-7.15" width="0.05" layer="39"/>
-<wire x1="-3.1" y1="7.1" x2="3.1" y2="7.1" width="0.127" layer="21"/>
-<wire x1="-3.1" y1="-7.1" x2="3.1" y2="-7.1" width="0.127" layer="21"/>
-<circle x="-5.3" y="6.8" radius="0.1" width="0.2" layer="21"/>
-<text x="-4.80398125" y="7.6063" size="1.27105" layer="25">&gt;NAME</text>
-<text x="-4.80651875" y="-8.611690625" size="1.27173125" layer="27">&gt;VALUE</text>
-<circle x="-2.633" y="6.546" radius="0.1" width="0.2" layer="51"/>
-<smd name="1" x="-3.715" y="6.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="2" x="-3.715" y="6.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="3" x="-3.715" y="5.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="4" x="-3.715" y="5.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="5" x="-3.715" y="4.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="6" x="-3.715" y="4.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="7" x="-3.715" y="3.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="8" x="-3.715" y="3.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="9" x="-3.715" y="2.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="10" x="-3.715" y="2.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="11" x="-3.715" y="1.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="12" x="-3.715" y="1.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="13" x="-3.715" y="0.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="14" x="-3.715" y="0.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="15" x="-3.715" y="-0.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="16" x="-3.715" y="-0.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="17" x="-3.715" y="-1.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="18" x="-3.715" y="-1.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="19" x="-3.715" y="-2.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="20" x="-3.715" y="-2.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="21" x="-3.715" y="-3.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="22" x="-3.715" y="-3.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="23" x="-3.715" y="-4.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="24" x="-3.715" y="-4.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="25" x="-3.715" y="-5.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="26" x="-3.715" y="-5.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="27" x="-3.715" y="-6.25" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="28" x="-3.715" y="-6.75" dx="1.59" dy="0.29" layer="1" roundness="7"/>
-<smd name="29" x="3.715" y="-6.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="30" x="3.715" y="-6.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="31" x="3.715" y="-5.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="32" x="3.715" y="-5.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="33" x="3.715" y="-4.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="34" x="3.715" y="-4.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="35" x="3.715" y="-3.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="36" x="3.715" y="-3.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="37" x="3.715" y="-2.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="38" x="3.715" y="-2.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="39" x="3.715" y="-1.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="40" x="3.715" y="-1.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="41" x="3.715" y="-0.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="42" x="3.715" y="-0.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="43" x="3.715" y="0.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="44" x="3.715" y="0.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="45" x="3.715" y="1.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="46" x="3.715" y="1.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="47" x="3.715" y="2.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="48" x="3.715" y="2.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="49" x="3.715" y="3.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="50" x="3.715" y="3.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="51" x="3.715" y="4.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="52" x="3.715" y="4.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="53" x="3.715" y="5.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="54" x="3.715" y="5.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="55" x="3.715" y="6.25" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
-<smd name="56" x="3.715" y="6.75" dx="1.59" dy="0.29" layer="1" roundness="7" rot="R180"/>
+<package name="SOP65P780X200-28N">
+<text x="-4.00583125" y="6.00875" size="1.27" layer="25" ratio="10" rot="SR0">&gt;NAME</text>
+<text x="-4.007609375" y="-7.01331875" size="1.27" layer="27" ratio="10" rot="SR0">&gt;VALUE</text>
+<wire x1="-2.8" y1="5.25" x2="2.8" y2="5.25" width="0.127" layer="51"/>
+<wire x1="2.8" y1="5.25" x2="2.8" y2="-5.25" width="0.127" layer="51"/>
+<wire x1="2.8" y1="-5.25" x2="-2.8" y2="-5.25" width="0.127" layer="51"/>
+<wire x1="-2.8" y1="-5.25" x2="-2.8" y2="5.25" width="0.127" layer="51"/>
+<wire x1="-2.8" y1="5.25" x2="2.8" y2="5.25" width="0.127" layer="21"/>
+<wire x1="2.8" y1="-5.25" x2="-2.8" y2="-5.25" width="0.127" layer="21"/>
+<wire x1="-4.71" y1="4.72" x2="-3.05" y2="4.72" width="0.05" layer="39"/>
+<wire x1="-3.05" y1="4.72" x2="-3.05" y2="5.5" width="0.05" layer="39"/>
+<wire x1="-3.05" y1="5.5" x2="3.05" y2="5.5" width="0.05" layer="39"/>
+<wire x1="3.05" y1="5.5" x2="3.05" y2="4.72" width="0.05" layer="39"/>
+<wire x1="3.05" y1="4.72" x2="4.71" y2="4.72" width="0.05" layer="39"/>
+<wire x1="4.71" y1="4.72" x2="4.71" y2="-4.72" width="0.05" layer="39"/>
+<wire x1="4.71" y1="-4.72" x2="3.05" y2="-4.72" width="0.05" layer="39"/>
+<wire x1="3.05" y1="-4.72" x2="3.05" y2="-5.5" width="0.05" layer="39"/>
+<wire x1="3.05" y1="-5.5" x2="-3.05" y2="-5.5" width="0.05" layer="39"/>
+<wire x1="-3.05" y1="-5.5" x2="-3.05" y2="-4.72" width="0.05" layer="39"/>
+<wire x1="-3.05" y1="-4.72" x2="-4.71" y2="-4.72" width="0.05" layer="39"/>
+<wire x1="-4.71" y1="-4.72" x2="-4.71" y2="4.72" width="0.05" layer="39"/>
+<circle x="-5.2" y="4.6" radius="0.1" width="0.2" layer="21"/>
+<circle x="-5.2" y="4.6" radius="0.1" width="0.2" layer="51"/>
+<smd name="1" x="-3.505" y="4.225" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="2" x="-3.505" y="3.575" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="3" x="-3.505" y="2.925" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="4" x="-3.505" y="2.275" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="5" x="-3.505" y="1.625" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="6" x="-3.505" y="0.975" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="7" x="-3.505" y="0.325" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="8" x="-3.505" y="-0.325" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="9" x="-3.505" y="-0.975" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="10" x="-3.505" y="-1.625" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="11" x="-3.505" y="-2.275" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="12" x="-3.505" y="-2.925" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="13" x="-3.505" y="-3.575" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="14" x="-3.505" y="-4.225" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="15" x="3.505" y="-4.225" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="16" x="3.505" y="-3.575" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="17" x="3.505" y="-2.925" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="18" x="3.505" y="-2.275" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="19" x="3.505" y="-1.625" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="20" x="3.505" y="-0.975" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="21" x="3.505" y="-0.325" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="22" x="3.505" y="0.325" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="23" x="3.505" y="0.975" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="24" x="3.505" y="1.625" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="25" x="3.505" y="2.275" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="26" x="3.505" y="2.925" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="27" x="3.505" y="3.575" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
+<smd name="28" x="3.505" y="4.225" dx="1.651" dy="0.4318" layer="1" roundness="30"/>
 </package>
 </packages>
 </library>
@@ -1490,427 +1470,187 @@ design rules under a new name.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="J1" library="90325-0004" package="MOLEX_90325-0004" value="90325-0004" x="75.44" y="95.53" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="111" y="46" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" HEADER, PICOFLEX, 4WAY; Connector Type:Wire-to-Board; Gender:Pin; Ways, No. of:4; Lead Spacing:1.27mm; Termination Method:Solder; Contact Material:Brass; Series:PICOFLEX PF50; Contact Plating:Tin; Rows, No. of:1; Colour:Black; Current Rating:1.2A; Flammability Rating:UL94V-0; Material:Polyester; No. of Poles:4; Pitch:1.27mm; Resistance, Contact:10mohm; Temp, Op. Max:105°C; Temp, Op. Min:-25°C; Voltage Rating, AC:250V; Voltage, Withstand:750V; Voltage, Working:250V; Width, External:3.81mm; Wire Size, AWG Max:26AWG; Wire Size, AWG Min:28AWG; Fixing Centres:7.41mm " x="111" y="46" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Molex" x="111" y="46" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="90325-0004" x="111" y="46" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="70.44" y="98.53" size="1.27" layer="25" ratio="10" rot="SR0"/>
-<attribute name="PACKAGE" value="None" x="111" y="46" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="111" y="46" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/90325-0004/?ref=eda" x="111" y="46" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="70.44" y="91.03" size="1.27" layer="27" ratio="10" rot="SR0" align="top-left"/>
+<element name="J1" library="90325-0004" package="MOLEX_90325-0004" value="90325-0004" x="7" y="40" smashed="yes" rot="R270">
+<attribute name="AVAILABILITY" value="In Stock" x="-42.53" y="4.44" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="DESCRIPTION" value=" HEADER, PICOFLEX, 4WAY; Connector Type:Wire-to-Board; Gender:Pin; Ways, No. of:4; Lead Spacing:1.27mm; Termination Method:Solder; Contact Material:Brass; Series:PICOFLEX PF50; Contact Plating:Tin; Rows, No. of:1; Colour:Black; Current Rating:1.2A; Flammability Rating:UL94V-0; Material:Polyester; No. of Poles:4; Pitch:1.27mm; Resistance, Contact:10mohm; Temp, Op. Max:105°C; Temp, Op. Min:-25°C; Voltage Rating, AC:250V; Voltage, Withstand:750V; Voltage, Working:250V; Width, External:3.81mm; Wire Size, AWG Max:26AWG; Wire Size, AWG Min:28AWG; Fixing Centres:7.41mm " x="-42.53" y="4.44" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MF" value="Molex" x="-42.53" y="4.44" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MP" value="90325-0004" x="-42.53" y="4.44" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="NAME" x="10" y="45" size="1.27" layer="25" ratio="10" rot="SR270"/>
+<attribute name="PACKAGE" value="None" x="-42.53" y="4.44" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PRICE" value="None" x="-42.53" y="4.44" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/90325-0004/?ref=eda" x="-42.53" y="4.44" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="2.5" y="45" size="1.27" layer="27" ratio="10" rot="SR270" align="top-left"/>
 </element>
-<element name="J2" library="90325-0004" package="MOLEX_90325-0004" value="90325-0004" x="-46.99" y="49.53" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" HEADER, PICOFLEX, 4WAY; Connector Type:Wire-to-Board; Gender:Pin; Ways, No. of:4; Lead Spacing:1.27mm; Termination Method:Solder; Contact Material:Brass; Series:PICOFLEX PF50; Contact Plating:Tin; Rows, No. of:1; Colour:Black; Current Rating:1.2A; Flammability Rating:UL94V-0; Material:Polyester; No. of Poles:4; Pitch:1.27mm; Resistance, Contact:10mohm; Temp, Op. Max:105°C; Temp, Op. Min:-25°C; Voltage Rating, AC:250V; Voltage, Withstand:750V; Voltage, Working:250V; Width, External:3.81mm; Wire Size, AWG Max:26AWG; Wire Size, AWG Min:28AWG; Fixing Centres:7.41mm " x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Molex" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="90325-0004" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="-51.99" y="52.53" size="1.27" layer="25" ratio="10" rot="SR0"/>
-<attribute name="PACKAGE" value="None" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/90325-0004/?ref=eda" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-51.99" y="45.03" size="1.27" layer="27" ratio="10" rot="SR0" align="top-left"/>
+<element name="J2" library="90325-0004" package="MOLEX_90325-0004" value="90325-0004" x="94" y="40" smashed="yes" rot="R270">
+<attribute name="AVAILABILITY" value="In Stock" x="44.47" y="-6.99" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="DESCRIPTION" value=" HEADER, PICOFLEX, 4WAY; Connector Type:Wire-to-Board; Gender:Pin; Ways, No. of:4; Lead Spacing:1.27mm; Termination Method:Solder; Contact Material:Brass; Series:PICOFLEX PF50; Contact Plating:Tin; Rows, No. of:1; Colour:Black; Current Rating:1.2A; Flammability Rating:UL94V-0; Material:Polyester; No. of Poles:4; Pitch:1.27mm; Resistance, Contact:10mohm; Temp, Op. Max:105°C; Temp, Op. Min:-25°C; Voltage Rating, AC:250V; Voltage, Withstand:750V; Voltage, Working:250V; Width, External:3.81mm; Wire Size, AWG Max:26AWG; Wire Size, AWG Min:28AWG; Fixing Centres:7.41mm " x="44.47" y="-6.99" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MF" value="Molex" x="44.47" y="-6.99" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MP" value="90325-0004" x="44.47" y="-6.99" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="NAME" x="97" y="45" size="1.27" layer="25" ratio="10" rot="SR270"/>
+<attribute name="PACKAGE" value="None" x="44.47" y="-6.99" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PRICE" value="None" x="44.47" y="-6.99" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/90325-0004/?ref=eda" x="44.47" y="-6.99" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="89.5" y="45" size="1.27" layer="27" ratio="10" rot="SR270" align="top-left"/>
 </element>
-<element name="MT1" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="10" y="81" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="35.4" y="69.57" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="35.4" y="69.57" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="35.4" y="69.57" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="35.4" y="69.57" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="2.65" y="89.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="35.4" y="69.57" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="35.4" y="69.57" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="35.4" y="69.57" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="2.65" y="71.05" size="1.27" layer="27"/>
+<element name="MT1" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="12.5" y="58" smashed="yes">
+<attribute name="AVAILABILITY" value="In Stock" x="37.9" y="46.57" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="37.9" y="46.57" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Bourns" x="37.9" y="46.57" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="PEC11R-4215F-S0024" x="37.9" y="46.57" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="5.15" y="66.2" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="37.9" y="46.57" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="37.9" y="46.57" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="37.9" y="46.57" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="5.15" y="48.05" size="1.27" layer="27"/>
 </element>
-<element name="U1" library="PCA9698DGG_518" package="SOP50P810X120-56N" value="PCA9698DGG-518" x="-24.13" y="53.34" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" I/O Expander 40 I²C 1MHz 56-TSSOP " x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="NXP USA" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PCA9698DGG,518" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="-28.93398125" y="60.9463" size="1.27105" layer="25"/>
-<attribute name="PACKAGE" value="TSSOP-56 NXP Semiconductors" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PCA9698DGG,518/?ref=eda" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-28.93651875" y="44.728309375" size="1.27173125" layer="27"/>
+<element name="MT2" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="37.5" y="58" smashed="yes">
+<attribute name="AVAILABILITY" value="In Stock" x="20.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="20.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Bourns" x="20.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="PEC11R-4215F-S0024" x="20.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="30.15" y="66.2" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="20.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="20.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="20.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="30.15" y="48.05" size="1.27" layer="27"/>
 </element>
-<element name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-10.16" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-8.89" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-49.53" y="-3.81" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-49.53" y="-3.81" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-12.7" size="1.27" layer="27"/>
+<element name="MT3" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="62.5" y="58" smashed="yes">
+<attribute name="AVAILABILITY" value="In Stock" x="45.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="45.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Bourns" x="45.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="PEC11R-4215F-S0024" x="45.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="55.15" y="66.2" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="45.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="45.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="45.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="55.15" y="48.05" size="1.27" layer="27"/>
 </element>
-<element name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-3.81" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-2.54" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-49.53" y="-10.16" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-49.53" y="-10.16" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-6.35" size="1.27" layer="27"/>
+<element name="MT4" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="87.5" y="58" smashed="yes">
+<attribute name="AVAILABILITY" value="In Stock" x="70.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="70.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Bourns" x="70.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="PEC11R-4215F-S0024" x="70.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="80.15" y="66.2" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="70.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="70.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="70.99" y="79.59" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="80.15" y="48.05" size="1.27" layer="27"/>
 </element>
-<element name="MT2" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="30.55" y="80.87" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="14.04" y="102.46" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="14.04" y="102.46" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="14.04" y="102.46" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="14.04" y="102.46" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="23.2" y="89.07" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="14.04" y="102.46" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="14.04" y="102.46" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="14.04" y="102.46" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="23.2" y="70.92" size="1.27" layer="27"/>
+<element name="MT5" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="12.5" y="24" smashed="yes">
+<attribute name="AVAILABILITY" value="In Stock" x="-4.01" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="-4.01" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Bourns" x="-4.01" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="PEC11R-4215F-S0024" x="-4.01" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="5.15" y="32.2" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="-4.01" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="-4.01" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="-4.01" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="5.15" y="14.05" size="1.27" layer="27"/>
 </element>
-<element name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-38.1" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-36.83" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-16.51" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-16.51" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-40.64" size="1.27" layer="27"/>
+<element name="MT6" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="37.5" y="24" smashed="yes">
+<attribute name="AVAILABILITY" value="In Stock" x="20.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="20.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Bourns" x="20.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="PEC11R-4215F-S0024" x="20.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="30.15" y="32.2" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="20.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="20.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="20.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="30.15" y="14.05" size="1.27" layer="27"/>
 </element>
-<element name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-44.45" y="-38.1" smashed="yes">
-<attribute name="NAME" x="-45.085" y="-36.83" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-22.86" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-22.86" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-45.085" y="-40.64" size="1.27" layer="27"/>
+<element name="MT7" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="62.5" y="24" smashed="yes">
+<attribute name="AVAILABILITY" value="In Stock" x="45.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="45.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Bourns" x="45.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="PEC11R-4215F-S0024" x="45.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="55.15" y="32.2" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="45.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="45.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="45.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="55.15" y="14.05" size="1.27" layer="27"/>
 </element>
-<element name="MT3" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="50.55" y="80.93" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="34.04" y="102.52" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="34.04" y="102.52" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="34.04" y="102.52" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="34.04" y="102.52" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="43.2" y="89.13" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="34.04" y="102.52" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="34.04" y="102.52" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="34.04" y="102.52" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="43.2" y="70.98" size="1.27" layer="27"/>
+<element name="MT8" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="87.5" y="24" smashed="yes">
+<attribute name="AVAILABILITY" value="In Stock" x="70.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="70.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Bourns" x="70.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="PEC11R-4215F-S0024" x="70.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="80.15" y="32.2" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="70.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="70.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="70.99" y="45.59" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="80.15" y="14.05" size="1.27" layer="27"/>
 </element>
-<element name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-66.04" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-64.77" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-44.45" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-44.45" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-68.58" size="1.27" layer="27"/>
+<element name="U2" library="MCP23017T-E_SS" package="SOP65P780X200-28N" value="MCP23017T-E/SS" x="50" y="40" smashed="yes" rot="R90">
+<attribute name="AVAILABILITY" value="In Stock" x="50" y="40" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="DESCRIPTION" value=" I/O Expander 16 I²C 1.7MHz 28-SSOP " x="50" y="40" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MF" value="Microchip" x="50" y="40" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MP" value="MCP23017T-E/SS" x="50" y="40" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="NAME" x="43.99125" y="35.99416875" size="1.27" layer="25" ratio="10" rot="SR90"/>
+<attribute name="PACKAGE" value="SSOP-28 Microchip" x="50" y="40" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PRICE" value="None" x="50" y="40" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/MCP23017T-E/SS/?ref=eda" x="50" y="40" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="57.01331875" y="35.992390625" size="1.27" layer="27" ratio="10" rot="SR90"/>
 </element>
-<element name="R6" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-44.45" y="-66.04" smashed="yes">
-<attribute name="NAME" x="-45.085" y="-64.77" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-50.8" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-50.8" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-45.085" y="-68.58" size="1.27" layer="27"/>
+<element name="J3" library="90325-0004" package="MOLEX_90325-0004" value="90325-0004" x="15" y="40" smashed="yes" rot="R90">
+<attribute name="AVAILABILITY" value="In Stock" x="3" y="29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="DESCRIPTION" value=" HEADER, PICOFLEX, 4WAY; Connector Type:Wire-to-Board; Gender:Pin; Ways, No. of:4; Lead Spacing:1.27mm; Termination Method:Solder; Contact Material:Brass; Series:PICOFLEX PF50; Contact Plating:Tin; Rows, No. of:1; Colour:Black; Current Rating:1.2A; Flammability Rating:UL94V-0; Material:Polyester; No. of Poles:4; Pitch:1.27mm; Resistance, Contact:10mohm; Temp, Op. Max:105°C; Temp, Op. Min:-25°C; Voltage Rating, AC:250V; Voltage, Withstand:750V; Voltage, Working:250V; Width, External:3.81mm; Wire Size, AWG Max:26AWG; Wire Size, AWG Min:28AWG; Fixing Centres:7.41mm " x="3" y="29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MF" value="Molex" x="3" y="29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MP" value="90325-0004" x="3" y="29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="NAME" x="12" y="35" size="1.27" layer="25" ratio="10" rot="SR90"/>
+<attribute name="PACKAGE" value="None" x="3" y="29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PRICE" value="None" x="3" y="29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/90325-0004/?ref=eda" x="3" y="29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="19.5" y="35" size="1.27" layer="27" ratio="10" rot="SR90" align="top-left"/>
 </element>
-<element name="MT4" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="70" y="80" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="53.49" y="101.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="53.49" y="101.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="53.49" y="101.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="53.49" y="101.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="62.65" y="88.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="53.49" y="101.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="53.49" y="101.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="53.49" y="101.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="62.65" y="70.05" size="1.27" layer="27"/>
+<element name="J4" library="90325-0004" package="MOLEX_90325-0004" value="90325-0004" x="82" y="40" smashed="yes" rot="R90">
+<attribute name="AVAILABILITY" value="In Stock" x="58" y="18" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="DESCRIPTION" value=" HEADER, PICOFLEX, 4WAY; Connector Type:Wire-to-Board; Gender:Pin; Ways, No. of:4; Lead Spacing:1.27mm; Termination Method:Solder; Contact Material:Brass; Series:PICOFLEX PF50; Contact Plating:Tin; Rows, No. of:1; Colour:Black; Current Rating:1.2A; Flammability Rating:UL94V-0; Material:Polyester; No. of Poles:4; Pitch:1.27mm; Resistance, Contact:10mohm; Temp, Op. Max:105°C; Temp, Op. Min:-25°C; Voltage Rating, AC:250V; Voltage, Withstand:750V; Voltage, Working:250V; Width, External:3.81mm; Wire Size, AWG Max:26AWG; Wire Size, AWG Min:28AWG; Fixing Centres:7.41mm " x="58" y="18" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MF" value="Molex" x="58" y="18" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MP" value="90325-0004" x="58" y="18" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="NAME" x="79" y="35" size="1.27" layer="25" ratio="10" rot="SR90"/>
+<attribute name="PACKAGE" value="None" x="58" y="18" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PRICE" value="None" x="58" y="18" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/90325-0004/?ref=eda" x="58" y="18" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="86.5" y="35" size="1.27" layer="27" ratio="10" rot="SR90" align="top-left"/>
 </element>
-<element name="R7" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-93.98" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-92.71" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-72.39" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-72.39" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-96.52" size="1.27" layer="27"/>
+<element name="R1" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="1" x="42" y="9" smashed="yes" rot="R270">
+<attribute name="NAME" x="43.27" y="9.635" size="1.27" layer="25" rot="R270"/>
+<attribute name="POPULARITY" value="85" x="42" y="9" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="42" y="9" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="39.46" y="9.635" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="R8" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-44.45" y="-93.98" smashed="yes">
-<attribute name="NAME" x="-45.085" y="-92.71" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-78.74" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-78.74" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-45.085" y="-96.52" size="1.27" layer="27"/>
+<element name="R2" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="0" x="42" y="4" smashed="yes" rot="R270">
+<attribute name="NAME" x="43.27" y="4.635" size="1.27" layer="25" rot="R270"/>
+<attribute name="POPULARITY" value="85" x="42" y="4" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="42" y="4" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="39.46" y="4.635" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="MT5" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="10" y="60" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="-6.51" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="-6.51" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="-6.51" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="-6.51" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="2.65" y="68.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="-6.51" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="-6.51" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="-6.51" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="2.65" y="50.05" size="1.27" layer="27"/>
+<element name="R3" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="1" x="30" y="9" smashed="yes" rot="R270">
+<attribute name="NAME" x="31.27" y="9.635" size="1.27" layer="25" rot="R270"/>
+<attribute name="POPULARITY" value="85" x="30" y="9" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="30" y="9" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="27.46" y="9.635" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="R9" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-121.92" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-120.65" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-100.33" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-100.33" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-124.46" size="1.27" layer="27"/>
+<element name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="0" x="30" y="4" smashed="yes" rot="R270">
+<attribute name="NAME" x="31.27" y="4.635" size="1.27" layer="25" rot="R270"/>
+<attribute name="POPULARITY" value="85" x="30" y="4" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="30" y="4" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="27.46" y="4.635" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="R10" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-121.92" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-120.65" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-106.68" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-106.68" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-124.46" size="1.27" layer="27"/>
+<element name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="1" x="17" y="9" smashed="yes" rot="R270">
+<attribute name="NAME" x="18.27" y="9.635" size="1.27" layer="25" rot="R270"/>
+<attribute name="POPULARITY" value="85" x="17" y="9" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="17" y="9" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="14.46" y="9.635" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="MT6" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="30" y="60" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="13.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="13.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="13.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="13.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="22.65" y="68.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="13.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="13.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="13.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="22.65" y="50.05" size="1.27" layer="27"/>
-</element>
-<element name="R11" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-149.86" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-148.59" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-128.27" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-128.27" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-152.4" size="1.27" layer="27"/>
-</element>
-<element name="R12" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-149.86" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-148.59" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-134.62" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-134.62" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-152.4" size="1.27" layer="27"/>
-</element>
-<element name="MT7" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="50" y="60" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="33.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="33.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="33.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="33.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="42.65" y="68.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="33.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="33.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="33.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="42.65" y="50.05" size="1.27" layer="27"/>
-</element>
-<element name="R13" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-177.8" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-176.53" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-156.21" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-156.21" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-180.34" size="1.27" layer="27"/>
-</element>
-<element name="R14" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-177.8" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-176.53" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-162.56" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-162.56" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-180.34" size="1.27" layer="27"/>
-</element>
-<element name="MT8" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="70" y="60" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="53.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="53.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="53.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="53.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="62.65" y="68.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="53.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="53.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="53.49" y="81.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="62.65" y="50.05" size="1.27" layer="27"/>
-</element>
-<element name="R15" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-205.74" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-204.47" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-184.15" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-184.15" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-208.28" size="1.27" layer="27"/>
-</element>
-<element name="R16" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-205.74" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-204.47" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-190.5" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-190.5" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-208.28" size="1.27" layer="27"/>
-</element>
-<element name="MT9" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="10" y="40" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="-6.51" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="-6.51" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="-6.51" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="-6.51" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="2.65" y="48.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="-6.51" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="-6.51" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="-6.51" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="2.65" y="30.05" size="1.27" layer="27"/>
-</element>
-<element name="R17" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-233.68" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-232.41" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-212.09" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-212.09" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-236.22" size="1.27" layer="27"/>
-</element>
-<element name="R18" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-233.68" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-232.41" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-218.44" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-218.44" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-236.22" size="1.27" layer="27"/>
-</element>
-<element name="MT10" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="30" y="40" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="13.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="13.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="13.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="13.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="22.65" y="48.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="13.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="13.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="13.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="22.65" y="30.05" size="1.27" layer="27"/>
-</element>
-<element name="R19" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-261.62" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-260.35" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-240.03" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-240.03" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-264.16" size="1.27" layer="27"/>
-</element>
-<element name="R20" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-261.62" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-260.35" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-246.38" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-246.38" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-264.16" size="1.27" layer="27"/>
-</element>
-<element name="MT11" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="50" y="40" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="33.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="33.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="33.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="33.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="42.65" y="48.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="33.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="33.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="33.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="42.65" y="30.05" size="1.27" layer="27"/>
-</element>
-<element name="R21" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-289.56" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-288.29" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-267.97" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-267.97" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-292.1" size="1.27" layer="27"/>
-</element>
-<element name="R22" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-289.56" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-288.29" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-274.32" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-274.32" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-292.1" size="1.27" layer="27"/>
-</element>
-<element name="MT12" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="70" y="40" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="53.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="53.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="53.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="53.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="62.65" y="48.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="53.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="53.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="53.49" y="61.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="62.65" y="30.05" size="1.27" layer="27"/>
-</element>
-<element name="R23" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-317.5" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-316.23" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-295.91" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-295.91" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-320.04" size="1.27" layer="27"/>
-</element>
-<element name="R24" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-317.5" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-316.23" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-302.26" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-302.26" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-320.04" size="1.27" layer="27"/>
-</element>
-<element name="MT13" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="10" y="20" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="-6.51" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="-6.51" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="-6.51" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="-6.51" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="2.65" y="28.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="-6.51" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="-6.51" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="-6.51" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="2.65" y="10.05" size="1.27" layer="27"/>
-</element>
-<element name="R25" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-345.44" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-344.17" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-323.85" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-323.85" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-347.98" size="1.27" layer="27"/>
-</element>
-<element name="R26" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-345.44" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-344.17" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-330.2" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-330.2" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-347.98" size="1.27" layer="27"/>
-</element>
-<element name="MT14" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="30" y="20" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="13.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="13.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="13.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="13.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="22.65" y="28.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="13.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="13.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="13.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="22.65" y="10.05" size="1.27" layer="27"/>
-</element>
-<element name="R27" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-373.38" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-372.11" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-351.79" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-351.79" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-375.92" size="1.27" layer="27"/>
-</element>
-<element name="R28" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-373.38" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-372.11" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-358.14" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-358.14" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-375.92" size="1.27" layer="27"/>
-</element>
-<element name="MT15" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="50" y="20" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="33.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="33.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="33.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="33.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="42.65" y="28.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="33.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="33.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="33.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="42.65" y="10.05" size="1.27" layer="27"/>
-</element>
-<element name="R29" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-401.32" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-400.05" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-379.73" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-379.73" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-403.86" size="1.27" layer="27"/>
-</element>
-<element name="R30" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-401.32" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-400.05" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-386.08" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-386.08" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-403.86" size="1.27" layer="27"/>
-</element>
-<element name="MT16" library="PEC11R-4215F-S0024" package="XDCR_PEC11R-4215F-S0024" value="PEC11R-4215F-S0024" x="70" y="20" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="53.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Rotary Encoder Mechanical 24 Quadrature (Incremental) Vertical " x="53.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Bourns" x="53.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="PEC11R-4215F-S0024" x="53.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="62.65" y="28.2" size="1.27" layer="25"/>
-<attribute name="PACKAGE" value="None" x="53.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="53.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/PEC11R-4215F-S0024/?ref=eda" x="53.49" y="41.59" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="62.65" y="10.05" size="1.27" layer="27"/>
-</element>
-<element name="R31" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-49.53" y="-429.26" smashed="yes">
-<attribute name="NAME" x="-50.165" y="-427.99" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-407.67" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-407.67" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-50.165" y="-431.8" size="1.27" layer="27"/>
-</element>
-<element name="R32" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K" x="-43.18" y="-429.26" smashed="yes">
-<attribute name="NAME" x="-43.815" y="-427.99" size="1.27" layer="25"/>
-<attribute name="POPULARITY" value="85" x="-66.04" y="-414.02" size="1.778" layer="27" display="off"/>
-<attribute name="SPICEPREFIX" value="R" x="-66.04" y="-414.02" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-43.815" y="-431.8" size="1.27" layer="27"/>
+<element name="R6" library="rcl" library_urn="urn:adsk.eagle:library:334" package="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="0" x="17" y="4" smashed="yes" rot="R270">
+<attribute name="NAME" x="18.27" y="4.635" size="1.27" layer="25" rot="R270"/>
+<attribute name="POPULARITY" value="85" x="17" y="4" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="SPICEPREFIX" value="R" x="17" y="4" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="14.46" y="4.635" size="1.27" layer="27" rot="R270"/>
 </element>
 </elements>
 <signals>
-<signal name="VSS">
-<contactref element="U1" pad="6"/>
-<contactref element="U1" pad="11"/>
-<contactref element="U1" pad="23"/>
-<contactref element="U1" pad="34"/>
-<contactref element="U1" pad="39"/>
-<contactref element="U1" pad="51"/>
-<wire x1="-20.415" y1="51.59" x2="-20.415" y2="57.59" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="49.09" x2="-20.415" y2="51.59" width="0" layer="19" extent="1-1"/>
-<wire x1="-27.845" y1="57.59" x2="-20.415" y2="57.59" width="0" layer="19" extent="1-1"/>
-<wire x1="-27.845" y1="55.09" x2="-27.845" y2="57.59" width="0" layer="19" extent="1-1"/>
-<wire x1="-27.845" y1="49.09" x2="-27.845" y2="55.09" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="VDD">
-<contactref element="U1" pad="18"/>
-<contactref element="U1" pad="46"/>
-<wire x1="-27.845" y1="51.59" x2="-20.415" y2="55.09" width="0" layer="19" extent="1-1"/>
-</signal>
 <signal name="GND">
 <contactref element="J1" pad="2"/>
 <contactref element="J2" pad="2"/>
@@ -1938,383 +1678,186 @@ design rules under a new name.</description>
 <contactref element="MT8" pad="COM"/>
 <contactref element="MT8" pad="S2"/>
 <contactref element="MT8" pad="S1"/>
-<contactref element="MT9" pad="COM"/>
-<contactref element="MT9" pad="S2"/>
-<contactref element="MT9" pad="S1"/>
-<contactref element="MT10" pad="COM"/>
-<contactref element="MT10" pad="S2"/>
-<contactref element="MT10" pad="S1"/>
-<contactref element="MT11" pad="COM"/>
-<contactref element="MT11" pad="S2"/>
-<contactref element="MT11" pad="S1"/>
-<contactref element="MT12" pad="COM"/>
-<contactref element="MT12" pad="S2"/>
-<contactref element="MT12" pad="S1"/>
-<contactref element="MT13" pad="COM"/>
-<contactref element="MT13" pad="S2"/>
-<contactref element="MT13" pad="S1"/>
-<contactref element="MT14" pad="COM"/>
-<contactref element="MT14" pad="S2"/>
-<contactref element="MT14" pad="S1"/>
-<contactref element="MT15" pad="COM"/>
-<contactref element="MT15" pad="S2"/>
-<contactref element="MT15" pad="S1"/>
-<contactref element="MT16" pad="COM"/>
-<contactref element="MT16" pad="S2"/>
-<contactref element="MT16" pad="S1"/>
-<wire x1="75.7" y1="80" x2="74.805" y2="96.8" width="0" layer="19" extent="1-1"/>
-<wire x1="70" y1="72.5" x2="75.7" y2="80" width="0" layer="19" extent="1-1"/>
-<wire x1="64.3" y1="80" x2="70" y2="72.5" width="0" layer="19" extent="1-1"/>
-<wire x1="56.25" y1="80.93" x2="64.3" y2="80" width="0" layer="19" extent="1-1"/>
-<wire x1="50.55" y1="73.43" x2="56.25" y2="80.93" width="0" layer="19" extent="1-1"/>
-<wire x1="44.85" y1="80.93" x2="50.55" y2="73.43" width="0" layer="19" extent="1-1"/>
-<wire x1="36.25" y1="80.87" x2="44.85" y2="80.93" width="0" layer="19" extent="1-1"/>
-<wire x1="30.55" y1="73.37" x2="36.25" y2="80.87" width="0" layer="19" extent="1-1"/>
-<wire x1="24.85" y1="80.87" x2="30.55" y2="73.37" width="0" layer="19" extent="1-1"/>
-<wire x1="15.7" y1="81" x2="24.85" y2="80.87" width="0" layer="19" extent="1-1"/>
-<wire x1="10" y1="73.5" x2="15.7" y2="81" width="0" layer="19" extent="1-1"/>
-<wire x1="4.3" y1="81" x2="10" y2="73.5" width="0" layer="19" extent="1-1"/>
-<wire x1="75.7" y1="60" x2="70" y2="72.5" width="0" layer="19" extent="1-1"/>
-<wire x1="70" y1="52.5" x2="75.7" y2="60" width="0" layer="19" extent="1-1"/>
-<wire x1="64.3" y1="60" x2="70" y2="52.5" width="0" layer="19" extent="1-1"/>
-<wire x1="55.7" y1="60" x2="64.3" y2="60" width="0" layer="19" extent="1-1"/>
-<wire x1="50" y1="52.5" x2="55.7" y2="60" width="0" layer="19" extent="1-1"/>
-<wire x1="44.3" y1="60" x2="50" y2="52.5" width="0" layer="19" extent="1-1"/>
-<wire x1="35.7" y1="60" x2="44.3" y2="60" width="0" layer="19" extent="1-1"/>
-<wire x1="30" y1="52.5" x2="35.7" y2="60" width="0" layer="19" extent="1-1"/>
-<wire x1="24.3" y1="60" x2="30" y2="52.5" width="0" layer="19" extent="1-1"/>
-<wire x1="15.7" y1="60" x2="24.3" y2="60" width="0" layer="19" extent="1-1"/>
-<wire x1="10" y1="52.5" x2="15.7" y2="60" width="0" layer="19" extent="1-1"/>
-<wire x1="4.3" y1="60" x2="10" y2="52.5" width="0" layer="19" extent="1-1"/>
-<wire x1="75.7" y1="40" x2="70" y2="52.5" width="0" layer="19" extent="1-1"/>
-<wire x1="70" y1="32.5" x2="75.7" y2="40" width="0" layer="19" extent="1-1"/>
-<wire x1="64.3" y1="40" x2="70" y2="32.5" width="0" layer="19" extent="1-1"/>
-<wire x1="55.7" y1="40" x2="64.3" y2="40" width="0" layer="19" extent="1-1"/>
-<wire x1="50" y1="32.5" x2="55.7" y2="40" width="0" layer="19" extent="1-1"/>
-<wire x1="44.3" y1="40" x2="50" y2="32.5" width="0" layer="19" extent="1-1"/>
-<wire x1="35.7" y1="40" x2="44.3" y2="40" width="0" layer="19" extent="1-1"/>
-<wire x1="30" y1="32.5" x2="35.7" y2="40" width="0" layer="19" extent="1-1"/>
-<wire x1="24.3" y1="40" x2="30" y2="32.5" width="0" layer="19" extent="1-1"/>
-<wire x1="15.7" y1="40" x2="24.3" y2="40" width="0" layer="19" extent="1-1"/>
-<wire x1="10" y1="32.5" x2="15.7" y2="40" width="0" layer="19" extent="1-1"/>
-<wire x1="4.3" y1="40" x2="10" y2="32.5" width="0" layer="19" extent="1-1"/>
-<wire x1="75.7" y1="20" x2="70" y2="32.5" width="0" layer="19" extent="1-1"/>
-<wire x1="70" y1="12.5" x2="75.7" y2="20" width="0" layer="19" extent="1-1"/>
-<wire x1="64.3" y1="20" x2="70" y2="12.5" width="0" layer="19" extent="1-1"/>
-<wire x1="55.7" y1="20" x2="64.3" y2="20" width="0" layer="19" extent="1-1"/>
-<wire x1="50" y1="12.5" x2="55.7" y2="20" width="0" layer="19" extent="1-1"/>
-<wire x1="44.3" y1="20" x2="50" y2="12.5" width="0" layer="19" extent="1-1"/>
-<wire x1="35.7" y1="20" x2="44.3" y2="20" width="0" layer="19" extent="1-1"/>
-<wire x1="30" y1="12.5" x2="35.7" y2="20" width="0" layer="19" extent="1-1"/>
-<wire x1="24.3" y1="20" x2="30" y2="12.5" width="0" layer="19" extent="1-1"/>
-<wire x1="15.7" y1="20" x2="24.3" y2="20" width="0" layer="19" extent="1-1"/>
-<wire x1="10" y1="12.5" x2="15.7" y2="20" width="0" layer="19" extent="1-1"/>
-<wire x1="4.3" y1="20" x2="10" y2="12.5" width="0" layer="19" extent="1-1"/>
-<wire x1="-47.625" y1="50.8" x2="4.3" y2="60" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="10"/>
+<contactref element="J3" pad="2"/>
+<contactref element="J4" pad="2"/>
+<contactref element="R2" pad="2"/>
+<contactref element="R4" pad="2"/>
+<contactref element="R6" pad="2"/>
+<wire x1="87.5" y1="50.5" x2="93.2" y2="58" width="0" layer="19" extent="1-1"/>
+<wire x1="81.8" y1="58" x2="87.5" y2="50.5" width="0" layer="19" extent="1-1"/>
+<wire x1="95.27" y1="40.635" x2="87.5" y2="50.5" width="0" layer="19" extent="1-1"/>
+<wire x1="80.73" y1="39.365" x2="87.5" y2="50.5" width="0" layer="19" extent="1-1"/>
+<wire x1="68.2" y1="58" x2="81.8" y2="58" width="0" layer="19" extent="1-1"/>
+<wire x1="62.5" y1="50.5" x2="68.2" y2="58" width="0" layer="19" extent="1-1"/>
+<wire x1="56.8" y1="58" x2="62.5" y2="50.5" width="0" layer="19" extent="1-1"/>
+<wire x1="43.2" y1="58" x2="56.8" y2="58" width="0" layer="19" extent="1-1"/>
+<wire x1="37.5" y1="50.5" x2="43.2" y2="58" width="0" layer="19" extent="1-1"/>
+<wire x1="31.8" y1="58" x2="37.5" y2="50.5" width="0" layer="19" extent="1-1"/>
+<wire x1="18.2" y1="58" x2="31.8" y2="58" width="0" layer="19" extent="1-1"/>
+<wire x1="12.5" y1="50.5" x2="18.2" y2="58" width="0" layer="19" extent="1-1"/>
+<wire x1="6.8" y1="58" x2="12.5" y2="50.5" width="0" layer="19" extent="1-1"/>
+<wire x1="8.27" y1="40.635" x2="12.5" y2="50.5" width="0" layer="19" extent="1-1"/>
+<wire x1="13.73" y1="39.365" x2="8.27" y2="40.635" width="0" layer="19" extent="1-1"/>
+<wire x1="81.8" y1="24" x2="80.73" y2="39.365" width="0" layer="19" extent="1-1"/>
+<wire x1="87.5" y1="16.5" x2="81.8" y2="24" width="0" layer="19" extent="1-1"/>
+<wire x1="93.2" y1="24" x2="87.5" y2="16.5" width="0" layer="19" extent="1-1"/>
+<wire x1="68.2" y1="24" x2="81.8" y2="24" width="0" layer="19" extent="1-1"/>
+<wire x1="62.5" y1="16.5" x2="68.2" y2="24" width="0" layer="19" extent="1-1"/>
+<wire x1="56.8" y1="24" x2="62.5" y2="16.5" width="0" layer="19" extent="1-1"/>
+<wire x1="51.625" y1="36.495" x2="56.8" y2="24" width="0" layer="19" extent="1-1"/>
+<wire x1="43.2" y1="24" x2="56.8" y2="24" width="0" layer="19" extent="1-1"/>
+<wire x1="37.5" y1="16.5" x2="43.2" y2="24" width="0" layer="19" extent="1-1"/>
+<wire x1="31.8" y1="24" x2="37.5" y2="16.5" width="0" layer="19" extent="1-1"/>
+<wire x1="18.2" y1="24" x2="31.8" y2="24" width="0" layer="19" extent="1-1"/>
+<wire x1="12.5" y1="16.5" x2="18.2" y2="24" width="0" layer="19" extent="1-1"/>
+<wire x1="6.8" y1="24" x2="12.5" y2="16.5" width="0" layer="19" extent="1-1"/>
+<wire x1="42" y1="3.05" x2="12.5" y2="16.5" width="0" layer="19" extent="1-1"/>
+<wire x1="30" y1="3.05" x2="42" y2="3.05" width="0" layer="19" extent="1-1"/>
+<wire x1="17" y1="3.05" x2="30" y2="3.05" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VCC">
 <contactref element="J1" pad="1"/>
 <contactref element="J2" pad="1"/>
-<contactref element="R2" pad="2"/>
-<contactref element="R1" pad="2"/>
-<contactref element="R3" pad="2"/>
-<contactref element="R4" pad="2"/>
-<contactref element="R5" pad="2"/>
-<contactref element="R6" pad="2"/>
-<contactref element="R7" pad="2"/>
-<contactref element="R8" pad="2"/>
-<contactref element="R9" pad="2"/>
-<contactref element="R10" pad="2"/>
-<contactref element="R11" pad="2"/>
-<contactref element="R12" pad="2"/>
-<contactref element="R13" pad="2"/>
-<contactref element="R14" pad="2"/>
-<contactref element="R15" pad="2"/>
-<contactref element="R16" pad="2"/>
-<contactref element="R17" pad="2"/>
-<contactref element="R18" pad="2"/>
-<contactref element="R19" pad="2"/>
-<contactref element="R20" pad="2"/>
-<contactref element="R21" pad="2"/>
-<contactref element="R22" pad="2"/>
-<contactref element="R23" pad="2"/>
-<contactref element="R24" pad="2"/>
-<contactref element="R25" pad="2"/>
-<contactref element="R26" pad="2"/>
-<contactref element="R27" pad="2"/>
-<contactref element="R28" pad="2"/>
-<contactref element="R29" pad="2"/>
-<contactref element="R30" pad="2"/>
-<contactref element="R31" pad="2"/>
-<contactref element="R32" pad="2"/>
-<wire x1="-48.58" y1="-205.74" x2="-42.23" y2="-205.74" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-177.8" x2="-48.58" y2="-205.74" width="0" layer="19" extent="1-1"/>
-<wire x1="-42.23" y1="-177.8" x2="-48.58" y2="-177.8" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-149.86" x2="-48.58" y2="-177.8" width="0" layer="19" extent="1-1"/>
-<wire x1="-42.23" y1="-149.86" x2="-48.58" y2="-149.86" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-121.92" x2="-48.58" y2="-149.86" width="0" layer="19" extent="1-1"/>
-<wire x1="-42.23" y1="-121.92" x2="-48.58" y2="-121.92" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-93.98" x2="-48.58" y2="-121.92" width="0" layer="19" extent="1-1"/>
-<wire x1="-43.5" y1="-93.98" x2="-48.58" y2="-93.98" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-66.04" x2="-48.58" y2="-93.98" width="0" layer="19" extent="1-1"/>
-<wire x1="-43.5" y1="-66.04" x2="-48.58" y2="-66.04" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-38.1" x2="-48.58" y2="-66.04" width="0" layer="19" extent="1-1"/>
-<wire x1="-43.5" y1="-38.1" x2="-48.58" y2="-38.1" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-10.16" x2="-48.58" y2="-38.1" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-3.81" x2="-48.58" y2="-10.16" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-233.68" x2="-48.58" y2="-205.74" width="0" layer="19" extent="1-1"/>
-<wire x1="-42.23" y1="-233.68" x2="-48.58" y2="-233.68" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-261.62" x2="-48.58" y2="-233.68" width="0" layer="19" extent="1-1"/>
-<wire x1="-42.23" y1="-261.62" x2="-48.58" y2="-261.62" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-289.56" x2="-48.58" y2="-261.62" width="0" layer="19" extent="1-1"/>
-<wire x1="-42.23" y1="-289.56" x2="-48.58" y2="-289.56" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-317.5" x2="-48.58" y2="-289.56" width="0" layer="19" extent="1-1"/>
-<wire x1="-42.23" y1="-317.5" x2="-48.58" y2="-317.5" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-345.44" x2="-48.58" y2="-317.5" width="0" layer="19" extent="1-1"/>
-<wire x1="-42.23" y1="-345.44" x2="-48.58" y2="-345.44" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-373.38" x2="-48.58" y2="-345.44" width="0" layer="19" extent="1-1"/>
-<wire x1="-42.23" y1="-373.38" x2="-48.58" y2="-373.38" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-401.32" x2="-48.58" y2="-373.38" width="0" layer="19" extent="1-1"/>
-<wire x1="-42.23" y1="-401.32" x2="-48.58" y2="-401.32" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.58" y1="-429.26" x2="-48.58" y2="-401.32" width="0" layer="19" extent="1-1"/>
-<wire x1="-42.23" y1="-429.26" x2="-48.58" y2="-429.26" width="0" layer="19" extent="1-1"/>
-<wire x1="-48.895" y1="48.26" x2="-48.58" y2="-3.81" width="0" layer="19" extent="1-1"/>
-<wire x1="73.535" y1="94.26" x2="-48.895" y2="48.26" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="9"/>
+<contactref element="J3" pad="1"/>
+<contactref element="J4" pad="1"/>
+<contactref element="R1" pad="1"/>
+<contactref element="R3" pad="1"/>
+<contactref element="R5" pad="1"/>
+<contactref element="U2" pad="18"/>
+<wire x1="83.27" y1="38.095" x2="92.73" y2="41.905" width="0" layer="19" extent="1-1"/>
+<wire x1="52.275" y1="43.505" x2="83.27" y2="38.095" width="0" layer="19" extent="1-1"/>
+<wire x1="50.975" y1="36.495" x2="52.275" y2="43.505" width="0" layer="19" extent="1-1"/>
+<wire x1="42" y1="9.95" x2="50.975" y2="36.495" width="0" layer="19" extent="1-1"/>
+<wire x1="30" y1="9.95" x2="42" y2="9.95" width="0" layer="19" extent="1-1"/>
+<wire x1="17" y1="9.95" x2="30" y2="9.95" width="0" layer="19" extent="1-1"/>
+<wire x1="16.27" y1="38.095" x2="17" y2="9.95" width="0" layer="19" extent="1-1"/>
+<wire x1="5.73" y1="41.905" x2="16.27" y2="38.095" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SCL">
 <contactref element="J1" pad="3"/>
 <contactref element="J2" pad="3"/>
-<wire x1="-46.355" y1="48.26" x2="76.075" y2="94.26" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="12"/>
+<contactref element="J3" pad="3"/>
+<contactref element="J4" pad="3"/>
+<wire x1="83.27" y1="40.635" x2="92.73" y2="39.365" width="0" layer="19" extent="1-1"/>
+<wire x1="52.925" y1="36.495" x2="83.27" y2="40.635" width="0" layer="19" extent="1-1"/>
+<wire x1="16.27" y1="40.635" x2="52.925" y2="36.495" width="0" layer="19" extent="1-1"/>
+<wire x1="5.73" y1="39.365" x2="16.27" y2="40.635" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SDA">
 <contactref element="J1" pad="4"/>
 <contactref element="J2" pad="4"/>
-<wire x1="-45.085" y1="50.8" x2="77.345" y2="96.8" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="13"/>
+<contactref element="J3" pad="4"/>
+<contactref element="J4" pad="4"/>
+<wire x1="80.73" y1="41.905" x2="95.27" y2="38.095" width="0" layer="19" extent="1-1"/>
+<wire x1="53.575" y1="36.495" x2="80.73" y2="41.905" width="0" layer="19" extent="1-1"/>
+<wire x1="13.73" y1="41.905" x2="53.575" y2="36.495" width="0" layer="19" extent="1-1"/>
+<wire x1="8.27" y1="38.095" x2="13.73" y2="41.905" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="A2">
-<contactref element="U1" pad="5"/>
-<contactref element="R4" pad="1"/>
 <contactref element="MT2" pad="A"/>
-<wire x1="28.05" y1="73.37" x2="-45.4" y2="-38.1" width="0" layer="19" extent="1-1"/>
-<wire x1="-27.845" y1="58.09" x2="28.05" y2="73.37" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="23"/>
+<wire x1="35" y1="50.5" x2="49.025" y2="43.505" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="B2">
-<contactref element="U1" pad="7"/>
-<contactref element="R3" pad="1"/>
 <contactref element="MT2" pad="B"/>
-<wire x1="33.05" y1="73.37" x2="-50.48" y2="-38.1" width="0" layer="19" extent="1-1"/>
-<wire x1="-27.845" y1="57.09" x2="33.05" y2="73.37" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="24"/>
+<wire x1="40" y1="50.5" x2="48.375" y2="43.505" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="A1">
-<contactref element="U1" pad="3"/>
-<contactref element="R1" pad="1"/>
 <contactref element="MT1" pad="A"/>
-<wire x1="-27.845" y1="59.09" x2="-50.48" y2="-3.81" width="0" layer="19" extent="1-1"/>
-<wire x1="7.5" y1="73.5" x2="-27.845" y2="59.09" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="21"/>
+<wire x1="50.325" y1="43.505" x2="10" y2="50.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="B1">
-<contactref element="U1" pad="4"/>
-<contactref element="R2" pad="1"/>
 <contactref element="MT1" pad="B"/>
-<wire x1="-27.845" y1="58.59" x2="-50.48" y2="-10.16" width="0" layer="19" extent="1-1"/>
-<wire x1="12.5" y1="73.5" x2="-27.845" y2="58.59" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="22"/>
+<wire x1="49.675" y1="43.505" x2="15" y2="50.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="A4">
-<contactref element="U1" pad="10"/>
-<contactref element="R8" pad="1"/>
 <contactref element="MT4" pad="A"/>
-<wire x1="-27.845" y1="55.59" x2="-45.4" y2="-93.98" width="0" layer="19" extent="1-1"/>
-<wire x1="67.5" y1="72.5" x2="-27.845" y2="55.59" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="27"/>
+<wire x1="46.425" y1="43.505" x2="85" y2="50.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="B4">
-<contactref element="U1" pad="12"/>
-<contactref element="R7" pad="1"/>
 <contactref element="MT4" pad="B"/>
-<wire x1="-27.845" y1="54.59" x2="-50.48" y2="-93.98" width="0" layer="19" extent="1-1"/>
-<wire x1="72.5" y1="72.5" x2="-27.845" y2="54.59" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="28"/>
+<wire x1="45.775" y1="43.505" x2="90" y2="50.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="A3">
-<contactref element="U1" pad="8"/>
-<contactref element="R6" pad="1"/>
 <contactref element="MT3" pad="A"/>
-<wire x1="48.05" y1="73.43" x2="-45.4" y2="-66.04" width="0" layer="19" extent="1-1"/>
-<wire x1="-27.845" y1="56.59" x2="48.05" y2="73.43" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="25"/>
+<wire x1="47.725" y1="43.505" x2="60" y2="50.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="B3">
-<contactref element="U1" pad="9"/>
-<contactref element="R5" pad="1"/>
 <contactref element="MT3" pad="B"/>
-<wire x1="53.05" y1="73.43" x2="-50.48" y2="-66.04" width="0" layer="19" extent="1-1"/>
-<wire x1="-27.845" y1="56.09" x2="53.05" y2="73.43" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="A16">
-<contactref element="R32" pad="1"/>
-<contactref element="MT16" pad="A"/>
-<contactref element="U1" pad="43"/>
-<wire x1="67.5" y1="12.5" x2="-44.13" y2="-429.26" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="53.59" x2="67.5" y2="12.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="B16">
-<contactref element="R31" pad="1"/>
-<contactref element="MT16" pad="B"/>
-<contactref element="U1" pad="44"/>
-<wire x1="72.5" y1="12.5" x2="-50.48" y2="-429.26" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="54.09" x2="72.5" y2="12.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="B15">
-<contactref element="R29" pad="1"/>
-<contactref element="MT15" pad="B"/>
-<contactref element="U1" pad="42"/>
-<wire x1="52.5" y1="12.5" x2="-50.48" y2="-401.32" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="53.09" x2="52.5" y2="12.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="A15">
-<contactref element="R30" pad="1"/>
-<contactref element="MT15" pad="A"/>
-<contactref element="U1" pad="41"/>
-<wire x1="47.5" y1="12.5" x2="-44.13" y2="-401.32" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="52.59" x2="47.5" y2="12.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="B14">
-<contactref element="R27" pad="1"/>
-<contactref element="MT14" pad="B"/>
-<contactref element="U1" pad="40"/>
-<wire x1="32.5" y1="12.5" x2="-50.48" y2="-373.38" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="52.09" x2="32.5" y2="12.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="A14">
-<contactref element="R28" pad="1"/>
-<contactref element="MT14" pad="A"/>
-<contactref element="U1" pad="38"/>
-<wire x1="27.5" y1="12.5" x2="-44.13" y2="-373.38" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="51.09" x2="27.5" y2="12.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="B13">
-<contactref element="R25" pad="1"/>
-<contactref element="MT13" pad="B"/>
-<contactref element="U1" pad="37"/>
-<wire x1="12.5" y1="12.5" x2="-50.48" y2="-345.44" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="50.59" x2="12.5" y2="12.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="A13">
-<contactref element="R26" pad="1"/>
-<contactref element="MT13" pad="A"/>
-<contactref element="U1" pad="36"/>
-<wire x1="7.5" y1="12.5" x2="-44.13" y2="-345.44" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="50.09" x2="7.5" y2="12.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="B12">
-<contactref element="R23" pad="1"/>
-<contactref element="MT12" pad="B"/>
-<contactref element="U1" pad="35"/>
-<wire x1="72.5" y1="32.5" x2="-50.48" y2="-317.5" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="49.59" x2="72.5" y2="32.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="A12">
-<contactref element="R24" pad="1"/>
-<contactref element="MT12" pad="A"/>
-<contactref element="U1" pad="33"/>
-<wire x1="67.5" y1="32.5" x2="-44.13" y2="-317.5" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="48.59" x2="67.5" y2="32.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="B11">
-<contactref element="R21" pad="1"/>
-<contactref element="MT11" pad="B"/>
-<contactref element="U1" pad="32"/>
-<wire x1="52.5" y1="32.5" x2="-50.48" y2="-289.56" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="48.09" x2="52.5" y2="32.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="A11">
-<contactref element="R22" pad="1"/>
-<contactref element="MT11" pad="A"/>
-<contactref element="U1" pad="31"/>
-<wire x1="47.5" y1="32.5" x2="-44.13" y2="-289.56" width="0" layer="19" extent="1-1"/>
-<wire x1="-20.415" y1="47.59" x2="47.5" y2="32.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="B10">
-<contactref element="R19" pad="1"/>
-<contactref element="MT10" pad="B"/>
-<contactref element="U1" pad="26"/>
-<wire x1="32.5" y1="32.5" x2="-50.48" y2="-261.62" width="0" layer="19" extent="1-1"/>
-<wire x1="-27.845" y1="47.59" x2="32.5" y2="32.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="A10">
-<contactref element="R20" pad="1"/>
-<contactref element="MT10" pad="A"/>
-<contactref element="U1" pad="25"/>
-<wire x1="27.5" y1="32.5" x2="-44.13" y2="-261.62" width="0" layer="19" extent="1-1"/>
-<wire x1="-27.845" y1="48.09" x2="27.5" y2="32.5" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="B9">
-<contactref element="R17" pad="1"/>
-<contactref element="MT9" pad="B"/>
-<contactref element="U1" pad="24"/>
-<wire x1="-27.845" y1="48.59" x2="12.5" y2="32.5" width="0" layer="19" extent="1-1"/>
-<wire x1="-50.48" y1="-233.68" x2="-27.845" y2="48.59" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="A9">
-<contactref element="R18" pad="1"/>
-<contactref element="MT9" pad="A"/>
-<contactref element="U1" pad="22"/>
-<wire x1="-27.845" y1="49.59" x2="7.5" y2="32.5" width="0" layer="19" extent="1-1"/>
-<wire x1="-44.13" y1="-233.68" x2="-27.845" y2="49.59" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="26"/>
+<wire x1="47.075" y1="43.505" x2="65" y2="50.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="B8">
-<contactref element="R15" pad="1"/>
 <contactref element="MT8" pad="B"/>
-<contactref element="U1" pad="21"/>
-<wire x1="-27.845" y1="50.09" x2="72.5" y2="52.5" width="0" layer="19" extent="1-1"/>
-<wire x1="-50.48" y1="-205.74" x2="-27.845" y2="50.09" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="8"/>
+<wire x1="50.325" y1="36.495" x2="90" y2="16.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="A8">
-<contactref element="R16" pad="1"/>
 <contactref element="MT8" pad="A"/>
-<contactref element="U1" pad="20"/>
-<wire x1="-27.845" y1="50.59" x2="-44.13" y2="-205.74" width="0" layer="19" extent="1-1"/>
-<wire x1="67.5" y1="52.5" x2="-27.845" y2="50.59" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="7"/>
+<wire x1="49.675" y1="36.495" x2="85" y2="16.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="B7">
-<contactref element="R13" pad="1"/>
 <contactref element="MT7" pad="B"/>
-<contactref element="U1" pad="19"/>
-<wire x1="-27.845" y1="51.09" x2="-50.48" y2="-177.8" width="0" layer="19" extent="1-1"/>
-<wire x1="52.5" y1="52.5" x2="-27.845" y2="51.09" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="6"/>
+<wire x1="49.025" y1="36.495" x2="65" y2="16.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="A7\">
-<contactref element="R14" pad="1"/>
 <contactref element="MT7" pad="A"/>
-<wire x1="47.5" y1="52.5" x2="-44.13" y2="-177.8" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="B6">
-<contactref element="R11" pad="1"/>
 <contactref element="MT6" pad="B"/>
-<contactref element="U1" pad="16"/>
-<wire x1="-27.845" y1="52.59" x2="-44.13" y2="-149.86" width="0" layer="19" extent="1-1"/>
-<wire x1="32.5" y1="52.5" x2="-27.845" y2="52.59" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="4"/>
+<wire x1="47.725" y1="36.495" x2="40" y2="16.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="A6">
-<contactref element="R12" pad="1"/>
 <contactref element="MT6" pad="A"/>
-<contactref element="U1" pad="15"/>
-<wire x1="-27.845" y1="53.09" x2="-50.48" y2="-149.86" width="0" layer="19" extent="1-1"/>
-<wire x1="27.5" y1="52.5" x2="-27.845" y2="53.09" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="3"/>
+<wire x1="47.075" y1="36.495" x2="35" y2="16.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="B5">
-<contactref element="R9" pad="1"/>
 <contactref element="MT5" pad="B"/>
-<contactref element="U1" pad="14"/>
-<wire x1="-27.845" y1="53.59" x2="-44.13" y2="-121.92" width="0" layer="19" extent="1-1"/>
-<wire x1="12.5" y1="52.5" x2="-27.845" y2="53.59" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="2"/>
+<wire x1="46.425" y1="36.495" x2="15" y2="16.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="A5">
-<contactref element="R10" pad="1"/>
 <contactref element="MT5" pad="A"/>
-<contactref element="U1" pad="13"/>
-<wire x1="-27.845" y1="54.09" x2="-50.48" y2="-121.92" width="0" layer="19" extent="1-1"/>
-<wire x1="7.5" y1="52.5" x2="-27.845" y2="54.09" width="0" layer="19" extent="1-1"/>
+<contactref element="U2" pad="1"/>
+<wire x1="45.775" y1="36.495" x2="10" y2="16.5" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="A7">
-<contactref element="U1" pad="17"/>
+<contactref element="U2" pad="5"/>
+</signal>
+<signal name="ADR2">
+<contactref element="U2" pad="17"/>
+<contactref element="R5" pad="2"/>
+<contactref element="R6" pad="1"/>
+<wire x1="17" y1="8.05" x2="52.925" y2="43.505" width="0" layer="19" extent="1-1"/>
+<wire x1="17" y1="4.95" x2="17" y2="8.05" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="ADR1">
+<contactref element="U2" pad="16"/>
+<contactref element="R3" pad="2"/>
+<contactref element="R4" pad="1"/>
+<wire x1="30" y1="8.05" x2="53.575" y2="43.505" width="0" layer="19" extent="1-1"/>
+<wire x1="30" y1="4.95" x2="30" y2="8.05" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="ADR0">
+<contactref element="U2" pad="15"/>
+<contactref element="R1" pad="2"/>
+<contactref element="R2" pad="1"/>
+<wire x1="42" y1="8.05" x2="54.225" y2="43.505" width="0" layer="19" extent="1-1"/>
+<wire x1="42" y1="4.95" x2="42" y2="8.05" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
