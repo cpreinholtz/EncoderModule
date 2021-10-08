@@ -5435,13 +5435,6 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <pinref part="U2" gate="G$1" pin="GPB5"/>
 </segment>
 </net>
-<net name="A7\" class="0">
-<segment>
-<pinref part="MT7" gate="G$1" pin="A"/>
-<wire x1="88.9" y1="-134.62" x2="81.28" y2="-134.62" width="0.1524" layer="91"/>
-<label x="83.82" y="-134.62" size="1.778" layer="95"/>
-</segment>
-</net>
 <net name="B6" class="0">
 <segment>
 <pinref part="MT6" gate="G$1" pin="B"/>
@@ -5496,6 +5489,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <label x="121.92" y="-55.88" size="1.778" layer="95"/>
 <pinref part="U2" gate="G$1" pin="GPB4"/>
 </segment>
+<segment>
+<pinref part="MT7" gate="G$1" pin="A"/>
+<wire x1="88.9" y1="-134.62" x2="81.28" y2="-134.62" width="0.1524" layer="91"/>
+<label x="83.82" y="-134.62" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="ADR2" class="0">
 <segment>
@@ -5539,6 +5537,10 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 </nets>
 </sheet>
 </sheets>
+<errors>
+<approved hash="104,1,175.26,-22.86,U2,VDD,VCC,,,"/>
+<approved hash="104,1,175.26,-68.58,U2,VSS,GND,,,"/>
+</errors>
 </schematic>
 </drawing>
 <compatibility>
