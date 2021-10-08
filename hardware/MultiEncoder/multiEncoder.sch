@@ -4946,11 +4946,14 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="R4" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="0"/>
 <part name="R5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="1"/>
 <part name="R6" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="0"/>
+<part name="R7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="1K"/>
+<part name="R8" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="1K"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 <text x="114.3" y="22.86" size="1.778" layer="91">These are meant to be globbed over by the user, but only one per pin, either the vcc or gnd</text>
+<text x="114.3" y="63.5" size="1.778" layer="91">Optional pullups, do not populate under normal circumstances</text>
 </plain>
 <instances>
 <instance part="P+1" gate="VCC" x="-5.08" y="5.08" smashed="yes">
@@ -5034,6 +5037,12 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <instance part="R6" gate="G$1" x="165.1" y="0" smashed="yes">
 <attribute name="NAME" x="161.29" y="1.4986" size="1.778" layer="95"/>
 <attribute name="VALUE" x="161.29" y="-3.302" size="1.778" layer="96"/>
+</instance>
+<instance part="R7" gate="G$1" x="137.16" y="55.88" smashed="yes">
+<attribute name="NAME" x="133.35" y="57.3786" size="1.778" layer="95"/>
+</instance>
+<instance part="R8" gate="G$1" x="137.16" y="45.72" smashed="yes">
+<attribute name="NAME" x="133.35" y="47.2186" size="1.778" layer="95"/>
 </instance>
 </instances>
 <busses>
@@ -5219,6 +5228,16 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <wire x1="139.7" y1="-38.1" x2="121.92" y2="-38.1" width="0.1524" layer="91"/>
 <label x="121.92" y="-38.1" size="1.778" layer="95"/>
 </segment>
+<segment>
+<wire x1="114.3" y1="55.88" x2="132.08" y2="55.88" width="0.1524" layer="91"/>
+<label x="116.84" y="55.88" size="1.778" layer="95"/>
+<pinref part="R7" gate="G$1" pin="1"/>
+</segment>
+<segment>
+<wire x1="114.3" y1="45.72" x2="132.08" y2="45.72" width="0.1524" layer="91"/>
+<label x="116.84" y="45.72" size="1.778" layer="95"/>
+<pinref part="R8" gate="G$1" pin="1"/>
+</segment>
 </net>
 <net name="SCL" class="0">
 <segment>
@@ -5246,6 +5265,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <wire x1="33.02" y1="25.4" x2="15.24" y2="25.4" width="0.1524" layer="91"/>
 <label x="15.24" y="25.4" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="R7" gate="G$1" pin="2"/>
+<wire x1="142.24" y1="55.88" x2="157.48" y2="55.88" width="0.1524" layer="91"/>
+<label x="147.32" y="55.88" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="SDA" class="0">
 <segment>
@@ -5272,6 +5296,11 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <pinref part="J4" gate="G$1" pin="4"/>
 <wire x1="33.02" y1="22.86" x2="15.24" y2="22.86" width="0.1524" layer="91"/>
 <label x="15.24" y="22.86" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R8" gate="G$1" pin="2"/>
+<wire x1="142.24" y1="45.72" x2="157.48" y2="45.72" width="0.1524" layer="91"/>
+<label x="147.32" y="45.72" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="A2" class="0">
