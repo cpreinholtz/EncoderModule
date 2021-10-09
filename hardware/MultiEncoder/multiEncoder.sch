@@ -4944,6 +4944,8 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <part name="R7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="1K"/>
 <part name="R8" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="1K"/>
 <part name="U1" library="MCP23017-E_SP" deviceset="MCP23017-E/SP" device=""/>
+<part name="J5" library="90325-0004" deviceset="90325-0004" device=""/>
+<part name="J6" library="90325-0004" deviceset="90325-0004" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -5039,6 +5041,14 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <instance part="U1" gate="G$1" x="218.44" y="-43.18" smashed="yes">
 <attribute name="NAME" x="208.2606" y="-14.1735" size="1.7814" layer="95"/>
 <attribute name="VALUE" x="209.291509375" y="-73.9279" size="1.77886875" layer="96"/>
+</instance>
+<instance part="J5" gate="G$1" x="88.9" y="50.8" smashed="yes">
+<attribute name="NAME" x="83.82" y="56.515" size="1.778" layer="95" ratio="10" rot="SR0"/>
+<attribute name="VALUE" x="83.82" y="40.64" size="1.778" layer="96" ratio="10" rot="SR0"/>
+</instance>
+<instance part="J6" gate="G$1" x="88.9" y="27.94" smashed="yes">
+<attribute name="NAME" x="83.82" y="33.655" size="1.778" layer="95" ratio="10" rot="SR0"/>
+<attribute name="VALUE" x="83.82" y="17.78" size="1.778" layer="96" ratio="10" rot="SR0"/>
 </instance>
 </instances>
 <busses>
@@ -5171,6 +5181,16 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <label x="236.22" y="-68.58" size="1.778" layer="95"/>
 <pinref part="U1" gate="G$1" pin="VSS"/>
 </segment>
+<segment>
+<pinref part="J5" gate="G$1" pin="2"/>
+<wire x1="78.74" y1="50.8" x2="60.96" y2="50.8" width="0.1524" layer="91"/>
+<label x="60.96" y="50.8" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="J6" gate="G$1" pin="2"/>
+<wire x1="78.74" y1="27.94" x2="60.96" y2="27.94" width="0.1524" layer="91"/>
+<label x="60.96" y="27.94" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="VCC" class="0">
 <segment>
@@ -5234,6 +5254,16 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <label x="236.22" y="-17.78" size="1.778" layer="95"/>
 <pinref part="U1" gate="G$1" pin="VDD"/>
 </segment>
+<segment>
+<pinref part="J5" gate="G$1" pin="1"/>
+<wire x1="78.74" y1="53.34" x2="60.96" y2="53.34" width="0.1524" layer="91"/>
+<label x="60.96" y="53.34" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="J6" gate="G$1" pin="1"/>
+<wire x1="78.74" y1="30.48" x2="60.96" y2="30.48" width="0.1524" layer="91"/>
+<label x="60.96" y="30.48" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="SCL" class="0">
 <segment>
@@ -5266,6 +5296,16 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <label x="185.42" y="-27.94" size="1.778" layer="95"/>
 <pinref part="U1" gate="G$1" pin="SCL"/>
 </segment>
+<segment>
+<pinref part="J5" gate="G$1" pin="3"/>
+<wire x1="78.74" y1="48.26" x2="60.96" y2="48.26" width="0.1524" layer="91"/>
+<label x="60.96" y="48.26" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="J6" gate="G$1" pin="3"/>
+<wire x1="78.74" y1="25.4" x2="60.96" y2="25.4" width="0.1524" layer="91"/>
+<label x="60.96" y="25.4" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="SDA" class="0">
 <segment>
@@ -5297,6 +5337,16 @@ Source: http://www.murata.com .. GRM43DR72E224KW01.pdf</description>
 <wire x1="203.2" y1="-30.48" x2="185.42" y2="-30.48" width="0.1524" layer="91"/>
 <label x="185.42" y="-30.48" size="1.778" layer="95"/>
 <pinref part="U1" gate="G$1" pin="SDA"/>
+</segment>
+<segment>
+<pinref part="J5" gate="G$1" pin="4"/>
+<wire x1="78.74" y1="45.72" x2="60.96" y2="45.72" width="0.1524" layer="91"/>
+<label x="60.96" y="45.72" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="J6" gate="G$1" pin="4"/>
+<wire x1="78.74" y1="22.86" x2="60.96" y2="22.86" width="0.1524" layer="91"/>
+<label x="60.96" y="22.86" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="A2" class="0">

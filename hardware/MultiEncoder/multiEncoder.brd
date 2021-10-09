@@ -1658,6 +1658,28 @@ design rules under a new name.</description>
 <attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/MCP23017-E/SP/?ref=eda" x="45" y="40" size="1.778" layer="27" rot="R90" display="off"/>
 <attribute name="VALUE" x="53.94563125" y="41.1171" size="1.78091875" layer="27" rot="R180"/>
 </element>
+<element name="J5" library="90325-0004" package="MOLEX_90325-0004" value="90325-0004" x="25" y="74" smashed="yes" rot="R180">
+<attribute name="AVAILABILITY" value="In Stock" x="37" y="62" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DESCRIPTION" value=" HEADER, PICOFLEX, 4WAY; Connector Type:Wire-to-Board; Gender:Pin; Ways, No. of:4; Lead Spacing:1.27mm; Termination Method:Solder; Contact Material:Brass; Series:PICOFLEX PF50; Contact Plating:Tin; Rows, No. of:1; Colour:Black; Current Rating:1.2A; Flammability Rating:UL94V-0; Material:Polyester; No. of Poles:4; Pitch:1.27mm; Resistance, Contact:10mohm; Temp, Op. Max:105°C; Temp, Op. Min:-25°C; Voltage Rating, AC:250V; Voltage, Withstand:750V; Voltage, Working:250V; Width, External:3.81mm; Wire Size, AWG Max:26AWG; Wire Size, AWG Min:28AWG; Fixing Centres:7.41mm " x="37" y="62" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MF" value="Molex" x="37" y="62" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MP" value="90325-0004" x="37" y="62" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="NAME" x="30" y="71" size="1.27" layer="25" ratio="10" rot="SR180"/>
+<attribute name="PACKAGE" value="None" x="37" y="62" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PRICE" value="None" x="37" y="62" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/90325-0004/?ref=eda" x="37" y="62" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="30" y="78.5" size="1.27" layer="27" ratio="10" rot="SR180" align="top-left"/>
+</element>
+<element name="J6" library="90325-0004" package="MOLEX_90325-0004" value="90325-0004" x="25" y="5" smashed="yes" rot="R180">
+<attribute name="AVAILABILITY" value="In Stock" x="48" y="-19" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="DESCRIPTION" value=" HEADER, PICOFLEX, 4WAY; Connector Type:Wire-to-Board; Gender:Pin; Ways, No. of:4; Lead Spacing:1.27mm; Termination Method:Solder; Contact Material:Brass; Series:PICOFLEX PF50; Contact Plating:Tin; Rows, No. of:1; Colour:Black; Current Rating:1.2A; Flammability Rating:UL94V-0; Material:Polyester; No. of Poles:4; Pitch:1.27mm; Resistance, Contact:10mohm; Temp, Op. Max:105°C; Temp, Op. Min:-25°C; Voltage Rating, AC:250V; Voltage, Withstand:750V; Voltage, Working:250V; Width, External:3.81mm; Wire Size, AWG Max:26AWG; Wire Size, AWG Min:28AWG; Fixing Centres:7.41mm " x="48" y="-19" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MF" value="Molex" x="48" y="-19" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="MP" value="90325-0004" x="48" y="-19" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="NAME" x="30" y="2" size="1.27" layer="25" ratio="10" rot="SR180"/>
+<attribute name="PACKAGE" value="None" x="48" y="-19" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PRICE" value="None" x="48" y="-19" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/90325-0004/?ref=eda" x="48" y="-19" size="1.778" layer="27" rot="R180" display="off"/>
+<attribute name="VALUE" x="30" y="9.5" size="1.27" layer="27" ratio="10" rot="SR180" align="top-left"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -1711,6 +1733,8 @@ design rules under a new name.</description>
 <wire x1="80.5" y1="39" x2="80" y2="39" width="0.1524" layer="1"/>
 <wire x1="75" y1="36.5" x2="75" y2="36.05" width="0.1524" layer="1"/>
 <wire x1="80.5" y1="39" x2="80.73" y2="39.365" width="0.1524" layer="1"/>
+<contactref element="J5" pad="2"/>
+<contactref element="J6" pad="2"/>
 </signal>
 <signal name="VCC">
 <contactref element="J1" pad="1"/>
@@ -1731,6 +1755,8 @@ design rules under a new name.</description>
 </polygon>
 <contactref element="U1" pad="18"/>
 <contactref element="U1" pad="9"/>
+<contactref element="J5" pad="1"/>
+<contactref element="J6" pad="1"/>
 </signal>
 <signal name="SCL">
 <contactref element="J1" pad="3"/>
@@ -1748,7 +1774,8 @@ design rules under a new name.</description>
 <wire x1="13" y1="43.5" x2="9" y2="39.5" width="0.1524" layer="1"/>
 <wire x1="14.5" y1="43.5" x2="13" y2="43.5" width="0.1524" layer="1"/>
 <wire x1="17" y1="41" x2="14.5" y2="43.5" width="0.1524" layer="1"/>
-<wire x1="6" y1="39.5" x2="5.73" y2="39.365" width="0.1524" layer="1"/>
+<wire x1="6" y1="39.5" x2="5.8" y2="39.4" width="0.1524" layer="1"/>
+<wire x1="5.8" y1="39.4" x2="5.73" y2="39.365" width="0.1524" layer="1"/>
 <wire x1="59" y1="33.5" x2="56.5" y2="36" width="0.1524" layer="1"/>
 <wire x1="76.5" y1="33.5" x2="66" y2="33.5" width="0.1524" layer="1"/>
 <wire x1="66" y1="33.5" x2="59" y2="33.5" width="0.1524" layer="1"/>
@@ -1762,6 +1789,21 @@ design rules under a new name.</description>
 <wire x1="27" y1="38" x2="24" y2="41" width="0.1524" layer="1"/>
 <wire x1="61.5" y1="38" x2="27" y2="38" width="0.1524" layer="1"/>
 <wire x1="66" y1="33.5" x2="61.5" y2="38" width="0.1524" layer="1"/>
+<contactref element="J5" pad="3"/>
+<contactref element="J6" pad="3"/>
+<wire x1="24.365" y1="75.27" x2="24.365" y2="68.365" width="0.1524" layer="1"/>
+<wire x1="7" y1="40.6" x2="5.8" y2="39.4" width="0.1524" layer="1"/>
+<wire x1="24.365" y1="68.365" x2="7" y2="51" width="0.1524" layer="1"/>
+<wire x1="7" y1="51" x2="7" y2="40.6" width="0.1524" layer="1"/>
+<wire x1="24.365" y1="6.27" x2="23.1872" y2="7.4478" width="0.1524" layer="16"/>
+<wire x1="23.1872" y1="7.4478" x2="23.1872" y2="8.533775" width="0.1524" layer="16"/>
+<wire x1="23.1872" y1="8.533775" x2="18.720975" y2="13" width="0.1524" layer="16"/>
+<wire x1="18.720975" y1="13" x2="10" y2="13" width="0.1524" layer="16"/>
+<wire x1="10" y1="13" x2="4" y2="19" width="0.1524" layer="16"/>
+<wire x1="6.1422" y1="34.1422" x2="6.1422" y2="38.9528" width="0.1524" layer="16"/>
+<wire x1="6.1422" y1="38.9528" x2="5.73" y2="39.365" width="0.1524" layer="16"/>
+<wire x1="4" y1="19" x2="4" y2="32" width="0.1524" layer="16"/>
+<wire x1="4" y1="32" x2="6.1422" y2="34.1422" width="0.1524" layer="16"/>
 </signal>
 <signal name="SDA">
 <contactref element="J1" pad="4"/>
@@ -1771,15 +1813,12 @@ design rules under a new name.</description>
 <contactref element="R8" pad="2"/>
 <contactref element="U1" pad="13"/>
 <wire x1="24" y1="37.5" x2="24" y2="37" width="0.1524" layer="1"/>
-<wire x1="16" y1="39.5" x2="21" y2="39.5" width="0.1524" layer="1"/>
+<wire x1="16" y1="39.5" x2="21.45" y2="39.5" width="0.1524" layer="1"/>
 <wire x1="14" y1="41.5" x2="16" y2="39.5" width="0.1524" layer="1"/>
 <wire x1="24" y1="37" x2="23.95" y2="37" width="0.1524" layer="1"/>
 <wire x1="14" y1="41.5" x2="13.73" y2="41.905" width="0.1524" layer="1"/>
-<wire x1="9" y1="38.5" x2="8.5" y2="38.5" width="0.1524" layer="1"/>
-<wire x1="12" y1="41.5" x2="9" y2="38.5" width="0.1524" layer="1"/>
-<wire x1="13.5" y1="41.5" x2="12" y2="41.5" width="0.1524" layer="1"/>
+<wire x1="8.5" y1="38.5" x2="9" y2="38.5" width="0.1524" layer="1"/>
 <wire x1="8.5" y1="38.5" x2="8.27" y2="38.095" width="0.1524" layer="1"/>
-<wire x1="13.5" y1="41.5" x2="13.73" y2="41.905" width="0.1524" layer="1"/>
 <wire x1="60.5" y1="34.5" x2="59" y2="36" width="0.1524" layer="16"/>
 <wire x1="73" y1="34.5" x2="60.5" y2="34.5" width="0.1524" layer="16"/>
 <wire x1="80.5" y1="42" x2="73" y2="34.5" width="0.1524" layer="16"/>
@@ -1797,7 +1836,21 @@ design rules under a new name.</description>
 <wire x1="24" y1="37.5" x2="23.95" y2="37" width="0.1524" layer="1"/>
 <wire x1="58.5" y1="36.5" x2="58.97" y2="36.065" width="0.1524" layer="1"/>
 <wire x1="23.95" y1="37" x2="21.45" y2="39.5" width="0.1524" layer="1"/>
-<wire x1="21.45" y1="39.5" x2="21" y2="39.5" width="0.1524" layer="1"/>
+<contactref element="J5" pad="4"/>
+<contactref element="J6" pad="4"/>
+<wire x1="23.95" y1="37" x2="23.95" y2="12.95" width="0.1524" layer="1"/>
+<wire x1="23.95" y1="12.95" x2="23" y2="12" width="0.1524" layer="1"/>
+<wire x1="23" y1="12" x2="23" y2="8.720975" width="0.1524" layer="1"/>
+<wire x1="23" y1="8.720975" x2="23.1872" y2="8.533775" width="0.1524" layer="1"/>
+<wire x1="23.1872" y1="8.533775" x2="23.1872" y2="6.966225" width="0.1524" layer="1"/>
+<wire x1="23.1872" y1="6.966225" x2="23.095" y2="6.874025" width="0.1524" layer="1"/>
+<wire x1="23.095" y1="6.874025" x2="23.095" y2="3.73" width="0.1524" layer="1"/>
+<wire x1="12.405" y1="41.905" x2="13.73" y2="41.905" width="0.1524" layer="1"/>
+<wire x1="9" y1="38.5" x2="12.405" y2="41.905" width="0.1524" layer="1"/>
+<wire x1="23.095" y1="72.73" x2="23.095" y2="68.095" width="0.1524" layer="16"/>
+<wire x1="23.095" y1="68.095" x2="7" y2="52" width="0.1524" layer="16"/>
+<wire x1="7" y1="52" x2="7" y2="48.635" width="0.1524" layer="16"/>
+<wire x1="7" y1="48.635" x2="13.73" y2="41.905" width="0.1524" layer="16"/>
 </signal>
 <signal name="A2">
 <contactref element="MT2" pad="A"/>
