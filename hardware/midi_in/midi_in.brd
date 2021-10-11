@@ -83,8 +83,8 @@
 <text x="31.75" y="13.97" size="1.778" layer="21">GND</text>
 <text x="31.75" y="11.43" size="1.778" layer="21">VRX</text>
 <text x="31.75" y="8.89" size="1.778" layer="21">5v</text>
-<text x="31.75" y="3.81" size="1.778" layer="21">M5</text>
-<text x="31.75" y="6.35" size="1.778" layer="21">M4</text>
+<text x="31.75" y="6.35" size="1.778" layer="21">M5</text>
+<text x="31.75" y="3.81" size="1.778" layer="21">M4</text>
 <wire x1="12.7" y1="8.89" x2="12.7" y2="7.62" width="0.1524" layer="21"/>
 <wire x1="11.43" y1="8.89" x2="12.7" y2="8.89" width="0.1524" layer="21"/>
 <wire x1="12.7" y1="8.89" x2="13.97" y2="8.89" width="0.1524" layer="21"/>

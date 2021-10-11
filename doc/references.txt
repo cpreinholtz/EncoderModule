@@ -1,3 +1,5 @@
 
 
 http://makeatronics.blogspot.com/2013/02/efficiently-reading-quadrature-with.html
+
+https://www.adafruit.com/product/3954
