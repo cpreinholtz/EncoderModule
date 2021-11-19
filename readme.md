@@ -28,6 +28,7 @@ This module is meant to be an expandable way to attach many rotary encoders to a
 
 ### Hardare Features
 
+* Voltage input 1.8 — 5.5 V
 * Optional pullups on SCL and SDA, do not pupulate by default,  should be pulled up on master side.
 * Chainable design, simply connect modules using the ribbon cable connectors. (VCC, GND, SCL, SDA).
 * 3 address pins per chip allow up to 8 unique addresses.  
