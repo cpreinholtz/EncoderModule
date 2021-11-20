@@ -7518,8 +7518,6 @@ W = angled&lt;p&gt;
 <part name="C1" library="capacitor-wima" library_urn="urn:adsk.eagle:library:116" deviceset="C" device="5/3.5" package3d_urn="urn:adsk.eagle:package:5427/1" value="1uf"/>
 <part name="C3" library="capacitor-wima" library_urn="urn:adsk.eagle:library:116" deviceset="C" device="5/3.5" package3d_urn="urn:adsk.eagle:package:5427/1" value="1uf"/>
 <part name="U$7" library="seeedgrove" deviceset="110990030" device=""/>
-<part name="R7" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10k"/>
-<part name="R8" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="R0805" package3d_urn="urn:adsk.eagle:package:23553/2" value="10K"/>
 <part name="SV5" library="con-lstb" library_urn="urn:adsk.eagle:library:162" deviceset="MA04-1" device="" package3d_urn="urn:adsk.eagle:package:8337/1"/>
 <part name="SV2" library="con-lsta" library_urn="urn:adsk.eagle:library:161" deviceset="FE06-1" device="" package3d_urn="urn:adsk.eagle:package:8191/1"/>
 <part name="SV3" library="con-lsta" library_urn="urn:adsk.eagle:library:161" deviceset="FE06-1" device="" package3d_urn="urn:adsk.eagle:package:8191/1"/>
@@ -7527,12 +7525,16 @@ W = angled&lt;p&gt;
 <part name="SV6" library="con-lstb" library_urn="urn:adsk.eagle:library:162" deviceset="MA04-1" device="" package3d_urn="urn:adsk.eagle:package:8337/1"/>
 <part name="U2" library="DEV-15583" deviceset="DEV-15583" device=""/>
 <part name="JP1" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X14" device="" package3d_urn="urn:adsk.eagle:package:22417/2"/>
+<part name="R9" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="0207/10" package3d_urn="urn:adsk.eagle:package:23491/2" value="100"/>
+<part name="R10" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="0207/10" package3d_urn="urn:adsk.eagle:package:23491/2" value="10K"/>
+<part name="R11" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="R-US_" device="0207/10" package3d_urn="urn:adsk.eagle:package:23491/2" value="10K"/>
+<part name="SV7" library="con-lstb" library_urn="urn:adsk.eagle:library:162" deviceset="MA04-1" device="" package3d_urn="urn:adsk.eagle:package:8337/1"/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 <text x="157.48" y="81.28" size="1.778" layer="91">LCD Display</text>
-<text x="157.48" y="132.08" size="1.778" layer="91">Optional pullups, do not populate if not needed</text>
+<text x="154.94" y="134.62" size="1.778" layer="91">Optional pullups, do not populate if not needed</text>
 <text x="137.16" y="48.26" size="1.778" layer="91">Optional, connector if desired to go grove to grove. beware of orintation during install</text>
 <text x="-63.5" y="35.56" size="1.778" layer="91">MIDI THROUGH</text>
 <text x="-17.78" y="30.48" size="1.778" layer="91">MIDI OUT</text>
@@ -7618,14 +7620,6 @@ W = angled&lt;p&gt;
 <attribute name="NAME" x="162.56" y="73.66" size="1.27" layer="95"/>
 <attribute name="VALUE" x="162.56" y="71.12" size="1.27" layer="96"/>
 </instance>
-<instance part="R7" gate="G$1" x="177.8" y="127" smashed="yes">
-<attribute name="NAME" x="173.99" y="128.4986" size="1.778" layer="95"/>
-<attribute name="VALUE" x="173.99" y="123.698" size="1.778" layer="96"/>
-</instance>
-<instance part="R8" gate="G$1" x="177.8" y="119.38" smashed="yes">
-<attribute name="NAME" x="173.99" y="120.8786" size="1.778" layer="95"/>
-<attribute name="VALUE" x="173.99" y="116.078" size="1.778" layer="96"/>
-</instance>
 <instance part="SV5" gate="1" x="182.88" y="66.04" smashed="yes">
 <attribute name="VALUE" x="181.61" y="55.88" size="1.778" layer="96"/>
 <attribute name="NAME" x="181.61" y="71.882" size="1.778" layer="95"/>
@@ -7653,6 +7647,22 @@ W = angled&lt;p&gt;
 <instance part="JP1" gate="A" x="-45.72" y="127" smashed="yes">
 <attribute name="NAME" x="-52.07" y="145.415" size="1.778" layer="95"/>
 <attribute name="VALUE" x="-52.07" y="104.14" size="1.778" layer="96"/>
+</instance>
+<instance part="R9" gate="G$1" x="-114.3" y="121.92" smashed="yes">
+<attribute name="NAME" x="-113.03" y="125.9586" size="1.778" layer="95"/>
+<attribute name="VALUE" x="-113.03" y="123.698" size="1.778" layer="96"/>
+</instance>
+<instance part="R10" gate="G$1" x="177.8" y="127" smashed="yes">
+<attribute name="NAME" x="179.07" y="131.0386" size="1.778" layer="95"/>
+<attribute name="VALUE" x="179.07" y="128.778" size="1.778" layer="96"/>
+</instance>
+<instance part="R11" gate="G$1" x="177.8" y="119.38" smashed="yes">
+<attribute name="NAME" x="179.07" y="123.4186" size="1.778" layer="95"/>
+<attribute name="VALUE" x="179.07" y="121.158" size="1.778" layer="96"/>
+</instance>
+<instance part="SV7" gate="1" x="152.4" y="205.74" smashed="yes">
+<attribute name="VALUE" x="151.13" y="195.58" size="1.778" layer="96"/>
+<attribute name="NAME" x="151.13" y="211.582" size="1.778" layer="95"/>
 </instance>
 </instances>
 <busses>
@@ -7692,9 +7702,9 @@ W = angled&lt;p&gt;
 <label x="-60.96" y="142.24" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="JP1" gate="A" pin="8"/>
-<wire x1="-48.26" y1="124.46" x2="-60.96" y2="124.46" width="0.1524" layer="91"/>
-<label x="-60.96" y="124.46" size="1.778" layer="95"/>
+<pinref part="R9" gate="G$1" pin="1"/>
+<wire x1="-119.38" y1="121.92" x2="-129.54" y2="121.92" width="0.1524" layer="91"/>
+<label x="-127" y="121.92" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -7779,6 +7789,11 @@ W = angled&lt;p&gt;
 <pinref part="JP1" gate="A" pin="2"/>
 <wire x1="-48.26" y1="139.7" x2="-60.96" y2="139.7" width="0.1524" layer="91"/>
 <label x="-60.96" y="139.7" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="177.8" y1="200.66" x2="160.02" y2="200.66" width="0.1524" layer="91"/>
+<label x="160.02" y="200.66" size="1.778" layer="95"/>
+<pinref part="SV7" gate="1" pin="1"/>
 </segment>
 </net>
 <net name="INMIDI4" class="0">
@@ -7875,8 +7890,8 @@ W = angled&lt;p&gt;
 <wire x1="167.64" y1="127" x2="167.64" y2="119.38" width="0.1524" layer="91"/>
 <wire x1="167.64" y1="119.38" x2="172.72" y2="119.38" width="0.1524" layer="91"/>
 <label x="167.64" y="127" size="1.778" layer="95"/>
-<pinref part="R7" gate="G$1" pin="1"/>
-<pinref part="R8" gate="G$1" pin="1"/>
+<pinref part="R11" gate="G$1" pin="1"/>
+<pinref part="R10" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <wire x1="142.24" y1="58.42" x2="157.48" y2="58.42" width="0.1524" layer="91"/>
@@ -7917,6 +7932,11 @@ W = angled&lt;p&gt;
 <pinref part="JP1" gate="A" pin="4"/>
 <wire x1="-48.26" y1="134.62" x2="-60.96" y2="134.62" width="0.1524" layer="91"/>
 <label x="-60.96" y="134.62" size="1.778" layer="95"/>
+</segment>
+<segment>
+<wire x1="177.8" y1="203.2" x2="160.02" y2="203.2" width="0.1524" layer="91"/>
+<label x="160.02" y="203.2" size="1.778" layer="95"/>
+<pinref part="SV7" gate="1" pin="2"/>
 </segment>
 </net>
 <net name="RXBUF" class="0">
@@ -8050,7 +8070,7 @@ W = angled&lt;p&gt;
 <segment>
 <wire x1="182.88" y1="127" x2="190.5" y2="127" width="0.1524" layer="91"/>
 <label x="185.42" y="127" size="1.778" layer="95"/>
-<pinref part="R7" gate="G$1" pin="2"/>
+<pinref part="R10" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <wire x1="142.24" y1="63.5" x2="157.48" y2="63.5" width="0.1524" layer="91"/>
@@ -8066,6 +8086,11 @@ W = angled&lt;p&gt;
 <wire x1="33.02" y1="132.08" x2="43.18" y2="132.08" width="0.1524" layer="91"/>
 <label x="35.56" y="132.08" size="1.778" layer="95"/>
 <pinref part="U2" gate="G$1" pin="19"/>
+</segment>
+<segment>
+<wire x1="177.8" y1="208.28" x2="160.02" y2="208.28" width="0.1524" layer="91"/>
+<label x="160.02" y="208.28" size="1.778" layer="95"/>
+<pinref part="SV7" gate="1" pin="4"/>
 </segment>
 </net>
 <net name="SDA" class="0">
@@ -8087,7 +8112,7 @@ W = angled&lt;p&gt;
 <segment>
 <wire x1="182.88" y1="119.38" x2="190.5" y2="119.38" width="0.1524" layer="91"/>
 <label x="185.42" y="119.38" size="1.778" layer="95"/>
-<pinref part="R8" gate="G$1" pin="2"/>
+<pinref part="R11" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <wire x1="142.24" y1="60.96" x2="157.48" y2="60.96" width="0.1524" layer="91"/>
@@ -8103,6 +8128,11 @@ W = angled&lt;p&gt;
 <wire x1="33.02" y1="129.54" x2="43.18" y2="129.54" width="0.1524" layer="91"/>
 <label x="35.56" y="129.54" size="1.778" layer="95"/>
 <pinref part="U2" gate="G$1" pin="18"/>
+</segment>
+<segment>
+<wire x1="177.8" y1="205.74" x2="160.02" y2="205.74" width="0.1524" layer="91"/>
+<label x="160.02" y="205.74" size="1.778" layer="95"/>
+<pinref part="SV7" gate="1" pin="3"/>
 </segment>
 </net>
 <net name="MIDITX" class="0">
@@ -8124,9 +8154,8 @@ W = angled&lt;p&gt;
 <label x="-134.62" y="60.96" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="33.02" y1="121.92" x2="43.18" y2="121.92" width="0.1524" layer="91"/>
-<label x="35.56" y="121.92" size="1.778" layer="95"/>
-<pinref part="U2" gate="G$1" pin="15"/>
+<wire x1="12.7" y1="160.02" x2="22.86" y2="160.02" width="0.1524" layer="91"/>
+<label x="15.24" y="160.02" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="RA" class="0">
@@ -8136,9 +8165,8 @@ W = angled&lt;p&gt;
 <label x="-124.46" y="60.96" size="1.778" layer="95"/>
 </segment>
 <segment>
-<wire x1="33.02" y1="119.38" x2="43.18" y2="119.38" width="0.1524" layer="91"/>
-<label x="35.56" y="119.38" size="1.778" layer="95"/>
-<pinref part="U2" gate="G$1" pin="14"/>
+<wire x1="12.7" y1="157.48" x2="22.86" y2="157.48" width="0.1524" layer="91"/>
+<label x="15.24" y="157.48" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="LABYPASS" class="0">
@@ -8310,6 +8338,18 @@ W = angled&lt;p&gt;
 <wire x1="-2.54" y1="142.24" x2="-15.24" y2="142.24" width="0.1524" layer="91"/>
 <label x="-15.24" y="142.24" size="1.778" layer="95"/>
 <pinref part="U2" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="LED" class="0">
+<segment>
+<pinref part="JP1" gate="A" pin="8"/>
+<wire x1="-48.26" y1="124.46" x2="-60.96" y2="124.46" width="0.1524" layer="91"/>
+<label x="-60.96" y="124.46" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R9" gate="G$1" pin="2"/>
+<wire x1="-109.22" y1="121.92" x2="-96.52" y2="121.92" width="0.1524" layer="91"/>
+<label x="-106.68" y="121.92" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
