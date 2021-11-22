@@ -105,12 +105,27 @@ TBD
 Overview TBD
 
 
-#### Firmware Detailed Descriptions
-TBD
+#### Firmware Detailed Descriptions (Requirments...)
+* Polled processes: knobs(100Hz), capacitive touch pads(100Hz?), midi RX(Every loop), Trellis (100Hz?), Clock Monitor(Every Loop), Touchscreen(100Hz?)
+* While polling, if something is found that requires updates, the dispatcher class is called.
+* When called the dispatcher will perform one or more actions such as modifying the voices or other synth parameters, and updating the display.
+* The synth itself will have N voices, each with its own oscilators, LFOs?, amplitude envelope, filter and filter envelope.
+* The synth will then combine all voices and send them through an effects signal chain containing delay, reverb, bitcrush, etc.
+* The synth will respond to pitch bending and modwheel messages.
+* The synth will be able to store up to M "note on" messages at a time, and will use the LAST N notes on the voices, upon notoffs it will go back through the list in revers chronological order.
+
+#### Firmware Future Considerations
+* It would be nice to have a good sequencer in the future, (keep this in mind when writing the dispatcher and voice controls)  consider things like kbd play / stack live 
+* It would be nice to have a built in drum machine in the future.
+* It would be nice to have the ability to save patches.  (make settings easy to get / set)
+* It would be nice to be able to swap LFOs from incremental clk sync to continuous bpm sweeps.  this requires some back and forth from dispatcher to clk and lfo.
+* It would be nice to be able to swap from re-triggering envelopes on each additional key to using one envelop for all voices(more smooth /legatto)
+
+
 
 
 #### Firmware Enviromental setup
-TBD
+All you should need is arduino IDE with teensy specific addons installed.
 
 
 #### Firmware Dependencies
