@@ -14,6 +14,7 @@ This repo contains several PCB designs and teensy firmware for building a digita
 **PCBs (see detailed descriptions below)**
 * **R**otary **E**ncoder **E**xpander **M**odule (REEM)
 * **G**round **I**solated **M**idi **I**nput Module (GIMI)
+* **D**igital **R**otary Encoder **T**eensy S**y**nth (DRTY / DORTHY)
 
 
 
@@ -101,12 +102,14 @@ Take a teensy, slap 64 knobs and 16 buttons onto it, make it midi compatable and
 #### Hardware Pinouts
 TBD
 
+
+
 ## Dorthy Teensy Synth Firmware
-Overview TBD
+This synth will make heavy use of the teensy audio libraries and other goodies found all over the web.  Special thanks to all the contributors!
 
 
 #### Firmware Detailed Descriptions (Requirments...)
-* Polled processes: knobs(100Hz), capacitive touch pads(100Hz?), midi RX(Every loop), Trellis (100Hz?), Clock Monitor(Every Loop), Touchscreen(100Hz?)
+* Polled processes: knobs(>100Hz), capacitive touch pads(100Hz?), midi RX(Every loop), Trellis (100Hz?), Clock Monitor(Every Loop), Touchscreen(100Hz?)
 * While polling, if something is found that requires updates, the dispatcher class is called.
 * When called the dispatcher will perform one or more actions such as modifying the voices or other synth parameters, and updating the display.
 * The synth itself will have N voices, each with its own oscilators, LFOs?, amplitude envelope, filter and filter envelope.
@@ -125,7 +128,7 @@ Overview TBD
 
 
 #### Firmware Enviromental setup
-All you should need is arduino IDE with teensy specific addons installed.
+All you should need is arduino IDE with the teensy 3.6 board installed.
 
 
 #### Firmware Dependencies
