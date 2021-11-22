@@ -2,7 +2,6 @@
 This repo contains several PCB designs and teensy firmware for building a digital sythesiser.
 
 
-
 **Directory structure:**
 * cad (empty...)
 * doc (mostly datasheets and links to research sources)
