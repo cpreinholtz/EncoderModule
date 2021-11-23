@@ -11,7 +11,6 @@ private:
     unsigned long long mSetTime;
     
     void startVoice(){
-        mSetTime = millis();
         //todo, hit the oscilators and envelopes now   
     }
     
@@ -34,6 +33,8 @@ public:
     //**************************************************************
     void set(byte note, byte vel){
         mVel = vel;
+        mNote = note;
+        mSetTime = millis();
         if (vel >0){
             startVoice();
         } else {
@@ -121,6 +122,9 @@ public:
     void set(byte note, byte vel){
 
         if (vel <= 0 ){
+            Serial.println("unset caught");
+            Serial.println(note);
+            
             unset(note);
         } else {
 
@@ -128,6 +132,7 @@ public:
             int i;                 
             for (i=0; i<kNumVoices ; i++){           
                 if (mVoices[i].getVel() > 0  and mVoices[i].getNote() == note) {
+                    Serial.println("repeat");
                     return;
                 }
             }
@@ -140,9 +145,13 @@ public:
     void unset(byte note){
         int i;
         for (i=0; i<kNumVoices ; i++){
-            mVoices[i].clear();
-            if (i < mNextVoice) mNextVoice = i;
-        }        
+            if (mVoices[i].getNote() == note){
+                mVoices[i].clear();
+                //Serial.println("clearing");
+                //Serial.println(i);
+                pickNext();
+            }
+        }
     }
 
     void clear(){
@@ -158,6 +167,20 @@ public:
     //**************************************************************
     int getNumVoices(){
         return kNumVoices;
+    }
+
+    void dbg(){
+        Serial.println("voicelist");
+        int i;
+        for (i = 0 ; i<kNumVoices; i++){
+            if (mVoices[i].getVel() <= 0 ) {
+                Serial.print("X");
+            } else {
+               Serial.print(mVoices[i].getNote()); 
+            }            
+            Serial.print("\t");
+        }
+        Serial.println("");
     }
     
 

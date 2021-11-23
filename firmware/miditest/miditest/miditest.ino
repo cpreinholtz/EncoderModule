@@ -12,12 +12,25 @@ MIDI_CREATE_DEFAULT_INSTANCE();
 
 
 
+void dbgNotes(){
+    Serial.println("");
+    gNotes.dbg(); 
+    gVoices.dbg();
+}
+
 void updateNotes(){
     int i;
+    Serial.println("updating");
     for (i=0; i<gVoices.getNumVoices(); i++){
         Note tNote = gNotes.get(i);
+        Serial.println(i);
+        Serial.println(tNote.mNote);
+        Serial.println(tNote.mVel);
+        
         gVoices.set(tNote.mNote, tNote.mVel);
-    }    
+        delay(10);
+    }
+    dbgNotes();
 }
   
 
@@ -26,12 +39,16 @@ void updateNotes(){
 void handleNoteOn(byte ch, byte note, byte vel){
     Serial.println("on");
     gNotes.noteOn(note, vel);
+    if (vel <= 0){
+        gVoices.unset(note);
+    }    
     updateNotes();
 }
 
 void handleNoteOff(byte ch, byte note, byte vel){
     Serial.println("off");
     gNotes.noteOff(note);
+    gVoices.unset(note);
     updateNotes();
 }
 

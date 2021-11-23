@@ -185,6 +185,19 @@ public:
         }
     }
 
+    
+
+    void dbg(){
+        Serial.println("noteslist ordered from last (left) to first (right)");
+        int i;
+        for (i = 0 ; i<kListMax; i++){
+            if (mNotes[i].mVel <= 0 ) {break;}
+            Serial.print(mNotes[i].mNote);
+            Serial.print("\t");
+        }
+        Serial.println("");
+    }
+
 
 
 
