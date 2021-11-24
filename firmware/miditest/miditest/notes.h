@@ -1,3 +1,5 @@
+#ifndef NOTES_H
+#define NOTES_H
 
 //#pragma once
 
@@ -210,3 +212,5 @@ public:
     }
     
 };
+
+#endif

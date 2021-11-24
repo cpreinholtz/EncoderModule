@@ -1,33 +1,26 @@
-#include <Audio.h>
+#ifndef VOICES_H
+#define VOICES_H
+
+/*
+ * 
+ #include <Audio.h>
 #include <Wire.h>
 #include <SPI.h>
 #include <SD.h>
 #include <SerialFlash.h>
+*/
+
 
 class Voice
 {
     
-private:
-    //**************************************************************
-    // members
-    //**************************************************************
-    bool mVel;
-    byte mNote;
-    static const int nWaves = 4;
-
 
     
-    unsigned long long mSetTime;
-    
-    void startVoice(){
-        //todo, hit the oscilators and envelopes now   
-    }
-    
-    void stopVoice(){
-        //todo, hit the oscilators and envelopes now
-    }
+
+
 
 public:    
+
     //**************************************************************
     // members (Audio)
     //**************************************************************
@@ -35,7 +28,8 @@ public:
 
 
 // GUItool: begin automatically generated code
-/*
+
+
 //Wave modifiers
 AudioSynthWaveform       mLfoWave;      //xy=483.74998474121094,213.75001287460327
 AudioAmplifier           mAmpShape;           //xy=639.7500839233398,261.75000190734863
@@ -55,25 +49,16 @@ AudioEffectEnvelope      mEnvFilter; //xy=1055.7500305175781,510.75002098083496
 AudioSynthWaveform       mLfoFilter; //xy=1055.7500038146973,574.750018119812
 AudioMixer4              mMixerFilter;         //xy=1239.0000190734863,540.7500095367432
 AudioFilterStateVariable mFilter;        //xy=1338.7500038146973,382.7500514984131
-*/
 
-// GUItool: begin automatically generated code
-AudioSynthWaveform       mLfoWave;      //xy=483.74998474121094,213.75001287460327
-AudioAmplifier           mAmpShape;           //xy=639.7500839233398,261.75000190734863
-AudioAmplifier           mAmpFreq;           //xy=650.7499923706055,162.75001049041748
-AudioSynthWaveformModulated mWave0;         //xy=874.0000953674316,161.99999713897705
-AudioSynthWaveformModulated mWave1; //xy=875.5,203.75
-AudioSynthWaveformModulated mWave2; //xy=875.5,248.75
-AudioSynthWaveformModulated mWave3; //xy=880.5,293.75
-AudioSynthWaveformDc     mDc;            //xy=913.0001220703125,521.7500219345093
-AudioMixer4              mMixerOSC; //xy=1033.2500305175781,229.75000381469727
-AudioOutputAnalogStereo  dacs1;          //xy=1053.7500038146973,727.7500085830688
-AudioEffectEnvelope      mEnvFilter; //xy=1055.7500305175781,510.75002098083496
-AudioSynthWaveform       mLfoFilter; //xy=1055.7500038146973,574.750018119812
-AudioEffectEnvelope      mEnvOsc;      //xy=1189.7500038146973,227.75001430511475
-AudioMixer4              mMixerFilter;         //xy=1239.0000190734863,540.7500095367432
-AudioFilterStateVariable mFilter;        //xy=1338.7500038146973,382.7500514984131
-/*
+
+
+
+
+
+
+
+
+/* this bad syntax
 AudioConnection          patchCord1(mLfoWave, mAmpFreq);
 AudioConnection          patchCord2(mLfoWave, mAmpShape);
 AudioConnection          patchCord3(mAmpShape, 0, mWave0, 1);
@@ -96,6 +81,8 @@ AudioConnection          patchCord19(mEnvOsc, 0, mFilter, 0);
 AudioConnection          patchCord20(mMixerFilter, 0, mFilter, 1);
 */
 
+
+// this is correct
 AudioConnection          patchCord1;
 AudioConnection          patchCord2;
 AudioConnection          patchCord3;
@@ -149,7 +136,6 @@ AudioConnection          patchCord20;
         mSetTime = 0;
     }
 
-// GUItool: end automatically generated code
 
     void initLfoWave(){
         mLfoWave.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
@@ -158,20 +144,20 @@ AudioConnection          patchCord20;
     }
 
     void initOsc(){        
-        mWave0.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
-        mWave1.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
-        mWave2.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
-        mWave3.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
-        mMixerOSC.gain(0, 1.0);
+        mWave0.begin(1.0, 100, WAVEFORM_SAWTOOTH); //level freq, wave
+        mWave1.begin(1.0, 100, WAVEFORM_PULSE); //level freq, wave
+        mWave2.begin(1.0, 100, WAVEFORM_TRIANGLE_VARIABLE); //level freq, wave
+        mWave3.begin(1.0, 50, WAVEFORM_SINE); //level freq, wave
+        mMixerOSC.gain(0, 0.5);
         mMixerOSC.gain(1, 1.0);
-        mMixerOSC.gain(2, 1.0);
+        mMixerOSC.gain(2, 0.2);
         mMixerOSC.gain(3, 1.0);
         mEnvOsc.delay(0);
         mEnvOsc.hold(0);
         mEnvOsc.attack(100);
         mEnvOsc.decay(300);
         mEnvOsc.sustain(0.7);
-        mEnvOsc.release(200);
+        mEnvOsc.release(1000);
     }
 
     void initFilter(){        
@@ -188,7 +174,7 @@ AudioConnection          patchCord20;
         mEnvFilter.sustain(0.4);
         mEnvFilter.release(100);
 
-        mFilter.frequency(2000);
+        mFilter.frequency(8000);
         mFilter.resonance(0);
         mFilter.octaveControl(2);
     }
@@ -207,20 +193,34 @@ AudioConnection          patchCord20;
     //**************************************************************
     // setters
     //**************************************************************
-    void set(byte note, byte vel){
+    void set(byte note, byte vel, int bend){
         mVel = vel;
         mNote = note;
         mSetTime = millis();
         if (vel >0){
-            startVoice();
+            updateVoiceFrequency(bend);
+            mEnvOsc.noteOn();
+            mEnvFilter.noteOn();
         } else {
-            stopVoice();
+            clear();
         }        
+    }
+    
+    void updateVoiceFrequency(int bend){
+        //todo, hit the oscilators and envelopes now
+        float freq = getBendedFrequency(bend);
+        mWave0.frequency(freq);
+        mWave1.frequency(freq);
+        mWave2.frequency(freq);
+        mWave3.frequency(freq/2.0); 
+        Serial.println("freq");   
+        Serial.println(freq); 
     }
 
     void clear(){
         mVel = 0;
-        stopVoice();
+        mEnvOsc.noteOff();
+        mEnvFilter.noteOff();
     }    
     
     //**************************************************************
@@ -235,6 +235,42 @@ AudioConnection          patchCord20;
     unsigned long long getTime(){
         return mSetTime;
     }  
+
+
+
+
+private:
+    //**************************************************************
+    // members
+    //**************************************************************
+    bool mVel;
+    byte mNote;
+    static const int nWaves = 4;
+
+
+    
+    unsigned long long mSetTime;
+    
+    static const int kA = 440; // a is 440 hz...
+    static const int kFullBend = 8191;
+    static const int kBendHalfSteps = 2.0;
+    static constexpr float kBbendScaler = ((float) kBendHalfSteps) / ( 12.0 * ((float)kFullBend) ) ;
+
+    //get note frequency * bendMultiplier
+    float getBendedFrequency(int bend){    
+        //actual bend is 2^ ((bendHalfSteps /12.0) * (bend/fullBend))
+        //therefore if half steps is 12 (one octave) and bend is max or min, your pitch will be multiplied by 2^-1 or 2^1 (0.5 or 2)            
+        float bendMultiplier = pow(2, (float) bend * kBbendScaler );
+        return ( getNoteFrequency() * bendMultiplier);        
+    }
+    
+    //get note frequency (before bending)
+    float getNoteFrequency(){        
+        return ( ((float)kA) / 32.0) * ( pow(2,(((float)mNote - 9.0) / 12.0)) )  ;
+    }
+
+    
+
 
 
 
@@ -256,6 +292,7 @@ private:
     //**************************************************************
     static const int kNumVoices = 3; 
     int mNextVoice;
+    int mBend;
 
 
     
@@ -294,7 +331,12 @@ public:
     // constructors
     //**************************************************************
     Voices(){
-        clear();        
+        mBend =0;
+        mNextVoice = 0;
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].clear();
+        }      
     }
 
     
@@ -319,9 +361,16 @@ public:
                 }
             }
             
-            mVoices[mNextVoice].set(note,vel);
+            mVoices[mNextVoice].set(note,vel,mBend);
             pickNext(); 
         }    
+    }
+
+    void updateBend(int bend){
+        int i;
+        for (i=0; i<kNumVoices ; i++){           
+            mVoices[i].updateVoiceFrequency(bend);
+        }
     }
 
     void unset(byte note){
@@ -336,13 +385,7 @@ public:
         }
     }
 
-    void clear(){
-        mNextVoice = 0;
-        int i;
-        for (i=0; i<kNumVoices ; i++){
-            mVoices[i].clear();
-        }
-    }
+
 
     void initAudio(){        
         int i;
@@ -375,3 +418,7 @@ public:
     
 
 };
+
+
+
+#endif
