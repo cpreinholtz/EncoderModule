@@ -1,7 +1,15 @@
+
+#include <Audio.h>
+#include <Wire.h>
+#include <SPI.h>
+#include <SD.h>
+#include <SerialFlash.h>
+
+
 #include <MIDI.h>
 #include "noteList.h"
 #include "voices.h"
-#include "Audio.h"
+
 
 
 
@@ -83,6 +91,18 @@ void handleNoteOff(byte ch, byte note, byte vel){
     updateNotes();
 }
 
+
+void handleControlChange(byte ch, byte cc, byte val){
+    Serial.println(ch);
+    Serial.println(cc);  
+    Serial.println(val);
+}
+
+void handlePitchChange(byte ch, byte cc, byte val){
+    Serial.println(ch);
+    Serial.println(cc);  
+    Serial.println(val);
+}
 // -----------------------------------------------------------------------------
 
 
@@ -91,16 +111,25 @@ void handleNoteOff(byte ch, byte note, byte vel){
 
 void setup()
 {
+    AudioMemory(400);
     //pinMode(sGatePin,     OUTPUT);
     //pinMode(sAudioOutPin, OUTPUT);
     MIDI.setHandleNoteOn(handleNoteOn);
     MIDI.setHandleNoteOff(handleNoteOff);
+    
+    //MIDI.setHandleControlChange(handleControlChange);
+
+    //MIDI.setHandlePitchChange(handlePitchChange);
+    
     MIDI.begin(4); //channel
     Serial.begin(9600);
     Serial.println("here");
+
+    initAudio();
 }
 
 void loop()
 { 
-    MIDI.read();
+    //MIDI.read();
+    Serial.println("dsjfhs");
 }
