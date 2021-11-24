@@ -23,7 +23,7 @@ AudioMixer4              gVoiceMixer;         //xy=900,337
 AudioConnection patchVoices0 (gVoices.mVoices[0].mFilter, 0, gVoiceMixer , 0);
 AudioConnection patchVoices1 (gVoices.mVoices[1].mFilter, 0, gVoiceMixer , 1);
 AudioConnection patchVoices2 (gVoices.mVoices[2].mFilter, 0, gVoiceMixer , 2);
-
+AudioConnection patchVoices3 (gVoices.mVoices[3].mFilter, 0, gVoiceMixer , 3);
 
 
 //output to Dacs
@@ -102,6 +102,7 @@ void handleControlChange(byte ch, byte cc, byte val){
     Serial.println(ch);
     Serial.println(cc);  
     Serial.println(val);
+    setCc(ch,cc,val);
 }
 
 void handlePitchBend(byte ch, int bend){
@@ -132,6 +133,7 @@ void setup()
     Serial.println("here");
 
     initAudio();
+    initControl();
 
   
 

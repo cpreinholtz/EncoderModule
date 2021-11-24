@@ -10,6 +10,7 @@
 #include <SerialFlash.h>
 */
 
+#include "time.h"
 
 class Voice
 {
@@ -290,7 +291,7 @@ private:
     //**************************************************************
     // members
     //**************************************************************
-    static const int kNumVoices = 3; 
+    static const int kNumVoices = 4; 
     int mNextVoice;
     int mBend;
 
@@ -415,9 +416,171 @@ public:
         }
         Serial.println("");
     }
-    
 
+
+
+    //**************************************************************
+    // audio
+    //**************************************************************
+
+    
+    ///////////////////////////////////////////////////////////
+    //WaveMixes
+    ///////////////////////////////////////////////////////////
+    void setWave0Mix(float mix){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mMixerOSC.gain(0, mix);
+        }
+    }    
+    void setWave1Mix(float mix){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mMixerOSC.gain(1, mix);
+        }
+    }    
+    void setWave2Mix(float mix){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mMixerOSC.gain(2, mix);
+        }
+    }
+    void setWave3Mix(float mix){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mMixerOSC.gain(3, mix);
+        }
+    }
+
+    ///////////////////////////////////////////////////////////
+    //VCA OSC ENV
+    ///////////////////////////////////////////////////////////
+    void setEnvAttack(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mEnvOsc.attack(val);
+        }
+    }    
+    void setEnvDecay(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mEnvOsc.decay(val);
+        }
+    }        
+    void setEnvSustain(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mEnvOsc.sustain(val);
+        }
+    }    
+
+    void setEnvRelease(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mEnvOsc.release(val);
+        }
+    }    
+
+    ///////////////////////////////////////////////////////////
+    //LFO wave
+    ///////////////////////////////////////////////////////////
+    void setLfoRate(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mLfoWave.frequency(bpmToFreq(val));
+        }
+    }    
+
+    void setLfoShapeMix(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mAmpShape.gain(val);
+        }
+    }    
+
+    void setLfoFreqMix(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mAmpFreq.gain(val);
+        }
+    }    
+
+    ///////////////////////////////////////////////////////////
+    //filter
+    ///////////////////////////////////////////////////////////
+    void setFilterCutoff(float freq){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mFilter.frequency(freq);
+        }
+    }
+
+    void setFilterRes(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mFilter.resonance(val);
+        }
+    }
+
+
+    ///////////////////////////////////////////////////////////
+    //filter Env
+    ///////////////////////////////////////////////////////////
+    void setFilterEnvAmmount(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mMixerFilter.gain(0, val);
+        }
+    }
+    void setFilterEnvAttack(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mEnvFilter.attack(val);
+        }
+    }    
+    void setFilterEnvDecay(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mEnvFilter.decay(val);
+        }
+    }        
+    void setFilterEnvSustain(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mEnvFilter.sustain(val);
+        }
+    }
+    void setFilterEnvRelease(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mEnvFilter.release(val);
+        }
+    }    
+
+    ///////////////////////////////////////////////////////////
+    //filter LFO
+    ///////////////////////////////////////////////////////////
+    void setFilterLfoAmmount(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mMixerFilter.gain(1, val);
+        }
+    }
+    void setFilterLfoRate(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].mLfoFilter.frequency(bpmToFreq(val));
+        }
+    }
+
+    
 };
+
+
+
+
+
+
 
 
 
