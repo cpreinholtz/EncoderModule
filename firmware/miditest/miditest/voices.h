@@ -1,3 +1,8 @@
+#include <Audio.h>
+#include <Wire.h>
+#include <SPI.h>
+#include <SD.h>
+#include <SerialFlash.h>
 
 class Voice
 {
@@ -8,6 +13,10 @@ private:
     //**************************************************************
     bool mVel;
     byte mNote;
+    static const int nWaves = 4;
+
+
+    
     unsigned long long mSetTime;
     
     void startVoice(){
@@ -18,15 +27,182 @@ private:
         //todo, hit the oscilators and envelopes now
     }
 
-public:
+public:    
+    //**************************************************************
+    // members (Audio)
+    //**************************************************************
+
+
+
+// GUItool: begin automatically generated code
+/*
+//Wave modifiers
+AudioSynthWaveform       mLfoWave;      //xy=483.74998474121094,213.75001287460327
+AudioAmplifier           mAmpShape;           //xy=639.7500839233398,261.75000190734863
+AudioAmplifier           mAmpFreq;           //xy=650.7499923706055,162.75001049041748
+
+//Oscilators
+AudioSynthWaveformModulated mWave0;         //xy=874.0000953674316,161.99999713897705
+AudioSynthWaveformModulated mWave1; //xy=875.5,203.75
+AudioSynthWaveformModulated mWave2; //xy=875.5,248.75
+AudioSynthWaveformModulated mWave3; //xy=880.5,293.75
+AudioMixer4              mMixerOSC; //xy=1033.2500305175781,229.75000381469727
+AudioEffectEnvelope      mEnvOsc;      //xy=1189.7500038146973,227.75001430511475
+
+//filter Modifiers
+AudioSynthWaveformDc     mDc;            //xy=913.0001220703125,521.7500219345093
+AudioEffectEnvelope      mEnvFilter; //xy=1055.7500305175781,510.75002098083496
+AudioSynthWaveform       mLfoFilter; //xy=1055.7500038146973,574.750018119812
+AudioMixer4              mMixerFilter;         //xy=1239.0000190734863,540.7500095367432
+AudioFilterStateVariable mFilter;        //xy=1338.7500038146973,382.7500514984131
+*/
+
+// GUItool: begin automatically generated code
+AudioSynthWaveform       mLfoWave;      //xy=483.74998474121094,213.75001287460327
+AudioAmplifier           mAmpShape;           //xy=639.7500839233398,261.75000190734863
+AudioAmplifier           mAmpFreq;           //xy=650.7499923706055,162.75001049041748
+AudioSynthWaveformModulated mWave0;         //xy=874.0000953674316,161.99999713897705
+AudioSynthWaveformModulated mWave1; //xy=875.5,203.75
+AudioSynthWaveformModulated mWave2; //xy=875.5,248.75
+AudioSynthWaveformModulated mWave3; //xy=880.5,293.75
+AudioSynthWaveformDc     mDc;            //xy=913.0001220703125,521.7500219345093
+AudioMixer4              mMixerOSC; //xy=1033.2500305175781,229.75000381469727
+AudioOutputAnalogStereo  dacs1;          //xy=1053.7500038146973,727.7500085830688
+AudioEffectEnvelope      mEnvFilter; //xy=1055.7500305175781,510.75002098083496
+AudioSynthWaveform       mLfoFilter; //xy=1055.7500038146973,574.750018119812
+AudioEffectEnvelope      mEnvOsc;      //xy=1189.7500038146973,227.75001430511475
+AudioMixer4              mMixerFilter;         //xy=1239.0000190734863,540.7500095367432
+AudioFilterStateVariable mFilter;        //xy=1338.7500038146973,382.7500514984131
+/*
+AudioConnection          patchCord1(mLfoWave, mAmpFreq);
+AudioConnection          patchCord2(mLfoWave, mAmpShape);
+AudioConnection          patchCord3(mAmpShape, 0, mWave0, 1);
+AudioConnection          patchCord4(mAmpShape, 0, mWave1, 1);
+AudioConnection          patchCord5(mAmpShape, 0, mWave2, 1);
+AudioConnection          patchCord6(mAmpShape, 0, mWave3, 1);
+AudioConnection          patchCord7(mAmpFreq, 0, mWave0, 0);
+AudioConnection          patchCord8(mAmpFreq, 0, mWave1, 0);
+AudioConnection          patchCord9(mAmpFreq, 0, mWave2, 0);
+AudioConnection          patchCord10(mAmpFreq, 0, mWave3, 0);
+AudioConnection          patchCord11(mWave0, 0, mMixerOSC, 0);
+AudioConnection          patchCord12(mWave1, 0, mMixerOSC, 1);
+AudioConnection          patchCord13(mWave2, 0, mMixerOSC, 2);
+AudioConnection          patchCord14(mWave3, 0, mMixerOSC, 3);
+AudioConnection          patchCord15(mDc, mEnvFilter);
+AudioConnection          patchCord16(mMixerOSC, mEnvOsc);
+AudioConnection          patchCord17(mEnvFilter, 0, mMixerFilter, 0);
+AudioConnection          patchCord18(mLfoFilter, 0, mMixerFilter, 1);
+AudioConnection          patchCord19(mEnvOsc, 0, mFilter, 0);
+AudioConnection          patchCord20(mMixerFilter, 0, mFilter, 1);
+*/
+
+AudioConnection          patchCord1;
+AudioConnection          patchCord2;
+AudioConnection          patchCord3;
+AudioConnection          patchCord4;
+AudioConnection          patchCord5;
+AudioConnection          patchCord6;
+AudioConnection          patchCord7;
+AudioConnection          patchCord8;
+AudioConnection          patchCord9;
+AudioConnection          patchCord10;
+AudioConnection          patchCord11;
+AudioConnection          patchCord12;
+AudioConnection          patchCord13;
+AudioConnection          patchCord14;
+AudioConnection          patchCord15;
+AudioConnection          patchCord16;
+AudioConnection          patchCord17;
+AudioConnection          patchCord18;
+AudioConnection          patchCord19;
+AudioConnection          patchCord20;
+
+
+// GUItool: end automatically generated code
 
     //**************************************************************
     // constructors
     //**************************************************************
-    Voice(){
+    Voice():
+        patchCord1(mLfoWave, mAmpFreq),
+        patchCord2(mLfoWave, mAmpShape),
+        patchCord3(mAmpShape, 0, mWave0, 1),
+        patchCord4(mAmpShape, 0, mWave1, 1),
+        patchCord5(mAmpShape, 0, mWave2, 1),
+        patchCord6(mAmpShape, 0, mWave3, 1),
+        patchCord7(mAmpFreq, 0, mWave0, 0),
+        patchCord8(mAmpFreq, 0, mWave1, 0),
+        patchCord9(mAmpFreq, 0, mWave2, 0),
+        patchCord10(mAmpFreq, 0, mWave3, 0),
+        patchCord11(mWave0, 0, mMixerOSC, 0),
+        patchCord12(mWave1, 0, mMixerOSC, 1),
+        patchCord13(mWave2, 0, mMixerOSC, 2),
+        patchCord14(mWave3, 0, mMixerOSC, 3),
+        patchCord15(mDc, mEnvFilter),
+        patchCord16(mMixerOSC, mEnvOsc),
+        patchCord17(mEnvFilter, 0, mMixerFilter, 0),
+        patchCord18(mLfoFilter, 0, mMixerFilter, 1),
+        patchCord19(mEnvOsc, 0, mFilter, 0),
+        patchCord20(mMixerFilter, 0, mFilter, 1)
+    {
         clear();
         mSetTime = 0;
     }
+
+// GUItool: end automatically generated code
+
+    void initLfoWave(){
+        mLfoWave.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
+        mAmpShape.gain(0.0);
+        mAmpFreq.gain(0.0);
+    }
+
+    void initOsc(){        
+        mWave0.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
+        mWave1.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
+        mWave2.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
+        mWave3.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
+        mMixerOSC.gain(0, 1.0);
+        mMixerOSC.gain(1, 1.0);
+        mMixerOSC.gain(2, 1.0);
+        mMixerOSC.gain(3, 1.0);
+        mEnvOsc.delay(0);
+        mEnvOsc.hold(0);
+        mEnvOsc.attack(100);
+        mEnvOsc.decay(300);
+        mEnvOsc.sustain(0.7);
+        mEnvOsc.release(200);
+    }
+
+    void initFilter(){        
+        mDc.amplitude(1.0);
+        mMixerFilter.gain(0, 0.0);
+        mMixerFilter.gain(1, 0.0);
+        mMixerFilter.gain(2, 0.0);
+        mMixerFilter.gain(3, 0.0);
+        mLfoFilter.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
+        mEnvFilter.delay(0);
+        mEnvFilter.hold(0);
+        mEnvFilter.attack(200);
+        mEnvFilter.decay(100);
+        mEnvFilter.sustain(0.4);
+        mEnvFilter.release(100);
+
+        mFilter.frequency(2000);
+        mFilter.resonance(0);
+        mFilter.octaveControl(2);
+    }
+
+    void initAudio(){        
+        initFilter();
+        initOsc();
+        initLfoWave();
+    }
+
+    
+    
+
+
 
     //**************************************************************
     // setters
@@ -59,6 +235,11 @@ public:
     unsigned long long getTime(){
         return mSetTime;
     }  
+
+
+
+
+    
 };
 
 
@@ -75,7 +256,7 @@ private:
     //**************************************************************
     static const int kNumVoices = 3; 
     int mNextVoice;
-    Voice mVoices [kNumVoices];
+
 
     
     
@@ -107,6 +288,7 @@ private:
 
 public:
 
+    Voice mVoices [kNumVoices];
 
     //**************************************************************
     // constructors
@@ -132,7 +314,7 @@ public:
             int i;                 
             for (i=0; i<kNumVoices ; i++){           
                 if (mVoices[i].getVel() > 0  and mVoices[i].getNote() == note) {
-                    Serial.println("repeat");
+                    //Serial.println("repeat");
                     return;
                 }
             }
@@ -161,6 +343,14 @@ public:
             mVoices[i].clear();
         }
     }
+
+    void initAudio(){        
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].initAudio();
+        }
+    }
+
 
     //**************************************************************
     // getters
