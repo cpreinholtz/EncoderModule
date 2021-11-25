@@ -155,11 +155,11 @@ void setCc(byte ch, byte cc, byte val){
     switch (cc){
         case kCcModWheel:         
             
-            gControls[VoiceLfoFreqMix].setVal(val); 
-            gVoices.setLfoFreqMix(gControls[VoiceLfoFreqMix].getScaled());
+            //gControls[VoiceLfoFreqMix].setVal(val); 
+            //gVoices.setLfoFreqMix(gControls[VoiceLfoFreqMix].getScaled());
             
-            //gControls[VoiceFilterCutoff].setVal(val + val);            
-            //gVoices.setFilterCutoff(gControls[VoiceFilterCutoff].getScaled());
+            gControls[VoiceFilterCutoff].setVal(val + val);            
+            gVoices.setFilterCutoff(gControls[VoiceFilterCutoff].getScaled());
             
             break;
     }
