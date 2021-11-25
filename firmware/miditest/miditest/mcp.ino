@@ -2,47 +2,111 @@
 #include <Wire.h>
 #include <Adafruit_MCP23X17.h>
 
+#include "grey_counter.h"
+
+const int DEFAULT_ADDR = 0x20;
+const int kNumReems = 2;
+
+Adafruit_MCP23X17 mcp[kNumReems];
+
+GreyCounter gGreyCounters[CtrlLast];
 
 
-
-Adafruit_MCP23X17 mcp;
-
-#define CS_PIN 19
-
-//#define DEFAULT_ADDR 0x
-
-const int DEFAULT_ADDR = 0x40;
 
 void initMcp(){
 
+    //Start and set to pullups
+    int i,j;   
+    for( j = 0; j < kNumReems; j++){
+        if (!mcp[j].begin_I2C(DEFAULT_ADDR+j)) {
+            Serial.println("Error.");
+             Serial.println(j);
+            while (1);
+        }        
+        for( i = 0; i < 16; i++){
+            mcp[j].pinMode(i,INPUT_PULLUP);        
+        }
+    }
     
-    //pinMode(19,INPUT_PULLUP);    
-    //pinMode(18,INPUT_PULLUP);   
-    
-    //Wire.begin();             // join i2c bus (address optional for master)
+    initAllKnobs();
+        //gc.initCounter( digitalRead(gA), digitalRead(gB) );
+}
 
-    Serial.println(MCP23XXX_ADDR,HEX);
-    // uncomment appropriate mcp.begin
-    if (!mcp.begin_I2C()) {
-        Serial.println("Error.");
-        while (1);
+
+
+
+void initAllKnobs(){
+    
+    //read all knobs
+    int i,j;
+    uint16_t tState[kNumReems];    
+    for( j = 0; j < kNumReems; j++){        
+        tState[j] = (((uint16_t) mcp[j].readGPIO(1)) <<8) | (uint16_t) mcp[j].readGPIO(0) ;        
     }
 
-    int i;
-    for( i = 0; i < 16; i++){
-        mcp.pinMode(i,INPUT_PULLUP);        
+
+    //update greycounters
+    for( j = 0; j < kNumReems; j++){
+                
+        for( i = 0; i < 8; i++){                         
+            uint8_t a = tState[j] & 0x01;
+            tState[j] = tState[j] >>1;
+            uint8_t b = tState[j] & 0x01;
+            tState[j] = tState[j] >>1;
+
+            int tCtrlIndex = j*8+i;
+
+            gGreyCounters[tCtrlIndex].initCounter(a,b);
+         
+        }            
     }
     
 }
 
 
 
+
+
+
+
+
 void getKnobs(){
     
-    Serial.println("getting knobs");
-    int i;
-    for( i = 0; i < 2; i++){
-        Serial.println(mcp.readGPIO(i), BIN);        
-    }    
+    //read all knobs
+    int i,j;
+    uint16_t tState[kNumReems];    
+    for( j = 0; j < kNumReems; j++){        
+        tState[j] = (((uint16_t) mcp[j].readGPIO(1)) <<8) | (uint16_t) mcp[j].readGPIO(0) ;        
+    }
+
+
+    //update greycounters
+    for( j = 0; j < kNumReems; j++){
+                
+        for( i = 0; i < 8; i++){                         
+            uint8_t a = tState[j] & 0x01;
+            tState[j] = tState[j] >>1;
+            uint8_t b = tState[j] & 0x01;
+            tState[j] = tState[j] >>1;
+
+            int tCtrlIndex = j*8+i;
+
+            gGreyCounters[tCtrlIndex].updateCounter(a,b);
+            if (gGreyCounters[tCtrlIndex].getChanged( )) {
+                
+
+                long tTick = gGreyCounters[tCtrlIndex].getCount();                
+                gControls[tCtrlIndex].setTick(tTick);
+
+                Serial.println("knob Change");
+                Serial.println(tCtrlIndex);
+                Serial.println(tTick);
+                Serial.println(gControls[tCtrlIndex].getVal());
+                Serial.println(gControls[tCtrlIndex].getScaled());
+
+                appllyAll();
+            }            
+        }            
+    }
     
 }

@@ -51,6 +51,13 @@ public:
         int8_t dif = kLookupTable[mShiftReg & 0b00001111];  
         mState.sChanged = dif !=0;        
         mState.sCount = mState.sCount + dif;
+        /*         
+        if (mState.sChanged){
+            Serial.println("poll");
+            Serial.println(dif);
+            Serial.println(mState.sCount);
+        }
+        */
         return mState;
     }
 
@@ -72,7 +79,7 @@ public:
         return mState.sChanged;        
     }
     
-    bool getCount(){
+    long getCount(){
         return mState.sCount;        
     }
     

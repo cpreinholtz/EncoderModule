@@ -4,7 +4,7 @@
 
 float bpmToFreq(float bpm){
     float bps = 60.0*bpm;
-    return bps;
+    return 1/bps;
 }
 
 

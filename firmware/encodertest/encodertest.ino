@@ -3,7 +3,7 @@
 
 
 #include "grey_counter.h"
-
+#include "time.h"
 
 
 
@@ -11,7 +11,7 @@ const int gA= 3;
 const int gB= 4;
 GreyCounter gc;
 
-
+Timer knobTimer(100);
 
 
 void setup() {
@@ -23,6 +23,7 @@ void setup() {
 
     Serial.begin(9600);
     Serial.println("here");
+
 
 
     //gc.initCounter( (digitalRead(gA)<<1)  | digitalRead(gB) );
@@ -37,13 +38,17 @@ void setup() {
 void loop()
 {
 
-    
-    //GreyState gs = gc.updateCounter(digitalRead(gA), digitalRead(gB));    
-    GreyState gs = gc.updateCounter( (digitalRead(gA)<<1)  | digitalRead(gB) );
 
+    if (knobTimer.pollAndReset()){
+        //GreyState gs = gc.updateCounter(digitalRead(gA), digitalRead(gB));    
+        gc.updateCounter( (digitalRead(gA)<<1)  | digitalRead(gB) );
     
-    if (gs.sChanged){
-        Serial.println(gs.sCount);
-    }    
+        
+        if (gc.getChanged()){
+            Serial.println(gc.getCount());
+        }       
+    }
+    
+
     
 }

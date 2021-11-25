@@ -190,6 +190,7 @@ public:
     
 
     void dbg(){
+        /*
         Serial.println("noteslist ordered from last (left) to first (right)");
         int i;
         for (i = 0 ; i<kListMax; i++){
@@ -198,6 +199,7 @@ public:
             Serial.print("\t");
         }
         Serial.println("");
+        */
     }
 
 

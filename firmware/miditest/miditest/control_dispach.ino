@@ -16,18 +16,23 @@ enum tCtrlList {
     VoiceLfoShapeMix,
     VoiceLfoFreqMix,
     VoiceLfoRate,
+
+    noop,
+
     
     VoiceFilterCutoff,
     VoiceFilterRes,
 
-    VoiceFilterEnvAmmount,
+    
+    VoiceFilterLfoAmmount,
+    VoiceFilterLfoRate,
+    
     VoiceFilterEnvAttack,
     VoiceFilterEnvDecay,
     VoiceFilterEnvSustain,
     VoiceFilterEnvRelease,
-    
-    VoiceFilterLfoAmmount,
-    VoiceFilterLfoRate,
+
+    VoiceFilterEnvAmmount,
 
 
     CtrlLast //always keep this at the bottom!
@@ -139,6 +144,7 @@ void appllyAll(){
 
 void initControl(){
     setScalers();
+    setDefaults();
 }
 
 

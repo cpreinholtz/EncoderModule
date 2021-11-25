@@ -68,7 +68,7 @@ public:
         return mState.sChanged;        
     }
     
-    bool getCount(){
+    long getCount(){
         return mState.sCount;        
     }
     

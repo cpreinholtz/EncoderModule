@@ -44,12 +44,12 @@ void dbgNotes(){
 
 void updateNotes(){
     int i;
-    Serial.println("updating");
+    //Serial.println("updating");
     for (i=0; i<gVoices.getNumVoices(); i++){
         Note tNote = gNotes.get(i);
-        Serial.println(i);
-        Serial.println(tNote.mNote);
-        Serial.println(tNote.mVel);
+        //Serial.println(i);
+        //Serial.println(tNote.mNote);
+        //Serial.println(tNote.mVel);
         if (tNote.mVel >0 ){
             gVoices.set(tNote.mNote, tNote.mVel);
         }
@@ -62,7 +62,7 @@ void updateNotes(){
 // -----------------------------------------------------------------------------
 
 void handleNoteOn(byte ch, byte note, byte vel){
-    Serial.println("on");
+    //Serial.println("on");
     gNotes.noteOn(note, vel);
     if (vel <= 0){
         gVoices.unset(note);
@@ -71,7 +71,7 @@ void handleNoteOn(byte ch, byte note, byte vel){
 }
 
 void handleNoteOff(byte ch, byte note, byte vel){
-    Serial.println("off");
+    //Serial.println("off");
     gNotes.noteOff(note);
     gVoices.unset(note);
     updateNotes();
@@ -79,15 +79,15 @@ void handleNoteOff(byte ch, byte note, byte vel){
 
 
 void handleControlChange(byte ch, byte cc, byte val){
-    Serial.println(ch);
-    Serial.println(cc);  
-    Serial.println(val);
+    //Serial.println(ch);
+    //Serial.println(cc);  
+    //Serial.println(val);
     setCc(ch,cc,val);
 }
 
 void handlePitchBend(byte ch, int bend){
-    Serial.println(ch);
-    Serial.println(bend);  
+    //Serial.println(ch);
+    //Serial.println(bend);  
     gVoices.updateBend(bend);
 }
 // -----------------------------------------------------------------------------

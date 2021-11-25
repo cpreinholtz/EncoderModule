@@ -17,7 +17,7 @@ Voices gVoices;
 Notes gNotes;
 //Timer knobTimer(1000);
 
-Timer knobTimer(50000);
+Timer knobTimer(3000);
 //GreyCounter gc;
 
 // Simple midi test, based off the "simpleSynth" example for the teensy   Note, your midi keyborad needs to be transmitting on channel 4!
@@ -39,7 +39,7 @@ void setup()
     MIDI.setHandlePitchBend(handlePitchBend);
     
     MIDI.begin(4); //channel
-    Serial.begin(9600);
+    Serial.begin(115200);
     Serial.println("here");
 
     initAudio();
@@ -55,7 +55,6 @@ void setup()
 void loop()
 { 
     MIDI.read();
-    //Serial.println("dsjfhs");
 
     if (knobTimer.pollAndReset()){
         getKnobs();

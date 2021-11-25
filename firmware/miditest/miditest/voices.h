@@ -214,8 +214,8 @@ AudioConnection          patchCord20;
         mWave1.frequency(freq);
         mWave2.frequency(freq);
         mWave3.frequency(freq/2.0); 
-        Serial.println("freq");   
-        Serial.println(freq); 
+        //Serial.println("freq");   
+        //Serial.println(freq); 
     }
 
     void clear(){
@@ -347,8 +347,8 @@ public:
     void set(byte note, byte vel){
 
         if (vel <= 0 ){
-            Serial.println("unset caught");
-            Serial.println(note);
+            //Serial.println("unset caught");
+            //Serial.println(note);
             
             unset(note);
         } else {
@@ -404,6 +404,7 @@ public:
     }
 
     void dbg(){
+        /*
         Serial.println("voicelist");
         int i;
         for (i = 0 ; i<kNumVoices; i++){
@@ -415,6 +416,7 @@ public:
             Serial.print("\t");
         }
         Serial.println("");
+        */
     }
 
 

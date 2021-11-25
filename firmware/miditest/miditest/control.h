@@ -77,9 +77,9 @@ public:
     void setScaler(float scaleMin, float scaleMax){
         mScaleMin = scaleMin;
         mScaleMax = scaleMax;
-        Serial.println("setting Scaler");
-        Serial.println(mScaleMin);
-        Serial.println(mScaleMax);
+        //Serial.println("setting Scaler");
+        //Serial.println(mScaleMin);
+        //Serial.println(mScaleMax);
     }
     
 
@@ -96,22 +96,22 @@ public:
 
     float getScaled(){
 
-        Serial.println("scaling");
-        Serial.println(mScaleMin);
-        Serial.println(mScaleMax);
+        //Serial.println("scaling");
+        //Serial.println(mScaleMin);
+        //Serial.println(mScaleMax);
         
         
         float dif =(float)(mVal - kMin);
-        Serial.println(dif);
+        //Serial.println(dif);
         
         float scaledDif = dif  / (float)(kMax - kMin);
-        Serial.println(scaledDif);
+        //Serial.println(scaledDif);
 
         float scaledFloat = scaledDif * (mScaleMax - mScaleMin);
-        Serial.println(scaledFloat);
+        //Serial.println(scaledFloat);
 
         float shifted = scaledFloat + mScaleMin;
-        Serial.println(shifted);
+        //Serial.println(shifted);
         
         return shifted;
     }
