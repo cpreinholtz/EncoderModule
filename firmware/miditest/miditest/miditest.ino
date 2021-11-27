@@ -17,7 +17,7 @@ Voices gVoices;
 Notes gNotes;
 //Timer knobTimer(1000);
 
-Timer knobTimer(3000);
+Timer knobTimer(8000);
 //GreyCounter gc;
 
 // Simple midi test, based off the "simpleSynth" example for the teensy   Note, your midi keyborad needs to be transmitting on channel 4!

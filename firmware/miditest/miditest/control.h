@@ -14,7 +14,7 @@ private:
     //**************************************************************
     //min and max val, inclusive
     static const int kMin = 0; 
-    static const int kMax = 255;  
+    static const int kMax = 40;  
 
     //min and max val, inclusive
     float mScaleMin; 
@@ -72,6 +72,12 @@ public:
         } else {
             mVal = desiredVal;
         }
+    }
+
+    //use val (percentage 0 to 1) leave tick alone
+    void setValPercent(float desiredValPercent){
+        long desiredVal = kMin + (long) (desiredValPercent * (float) (kMax - kMin) );
+        setVal(desiredVal);
     }
 
     void setScaler(float scaleMin, float scaleMax){

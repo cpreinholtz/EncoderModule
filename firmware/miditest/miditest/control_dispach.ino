@@ -3,35 +3,33 @@
 
 
 enum tCtrlList {
+    //reem , row    
+    // 0,0
     VoiceWave0Mix,
     VoiceWave1Mix,
     VoiceWave2Mix,
     VoiceWave3Mix,
-
+    // 0,1
     VoiceEnvAttack,
     VoiceEnvDecay,
     VoiceEnvSustain,
     VoiceEnvRelease,
-
+    //1,0
     VoiceLfoShapeMix,
-    VoiceLfoFreqMix,
+    VoiceLfoFreqMix,//help
     VoiceLfoRate,
-
     noop,
-
-    
+    //1,1
     VoiceFilterCutoff,
-    VoiceFilterRes,
-
-    
+    VoiceFilterRes,    
     VoiceFilterLfoAmmount,
-    VoiceFilterLfoRate,
-    
+    VoiceFilterLfoRate,    
+    //2,0
     VoiceFilterEnvAttack,
     VoiceFilterEnvDecay,
     VoiceFilterEnvSustain,
     VoiceFilterEnvRelease,
-
+    //2,1
     VoiceFilterEnvAmmount,
 
 
@@ -43,10 +41,12 @@ Control gControls[CtrlLast];
 
 void setScalers(){
 
-    gControls[VoiceWave0Mix].setScaler(0.0, 1.0);
-    gControls[VoiceWave1Mix].setScaler(0.0, 1.0);
-    gControls[VoiceWave2Mix].setScaler(0.0, 1.0);
-    gControls[VoiceWave3Mix].setScaler(0.0, 1.0);
+    
+
+    gControls[VoiceWave0Mix].setScaler(0.0, 0.5);
+    gControls[VoiceWave1Mix].setScaler(0.0, .5);
+    gControls[VoiceWave2Mix].setScaler(0.0, .5);
+    gControls[VoiceWave3Mix].setScaler(0.0, .5);
 
     gControls[VoiceEnvAttack].setScaler(5.0, 2000.0);
     gControls[VoiceEnvDecay].setScaler(5.0, 2000.0);
@@ -56,54 +56,58 @@ void setScalers(){
 
     gControls[VoiceLfoShapeMix].setScaler(0.0, 1.0);
     gControls[VoiceLfoFreqMix].setScaler(0.0, 1.0);
-    gControls[VoiceLfoRate].setScaler(6.0, 180.0);
+    gControls[VoiceLfoRate].setScaler(6.0, 60*6);
+    //noop
 
     
-    gControls[VoiceFilterCutoff].setScaler(100.0, 8000.0);
+    gControls[VoiceFilterCutoff].setScaler(100.0, 4000.0);
     gControls[VoiceFilterRes].setScaler(0.0, 0.7);
+    gControls[VoiceFilterLfoAmmount].setScaler(0.0, 0.5);
+    gControls[VoiceFilterLfoRate].setScaler(6.0, 60*36); 
+    
 
-    gControls[VoiceFilterEnvAmmount].setScaler(100.0, 8000.0);
     gControls[VoiceFilterEnvAttack].setScaler(5.0, 2000.0);
     gControls[VoiceFilterEnvDecay].setScaler(5.0, 2000.0);
     gControls[VoiceFilterEnvSustain].setScaler(0.0, 1.0);
     gControls[VoiceFilterEnvRelease].setScaler(5.0, 2000.0); 
     
-    gControls[VoiceFilterLfoAmmount].setScaler(0.0, 1.0);
-    gControls[VoiceFilterLfoRate].setScaler(6.0, 180.0); 
+    gControls[VoiceFilterEnvAmmount].setScaler(0.0, 0.5);
+
 
 
 }
 
 void setDefaults(){
 
-    gControls[VoiceWave0Mix].setVal(250);
-    gControls[VoiceWave1Mix].setVal(50);
-    gControls[VoiceWave2Mix].setVal(100);
-    gControls[VoiceWave3Mix].setVal(200);
+    gControls[VoiceWave0Mix].setValPercent(.95);
+    gControls[VoiceWave1Mix].setValPercent(.24);
+    gControls[VoiceWave2Mix].setValPercent(.5);
+    gControls[VoiceWave3Mix].setValPercent(.9);
     
 
-    gControls[VoiceEnvAttack].setVal(40);
-    gControls[VoiceEnvDecay].setVal(50);
-    gControls[VoiceEnvSustain].setVal(200);
-    gControls[VoiceEnvRelease].setVal(100);
+    gControls[VoiceEnvAttack].setValPercent(.2);
+    gControls[VoiceEnvDecay].setValPercent(.25);
+    gControls[VoiceEnvSustain].setValPercent(.7);
+    gControls[VoiceEnvRelease].setValPercent(.49);
 
 
-    gControls[VoiceLfoShapeMix].setVal(0);
-    gControls[VoiceLfoFreqMix].setVal(0);
-    gControls[VoiceLfoRate].setVal(20);
-
+    gControls[VoiceLfoShapeMix].setValPercent(0);
+    gControls[VoiceLfoFreqMix].setValPercent(0);
+    gControls[VoiceLfoRate].setValPercent(.1);
+    //noop
     
-    gControls[VoiceFilterCutoff].setVal(200);
-    gControls[VoiceFilterRes].setVal(15);
-
-    gControls[VoiceFilterEnvAmmount].setVal(0);
-    gControls[VoiceFilterEnvAttack].setVal(0);
-    gControls[VoiceFilterEnvDecay].setVal(0);
-    gControls[VoiceFilterEnvSustain].setVal(0);
-    gControls[VoiceFilterEnvRelease].setVal(0);     
+    gControls[VoiceFilterCutoff].setValPercent(.7);
+    gControls[VoiceFilterRes].setValPercent(.1);
+    gControls[VoiceFilterLfoAmmount].setValPercent(0);
+    gControls[VoiceFilterLfoRate].setValPercent(.4); 
     
-    gControls[VoiceFilterLfoAmmount].setVal(0);
-    gControls[VoiceFilterLfoRate].setVal(20); 
+
+    gControls[VoiceFilterEnvAttack].setValPercent(0);
+    gControls[VoiceFilterEnvDecay].setValPercent(0);
+    gControls[VoiceFilterEnvSustain].setValPercent(0);
+    gControls[VoiceFilterEnvRelease].setValPercent(0);     
+    
+    gControls[VoiceFilterEnvAmmount].setValPercent(0);
 
 }
 
@@ -164,7 +168,7 @@ void setCc(byte ch, byte cc, byte val){
             //gControls[VoiceLfoFreqMix].setVal(val); 
             //gVoices.setLfoFreqMix(gControls[VoiceLfoFreqMix].getScaled());
             
-            gControls[VoiceFilterCutoff].setVal(val + val);            
+            gControls[VoiceFilterCutoff].setValPercent((float)val / 128.0);            
             gVoices.setFilterCutoff(gControls[VoiceFilterCutoff].getScaled());
             
             break;

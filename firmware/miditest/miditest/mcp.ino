@@ -5,24 +5,33 @@
 #include "grey_counter.h"
 
 const int DEFAULT_ADDR = 0x20;
-const int kNumReems = 2;
+const int kNumReems = 7;
+const int kReemAddr[kNumReems] = { 0, 1 ,2, 4, 3,  7, 5};
+
+
+//const int kReemAddr[8] = { 0, 1 ,2, 4, 3, 6, 7, 5};
 
 Adafruit_MCP23X17 mcp[kNumReems];
 
-GreyCounter gGreyCounters[CtrlLast];
-
+//GreyCounter gGreyCounters[CtrlLast];
+GreyCounter gGreyCounters[kNumReems *8];
 
 
 void initMcp(){
 
     //Start and set to pullups
     int i,j;   
+
+
+        
     for( j = 0; j < kNumReems; j++){
-        if (!mcp[j].begin_I2C(DEFAULT_ADDR+j)) {
+        if (!mcp[j].begin_I2C(DEFAULT_ADDR+kReemAddr[j] )) {
             Serial.println("Error.");
-             Serial.println(j);
+            Serial.println(j);
+            Serial.println(DEFAULT_ADDR+kReemAddr[j]);
             while (1);
         }        
+        
         for( i = 0; i < 16; i++){
             mcp[j].pinMode(i,INPUT_PULLUP);        
         }
@@ -95,14 +104,21 @@ void getKnobs(){
             if (gGreyCounters[tCtrlIndex].getChanged( )) {
                 
 
-                long tTick = gGreyCounters[tCtrlIndex].getCount();                
-                gControls[tCtrlIndex].setTick(tTick);
+                long tTick = gGreyCounters[tCtrlIndex].getCount();   
+
+                if (tCtrlIndex < CtrlLast){
+                    gControls[tCtrlIndex].setTick(tTick);
+                }
+                
 
                 Serial.println("knob Change");
                 Serial.println(tCtrlIndex);
                 Serial.println(tTick);
-                Serial.println(gControls[tCtrlIndex].getVal());
-                Serial.println(gControls[tCtrlIndex].getScaled());
+
+                if (tCtrlIndex < CtrlLast){
+                    Serial.println(gControls[tCtrlIndex].getVal());
+                    Serial.println(gControls[tCtrlIndex].getScaled());
+                }
 
                 appllyAll();
             }            
