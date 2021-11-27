@@ -5,8 +5,11 @@
 #include "grey_counter.h"
 
 const int DEFAULT_ADDR = 0x20;
-const int kNumReems = 7;
-const int kReemAddr[kNumReems] = { 0, 1 ,2, 4, 3,  7, 5};
+const int kNumReems = 5;
+const int kReemAddr[kNumReems] = { 0, 1 ,2, 4, 5};
+
+
+//const int kReemAddr[kNumReems] = { 0, 1 ,2, 4, 3,  7, 5};
 
 
 //const int kReemAddr[8] = { 0, 1 ,2, 4, 3, 6, 7, 5};
@@ -120,7 +123,7 @@ void getKnobs(){
                     Serial.println(gControls[tCtrlIndex].getScaled());
                 }
 
-                appllyAll();
+                applyAll();
             }            
         }            
     }

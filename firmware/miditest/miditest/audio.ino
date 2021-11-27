@@ -10,10 +10,16 @@ AudioConnection patchVoices2 (gVoices.mVoices[2].mFilter, 0, gVoiceMixer , 2);
 AudioConnection patchVoices3 (gVoices.mVoices[3].mFilter, 0, gVoiceMixer , 3);
 
 
+
+//Efects out
+AudioMixer4              gMixerFxL;       //xy=1095.666748046875,564.3333740234375
+AudioMixer4              gMixerFxR;       //xy=1287.666748046875,777.3333740234375
+
+
 //output to Dacs
 AudioOutputAnalogStereo  dacs1;          //xy=688.75,520.75
-AudioConnection patchOut0 (gVoiceMixer, 0, dacs1 , 0);
-AudioConnection patchOut1 (gVoiceMixer, 0, dacs1 , 1);
+AudioConnection patchOut0 (gMixerFxL, 0, dacs1 , 0);
+AudioConnection patchOut1 (gMixerFxR, 0, dacs1 , 1);
 
 
 

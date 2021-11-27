@@ -117,12 +117,20 @@ This synth will make heavy use of the teensy audio libraries and other goodies f
 * The synth will respond to pitch bending and modwheel messages.
 * The synth will be able to store up to M "note on" messages at a time, and will use the LAST N notes on the voices, upon notoffs it will go back through the list in revers chronological order.
 
+
+#### Firmware Immediate Todo List
+* Test what happens if the SetScalers function is passed a max smaler than min, hopefully it just reverses the knob polarity, that would be sweet
+* Rewrite Midi function so that it does not take 50 ms to exxecute...
+* Figure out why polyphonic note off does not often continue the release envelope if another note is hit.
+
+
 #### Firmware Future Considerations
 * It would be nice to have a good sequencer in the future, (keep this in mind when writing the dispatcher and voice controls)  consider things like kbd play / stack live 
 * It would be nice to have a built in drum machine in the future.
 * It would be nice to have the ability to save patches.  (make settings easy to get / set)
 * It would be nice to be able to swap LFOs from incremental clk sync to continuous bpm sweeps.  this requires some back and forth from dispatcher to clk and lfo.
 * It would be nice to be able to swap from re-triggering envelopes on each additional key to using one envelop for all voices(more smooth /legatto)
+
 
 
 

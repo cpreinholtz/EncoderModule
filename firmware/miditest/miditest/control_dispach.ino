@@ -31,6 +31,24 @@ enum tCtrlList {
     VoiceFilterEnvRelease,
     //2,1
     VoiceFilterEnvAmmount,
+    NOOP2,
+    DryMix,
+    DryPan,
+    //3,0
+    DelayMix,
+    DelayPan,
+    DelayFeedBack,
+    DelayRate,
+    //3,1
+    ReverbMix,
+    ReverbPan,    
+    ReverbDamping,
+    ReverbRoomSize,
+    //4,0
+    BitcrushMix,
+    BitcrushPan,
+    BitcrushBits,
+    BitcrushSampleRate,
 
 
     CtrlLast //always keep this at the bottom!
@@ -39,7 +57,7 @@ enum tCtrlList {
 Control gControls[CtrlLast];
 
 
-void setScalers(){
+void setScalersVoices(){
 
     
 
@@ -77,7 +95,7 @@ void setScalers(){
 
 }
 
-void setDefaults(){
+void setDefaultsVoices(){
 
     gControls[VoiceWave0Mix].setValPercent(.95);
     gControls[VoiceWave1Mix].setValPercent(.24);
@@ -111,7 +129,7 @@ void setDefaults(){
 
 }
 
-void appllyAll(){
+void applyAllVoices(){
 
     gVoices.setWave0Mix(gControls[VoiceWave0Mix].getScaled());
     gVoices.setWave1Mix(gControls[VoiceWave1Mix].getScaled());
@@ -141,14 +159,22 @@ void appllyAll(){
     gVoices.setFilterLfoAmmount(gControls[VoiceFilterLfoAmmount].getScaled());
     gVoices.setFilterLfoRate(gControls[VoiceFilterLfoRate].getScaled());
 
+    applyAllFx();
+
 }
 
 
-
+void applyAll(){
+    applyAllVoices();
+    applyAllFx();
+}
 
 void initControl(){
-    setScalers();
-    setDefaults();
+    setScalersVoices();
+    setDefaultsVoices();
+    setFxScalers();
+    setFxDefaults();
+
 }
 
 
