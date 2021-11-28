@@ -34,7 +34,7 @@ public:
 //Wave modifiers
 AudioSynthWaveform       mLfoWave;      //xy=483.74998474121094,213.75001287460327
 AudioAmplifier           mAmpShape;           //xy=639.7500839233398,261.75000190734863
-AudioAmplifier           mAmpFreq;           //xy=650.7499923706055,162.75001049041748
+AudioAmplifier           mAmpPrefilter;           //xy=650.7499923706055,162.75001049041748
 
 //Oscilators
 AudioSynthWaveformModulated mWave0;         //xy=874.0000953674316,161.99999713897705
@@ -84,15 +84,15 @@ AudioConnection          patchCord20(mMixerFilter, 0, mFilter, 1);
 
 
 // this is correct
-AudioConnection          patchCord1;
+//AudioConnection          patchCord1;
 AudioConnection          patchCord2;
 AudioConnection          patchCord3;
 AudioConnection          patchCord4;
 AudioConnection          patchCord5;
 AudioConnection          patchCord6;
-AudioConnection          patchCord7;
-AudioConnection          patchCord8;
-AudioConnection          patchCord9;
+//AudioConnection          patchCord7;
+//AudioConnection          patchCord8;
+//AudioConnection          patchCord9;
 AudioConnection          patchCord10;
 AudioConnection          patchCord11;
 AudioConnection          patchCord12;
@@ -112,16 +112,16 @@ AudioConnection          patchCord20;
     // constructors
     //**************************************************************
     Voice():
-        patchCord1(mLfoWave, mAmpFreq),
+        //patchCord1(mLfoWave, mAmpFreq),
         patchCord2(mLfoWave, mAmpShape),
         patchCord3(mAmpShape, 0, mWave0, 1),
         patchCord4(mAmpShape, 0, mWave1, 1),
         patchCord5(mAmpShape, 0, mWave2, 1),
         patchCord6(mAmpShape, 0, mWave3, 1),
-        patchCord7(mAmpFreq, 0, mWave0, 0),
-        patchCord8(mAmpFreq, 0, mWave1, 0),
-        patchCord9(mAmpFreq, 0, mWave2, 0),
-        patchCord10(mAmpFreq, 0, mWave3, 0),
+        //patchCord7(mAmpFreq, 0, mWave0, 0),
+        //patchCord8(mAmpFreq, 0, mWave1, 0),
+        
+        patchCord10(mAmpPrefilter, 0, mFilter, 0),
         patchCord11(mWave0, 0, mMixerOSC, 0),
         patchCord12(mWave1, 0, mMixerOSC, 1),
         patchCord13(mWave2, 0, mMixerOSC, 2),
@@ -130,7 +130,7 @@ AudioConnection          patchCord20;
         patchCord16(mMixerOSC, mEnvOsc),
         patchCord17(mEnvFilter, 0, mMixerFilter, 0),
         patchCord18(mLfoFilter, 0, mMixerFilter, 1),
-        patchCord19(mEnvOsc, 0, mFilter, 0),
+        patchCord19(mEnvOsc, 0, mAmpPrefilter, 0),
         patchCord20(mMixerFilter, 0, mFilter, 1)
     {
         clear();
@@ -142,7 +142,7 @@ AudioConnection          patchCord20;
     void initLfoWave(){
         mLfoWave.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
         mAmpShape.gain(0.0);
-        mAmpFreq.gain(0.0);
+        //mAmpFreq.gain(0.0);
     }
 
     void initOsc(){        
@@ -179,6 +179,9 @@ AudioConnection          patchCord20;
         mFilter.frequency(8000);
         mFilter.resonance(0);
         mFilter.octaveControl(2);
+
+        //
+        mAmpPrefilter.gain(0.5);
     }
 
     void initAudio(){        
@@ -520,7 +523,7 @@ public:
     void setLfoFreqMix(float val){
         int i;
         for (i=0; i<kNumVoices ; i++){
-            mVoices[i].mAmpFreq.gain(val);
+            //mVoices[i].mAmpFreq.gain(val);
         }
     }    
 

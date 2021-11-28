@@ -28,7 +28,7 @@ MIDI_CREATE_DEFAULT_INSTANCE();
 
 void setup()
 {
-    AudioMemory(400);
+    AudioMemory(600);
     //pinMode(sGatePin,     OUTPUT);
     //pinMode(sAudioOutPin, OUTPUT);
 
@@ -54,6 +54,7 @@ void setup()
 
 void loop()
 { 
+
     MIDI.read();
 
     if (knobTimer.pollAndReset()){

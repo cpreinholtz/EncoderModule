@@ -6,7 +6,7 @@
 
 const int DEFAULT_ADDR = 0x20;
 const int kNumReems = 5;
-const int kReemAddr[kNumReems] = { 0, 1 ,2, 4, 5};
+const int kReemAddr[kNumReems] = { 0, 1 ,2, 3, 7};
 
 
 //const int kReemAddr[kNumReems] = { 0, 1 ,2, 4, 3,  7, 5};

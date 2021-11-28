@@ -110,7 +110,7 @@ public:
         float dif =(float)(mVal - kMin);
         //Serial.println(dif);
         
-        float scaledDif = dif  / (float)(kMax - kMin);
+        float scaledDif = dif  / ( (float) kMax - (float) kMin );
         //Serial.println(scaledDif);
 
         float scaledFloat = scaledDif * (mScaleMax - mScaleMin);

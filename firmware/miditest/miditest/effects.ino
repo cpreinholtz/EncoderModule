@@ -83,13 +83,13 @@ void setFxScalers(){
 
     gControls[ReverbMix].setScaler(0.0, 0.5);
     gControls[ReverbPan].setScaler(0.0, 1.0);    
-    gControls[ReverbDamping].setScaler(0.0, 1.0);
+    gControls[ReverbDamping].setScaler(1.0, 0.01);
     gControls[ReverbRoomSize].setScaler(0.0, 1.0);
 
     gControls[BitcrushMix].setScaler(0.0, 0.5);
     gControls[BitcrushPan].setScaler(0.0, 1.0);
     gControls[BitcrushBits].setScaler(15.0, 2.0); //sample bits, reverse polarity
-    gControls[BitcrushSampleRate].setScaler(44100, 100);  //in Hz, reverse polarity
+    gControls[BitcrushSampleRate].setScaler(16000, 100);  //in Hz, reverse polarity
 
 }
 
@@ -106,7 +106,7 @@ void setFxDefaults(){
     gControls[DelayFeedBack].setValPercent(0.3);
     gControls[DelayRate].setValPercent(0.7);
 
-    gControls[ReverbMix].setValPercent(1.0);
+    gControls[ReverbMix].setValPercent(0.0);
     gControls[ReverbPan].setValPercent(0.2);
     gControls[ReverbRoomSize].setValPercent(0.5);
     gControls[ReverbDamping].setValPercent(0.5);
@@ -119,7 +119,7 @@ void setFxDefaults(){
     //other defaults
 
     gMixerDelayFb.gain(0,1.0);
-    //gMixerDelayFb.gain(0,1.0);  set in contol functions
+    gMixerDelayFb.gain(1,0.0);  //set in contol functions
     gMixerDelayFb.gain(2,0.0);
     gMixerDelayFb.gain(3,0.0);
 
@@ -143,8 +143,6 @@ void setFxDefaults(){
 void applyAllFx(){
 
     setDryMix(gControls[DryMix].getScaled());
-
-
     setDryPan(gControls[DryPan].getScaled());
 
     setDelayMix(gControls[DelayMix].getScaled());
@@ -169,7 +167,6 @@ void applyAllFx(){
 
 //Dry
 void setDryMix(float val){
-
     gAmpDry.gain(val);
 }
 
@@ -182,9 +179,6 @@ void setDryPan(float val){
 
 //Delay
 void setDelayMix(float val){
-
-    Serial.println("dly mix");
-    Serial.println(val);
     gAmpDelay.gain(val);
 }
 
