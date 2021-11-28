@@ -21,7 +21,7 @@
 
 //dry
 AudioAmplifier           gAmpDry;         //xy=1921.6666717529297,833.3333129882812
-AudioConnection patchFxDry (gVoiceMixer, 0, gAmpDry , 0);
+AudioConnection patchFxDry (gWaveFolder, 0, gAmpDry , 0);
 AudioConnection patchFxDryL (gAmpDry, 0, gMixerFxL , 0);
 AudioConnection patchFxDryR (gAmpDry, 0, gMixerFxR , 0);
 
@@ -30,7 +30,7 @@ AudioConnection patchFxDryR (gAmpDry, 0, gMixerFxR , 0);
 AudioMixer4              gMixerDelayFb;   //xy=254.666748046875,765.3333740234375
 AudioEffectDelay         gDelay;         //xy=417.666748046875,769.3333740234375
 AudioAmplifier           gAmpDelay;         //xy=1921.6666717529297,833.3333129882812
-AudioConnection patchFxDelayDry (gVoiceMixer, 0, gMixerDelayFb , 0);
+AudioConnection patchFxDelayDry (gWaveFolder, 0, gMixerDelayFb , 0);
 AudioConnection patchFxDelayFb2 (gMixerDelayFb, 0, gDelay , 0);
 AudioConnection patchFxDelayFb (gDelay, 0, gMixerDelayFb , 1);
 AudioConnection patchFxDelay (gDelay, 0, gAmpDelay , 0);
@@ -43,7 +43,7 @@ AudioMixer4              gMixerDelayFf;   //xy=254.666748046875,765.333374023437
 AudioEffectFreeverbStereo gFreeverb;     //xy=871.666748046875,590.3333740234375
 AudioAmplifier           gAmpReverbL;         //xy=1921.6666717529297,833.3333129882812
 AudioAmplifier           gAmpReverbR;         //xy=1921.6666717529297,833.3333129882812
-AudioConnection patchFxRvbDry (gVoiceMixer, 0, gMixerDelayFf , 0);
+AudioConnection patchFxRvbDry (gWaveFolder, 0, gMixerDelayFf , 0);
 AudioConnection patchFxRvbDly (gAmpDelay, 0, gMixerDelayFf , 1);
 
 AudioConnection patchFxRvbIn (gMixerDelayFf, 0, gFreeverb , 0);

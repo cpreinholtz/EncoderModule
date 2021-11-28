@@ -16,7 +16,7 @@ enum tCtrlList {
     VoiceEnvRelease,
     //1,0
     VoiceLfoShapeMix,
-    noop,//help
+    WaveFolder,//help
     VoiceLfoRate,
     VoiceAllMix,
     
@@ -74,7 +74,7 @@ void setScalersVoices(){
 
 
     gControls[VoiceLfoShapeMix].setScaler(0.0, 1.0);
-    //gControls[VoiceLfoFreqMix].setScaler(0.0, .001);
+    gControls[WaveFolder].setScaler(0.0, .5);
     gControls[VoiceLfoRate].setScaler(6.0, 60*6);
     gControls[VoiceAllMix].setScaler(0.1, 0.5);
 
@@ -111,7 +111,7 @@ void setDefaultsVoices(){
 
 
     gControls[VoiceLfoShapeMix].setValPercent(0);
-    //gControls[VoiceLfoFreqMix].setValPercent(0);
+    gControls[WaveFolder].setValPercent(0);
     gControls[VoiceLfoRate].setValPercent(.1);
     gControls[VoiceAllMix].setValPercent(.6);
     
@@ -143,7 +143,7 @@ void applyAllVoices(){
     gVoices.setEnvRelease(gControls[VoiceEnvRelease].getScaled());
 
     gVoices.setLfoShapeMix(gControls[VoiceLfoShapeMix].getScaled());
-    //gVoices.setLfoFreqMix(gControls[VoiceLfoFreqMix].getScaled());
+    gDcWave.amplitude(gControls[WaveFolder].getScaled());
     gVoices.setLfoRate(gControls[VoiceLfoRate].getScaled());
     
     float t = gControls[VoiceAllMix].getScaled();

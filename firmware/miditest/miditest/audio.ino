@@ -9,6 +9,15 @@ AudioConnection patchVoices1 (gVoices.mVoices[1].mFilter, 0, gVoiceMixer , 1);
 AudioConnection patchVoices2 (gVoices.mVoices[2].mFilter, 0, gVoiceMixer , 2);
 AudioConnection patchVoices3 (gVoices.mVoices[3].mFilter, 0, gVoiceMixer , 3);
 
+AudioEffectWaveFolder    gWaveFolder;    //xy=1346.0000076293945,1522.7501068115234
+AudioSynthWaveformDc     gDcWave;            //xy=913.0001220703125,521.7500219345093
+
+
+AudioConnection patchVoicesAll (gVoiceMixer, 0, gWaveFolder , 0);
+AudioConnection patchVoicesAll2 (gDcWave, 0, gWaveFolder , 1);
+
+
+
 
 
 //Efects out
