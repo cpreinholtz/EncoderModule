@@ -135,6 +135,7 @@ AudioConnection          patchCord20;
     {
         clear();
         mSetTime = 0;
+        mOffTime = 0;
     }
 
 
@@ -219,9 +220,13 @@ AudioConnection          patchCord20;
     }
 
     void clear(){
-        mVel = 0;
-        mEnvOsc.noteOff();
-        mEnvFilter.noteOff();
+        if (mVel > 0 ){
+            mVel = 0;
+            mOffTime = millis();
+            mEnvOsc.noteOff();
+            mEnvFilter.noteOff();
+        }
+
     }    
     
     //**************************************************************
@@ -236,7 +241,9 @@ AudioConnection          patchCord20;
     unsigned long long getTime(){
         return mSetTime;
     }  
-
+    unsigned long long getOffTime(){
+        return mOffTime;
+    }  
 
 
 
@@ -251,6 +258,8 @@ private:
 
     
     unsigned long long mSetTime;
+    unsigned long long mOffTime;
+
     
     static const int kA = 440; // a is 440 hz...
     static const int kFullBend = 8191;
@@ -301,22 +310,35 @@ private:
     //**************************************************************
     // arbitration
     //**************************************************************
-    void pickNext(){
+    void pickNext(byte note){
         int i;    
-        unsigned long long lowestTime = millis();        
+        unsigned long long lowestTime = millis();   
+        unsigned long long lowestOffTime = lowestTime; 
+        bool foundOff = false;
+        
         for (i=0; i<kNumVoices ; i++){
 
-            //pick the first one not in use by default, returns immidiatly
-            if (mVoices[i].getVel() <= 0 ){
+
+            if (mVoices[i].getNote() == note){
                 mNextVoice = i;
                 return;
-            }
+                
+            //pick the lowest off time of the off notesby default
+            } else if (mVoices[i].getVel() <= 0 ){
+                foundOff = true;
+                if (mVoices[i].getOffTime() < lowestOffTime){
+                    lowestOffTime = mVoices[i].getOffTime();
+                    mNextVoice = i;
+                }
 
-            //otherwise pick the one that started the earlist
-            if (mVoices[i].getTime() <= lowestTime ){
-                mNextVoice = i;
-                lowestTime = mVoices[i].getTime();
+            //if all are in use pick the lowest on time
+            } else {
+                if (foundOff == false and mVoices[i].getTime() < lowestTime){
+                    lowestTime = mVoices[i].getTime();
+                    mNextVoice = i;
+                }                
             }
+            
             
         }  
     }
@@ -347,9 +369,6 @@ public:
     void set(byte note, byte vel){
 
         if (vel <= 0 ){
-            //Serial.println("unset caught");
-            //Serial.println(note);
-            
             unset(note);
         } else {
 
@@ -362,8 +381,9 @@ public:
                 }
             }
             
+            pickNext(note); 
             mVoices[mNextVoice].set(note,vel,mBend);
-            pickNext(); 
+            
         }    
     }
 
@@ -379,9 +399,6 @@ public:
         for (i=0; i<kNumVoices ; i++){
             if (mVoices[i].getNote() == note){
                 mVoices[i].clear();
-                //Serial.println("clearing");
-                //Serial.println(i);
-                pickNext();
             }
         }
     }

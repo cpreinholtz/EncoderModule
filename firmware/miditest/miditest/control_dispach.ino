@@ -18,7 +18,8 @@ enum tCtrlList {
     VoiceLfoShapeMix,
     VoiceLfoFreqMix,//help
     VoiceLfoRate,
-    noop,
+    VoiceAllMix,
+    
     //1,1
     VoiceFilterCutoff,
     VoiceFilterRes,    
@@ -75,7 +76,7 @@ void setScalersVoices(){
     gControls[VoiceLfoShapeMix].setScaler(0.0, 1.0);
     gControls[VoiceLfoFreqMix].setScaler(0.0, 1.0);
     gControls[VoiceLfoRate].setScaler(6.0, 60*6);
-    //noop
+    gControls[VoiceAllMix].setScaler(0.1, 1.0);
 
     
     gControls[VoiceFilterCutoff].setScaler(100.0, 4000.0);
@@ -112,7 +113,7 @@ void setDefaultsVoices(){
     gControls[VoiceLfoShapeMix].setValPercent(0);
     gControls[VoiceLfoFreqMix].setValPercent(0);
     gControls[VoiceLfoRate].setValPercent(.1);
-    //noop
+    gControls[VoiceAllMix].setValPercent(.6);
     
     gControls[VoiceFilterCutoff].setValPercent(.7);
     gControls[VoiceFilterRes].setValPercent(.1);
@@ -144,7 +145,12 @@ void applyAllVoices(){
     gVoices.setLfoShapeMix(gControls[VoiceLfoShapeMix].getScaled());
     gVoices.setLfoFreqMix(gControls[VoiceLfoFreqMix].getScaled());
     gVoices.setLfoRate(gControls[VoiceLfoRate].getScaled());
-
+    
+    float t = gControls[VoiceAllMix].getScaled();
+    gVoiceMixer.gain(0,t);
+    gVoiceMixer.gain(1,t);
+    gVoiceMixer.gain(2,t);
+    gVoiceMixer.gain(3,t);
     
     gVoices.setFilterCutoff(gControls[VoiceFilterCutoff].getScaled());
     gVoices.setFilterRes(gControls[VoiceFilterRes].getScaled());
@@ -174,6 +180,7 @@ void initControl(){
     setDefaultsVoices();
     setFxScalers();
     setFxDefaults();
+    applyAll();
 
 }
 

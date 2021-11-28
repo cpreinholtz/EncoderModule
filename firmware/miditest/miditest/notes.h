@@ -131,14 +131,15 @@ public:
         }        
         else {
             if (mActiveNotes < kListMax){
-                
+
+                //shift all notes 
                 int i;
                 for (i=mActiveNotes; i >0 ; i--){
                     mNotes[i] = mNotes[i-1];
                 }                
-                
-                mNotes[0].set(note, vel);
-                
+
+                //place the most recent note in position 0 
+                mNotes[0].set(note, vel);                
                 
                 //this is VERY important to keep track of for the squish algorithm to work right
                 mActiveNotes = mActiveNotes+1;

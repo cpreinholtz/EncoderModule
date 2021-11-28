@@ -27,7 +27,7 @@ void initAudio(){
     int i;
     
     for ( i=0; i<gVoices.getNumVoices(); i++){
-        gVoiceMixer.gain(i,1.0);
+        gVoiceMixer.gain(i,0.5);
     }    
     for ( i=gVoices.getNumVoices(); i<4; i++){
         gVoiceMixer.gain(i,0.0);
@@ -56,10 +56,11 @@ void updateNotes(){
         //Serial.println(i);
         //Serial.println(tNote.mNote);
         //Serial.println(tNote.mVel);
-        if (tNote.mVel >0 ){
+        if (tNote.mVel > 0 ){
             gVoices.set(tNote.mNote, tNote.mVel);
+        } else {
+            break;
         }
-        delay(10);
     }
     dbgNotes();
 }
@@ -68,19 +69,23 @@ void updateNotes(){
 // -----------------------------------------------------------------------------
 
 void handleNoteOn(byte ch, byte note, byte vel){
-    //Serial.println("on");
-    gNotes.noteOn(note, vel);
+    Serial.println("on");
     if (vel <= 0){
+        Serial.println("Velocity 0!!!!!!!!!!!!!!");
+        gNotes.noteOff(note);
         gVoices.unset(note);
-    }    
-    updateNotes();
+    } else {
+        gNotes.noteOn(note, vel);
+        updateNotes();//this contains voices.set
+    }
+    
 }
 
 void handleNoteOff(byte ch, byte note, byte vel){
     //Serial.println("off");
     gNotes.noteOff(note);
     gVoices.unset(note);
-    updateNotes();
+    //updateNotes();
 }
 
 
