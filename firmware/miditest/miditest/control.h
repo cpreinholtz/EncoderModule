@@ -12,7 +12,8 @@ private:
     //**************************************************************
     // members
     //**************************************************************
-    //min and max val, inclusive
+    //min and max val, inclusive.  do not change these of else you need to fix these locations:: 
+    //lfoRate value check in "applyAllVoices" and the led brightness mapping in mcp get knobs
     static const int kMin = 0; 
     static const int kMax = 40;  
 
