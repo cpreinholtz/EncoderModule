@@ -12,12 +12,11 @@
 
 
 
-
 Voices gVoices;
 Notes gNotes;
 //Timer knobTimer(1000);
 
-Timer knobTimer(8000);
+Timer knobTimer(5000);
 //GreyCounter gc;
 
 // Simple midi test, based off the "simpleSynth" example for the teensy   Note, your midi keyborad needs to be transmitting on channel 4!
@@ -41,7 +40,9 @@ void setup()
     MIDI.begin(4); //channel
     Serial.begin(115200);
     Serial.println("here");
+    
 
+    
     initAudio();
     initControl();
     initMcp();

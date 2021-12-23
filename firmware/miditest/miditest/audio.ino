@@ -1,5 +1,9 @@
 
 
+AudioOutputI2S      audioOutput;        // audio shield: headphones & line-out
+AudioControlSGTL5000 audioShield;
+
+
 
 
 //mix all voices
@@ -17,13 +21,21 @@ AudioMixer4              gMixerFxR;       //xy=1287.666748046875,777.33337402343
 
 
 //output to Dacs
-AudioOutputAnalogStereo  dacs1;          //xy=688.75,520.75
-AudioConnection patchOut0 (gMixerFxL, 0, dacs1 , 0);
-AudioConnection patchOut1 (gMixerFxR, 0, dacs1 , 1);
+//AudioOutputAnalogStereo  dacs1;          //xy=688.75,520.75
+//AudioConnection patchOut0 (gMixerFxL, 0, dacs1 , 0);
+//AudioConnection patchOut1 (gMixerFxR, 0, dacs1 , 1);
+
+AudioConnection patchOut0 (gMixerFxL, 0, audioOutput , 0);
+AudioConnection patchOut1 (gMixerFxR, 0, audioOutput , 1);
 
 
 
 void initAudio(){
+
+    audioShield.enable();
+    //audioShield.inputSelect(myInput);
+    audioShield.volume(0.5);
+    
     int i;
     
     for ( i=0; i<gVoices.getNumVoices(); i++){
