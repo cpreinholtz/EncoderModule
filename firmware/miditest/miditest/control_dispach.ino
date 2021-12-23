@@ -2,6 +2,8 @@
 #include "control.h"
 
 
+
+
 enum tCtrlList {
     //reem , row    
     // 0,0
@@ -14,44 +16,44 @@ enum tCtrlList {
     VoiceEnvDecay,
     VoiceEnvSustain,
     VoiceEnvRelease,
-    //1,0
-    VoiceLfoShapeMix,
-    noop,//help
-    VoiceLfoRate,
-    VoiceAllMix,
     
+    //1,0
+    VoiceLfoShapeMix,    
+    VoiceLfoRate,
+    DryMix,
+    VoiceAllMix,    
     //1,1
     VoiceFilterCutoff,
     VoiceFilterRes,    
     VoiceFilterLfoAmmount,
-    VoiceFilterLfoRate,    
+    VoiceFilterLfoRate,   
+     
     //2,0
     VoiceFilterEnvAttack,
     VoiceFilterEnvDecay,
     VoiceFilterEnvSustain,
-    VoiceFilterEnvRelease,
-    //2,1
     VoiceFilterEnvAmmount,
-    NOOP2,
-    DryMix,
-    DryPan,
-    //3,0
+    //2,1    
     DelayMix,
     DelayPan,
     DelayFeedBack,
     DelayRate,
-    //3,1
+    
+    //3,0    
     ReverbMix,
     ReverbPan,    
     ReverbDamping,
     ReverbRoomSize,
-    //4,0
+    //3,1
     BitcrushMix,
     BitcrushPan,
     BitcrushBits,
     BitcrushSampleRate,
 
-
+    //relics of the past
+    VoiceFilterEnvRelease,
+    DryPan,
+    
     CtrlLast //always keep this at the bottom!
 };
 
@@ -176,6 +178,8 @@ void applyAll(){
 }
 
 void initControl(){
+
+
     setScalersVoices();
     setDefaultsVoices();
     setFxScalers();

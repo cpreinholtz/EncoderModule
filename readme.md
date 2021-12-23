@@ -137,7 +137,7 @@ This synth will make heavy use of the teensy audio libraries and other goodies f
 
 #### Firmware Enviromental setup
 All you should need is arduino IDE with the teensy 3.6 board installed.
-Teensy 1.53 seems to work much faster than the latest versions, the installer is included in the firmware repo.
+Teensy 1.53 seems to work much faster than the latest versions, Note to self: I have a copy of the 1.53 installer on my google drive main folder "installexes.rar" 
 
 
 #### Firmware Dependencies

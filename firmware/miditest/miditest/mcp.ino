@@ -5,9 +5,10 @@
 #include "grey_counter.h"
 
 const int DEFAULT_ADDR = 0x20;
-const int kNumReems = 5;
-const int kReemAddr[kNumReems] = { 0, 1 ,2, 3, 7};
+const int kNumReems = 4;
+const int kReemAddr[kNumReems] = { 0, 6 , 4, 5};
 
+const int LED_PIN = 13;
 
 //const int kReemAddr[kNumReems] = { 0, 1 ,2, 4, 3,  7, 5};
 
@@ -21,12 +22,11 @@ GreyCounter gGreyCounters[kNumReems *8];
 
 
 void initMcp(){
+    
 
-    //Start and set to pullups
-    int i,j;   
-
-
-        
+    
+    //Start and set all mcp pins to pullups
+    int i,j;           
     for( j = 0; j < kNumReems; j++){
         if (!mcp[j].begin_I2C(DEFAULT_ADDR+kReemAddr[j] )) {
             Serial.println("Error.");
@@ -48,6 +48,7 @@ void initMcp(){
 
 
 void initAllKnobs(){
+    pinMode(LED_PIN, OUTPUT);
     
     //read all knobs
     int i,j;
@@ -116,11 +117,20 @@ void getKnobs(){
 
                 Serial.println("knob Change");
                 Serial.println(tCtrlIndex);
-                Serial.println(tTick);
+                //Serial.println(tTick);
+
+                //analogWrite(LED_PIN, map(tTick,0,);
+
+                
 
                 if (tCtrlIndex < CtrlLast){
-                    Serial.println(gControls[tCtrlIndex].getVal());
-                    Serial.println(gControls[tCtrlIndex].getScaled());
+                    long val = gControls[tCtrlIndex].getVal();
+                    
+                    Serial.println(val);                  
+                    Serial.println(gControls[tCtrlIndex].getScaled());                    
+                        
+                    analogWrite(LED_PIN, map(val, 0, 40, 0, 255));
+                    
                 }
 
                 applyAll();

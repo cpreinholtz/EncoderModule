@@ -84,7 +84,7 @@ void setFxScalers(){
     gControls[ReverbMix].setScaler(0.0, 0.5);
     gControls[ReverbPan].setScaler(0.0, 1.0);    
     gControls[ReverbDamping].setScaler(1.0, 0.01);
-    gControls[ReverbRoomSize].setScaler(0.0, 1.0);
+    gControls[ReverbRoomSize].setScaler(0.0, 0.75);
 
     gControls[BitcrushMix].setScaler(0.0, 0.5);
     gControls[BitcrushPan].setScaler(0.0, 1.0);
