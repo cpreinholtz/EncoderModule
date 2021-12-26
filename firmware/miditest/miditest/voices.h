@@ -148,7 +148,7 @@ AudioConnection          patchCord20;
     void initOsc(){        
         mWave0.begin(1.0, 100, WAVEFORM_SAWTOOTH); //level freq, wave
         mWave1.begin(1.0, 100, WAVEFORM_PULSE); //level freq, wave
-        mWave2.begin(1.0, 100, WAVEFORM_TRIANGLE_VARIABLE); //level freq, wave
+        mWave2.begin(1.0, 100, WAVEFORM_SQUARE); //level freq, wave
         mWave3.begin(1.0, 50, WAVEFORM_SINE); //level freq, wave
         mMixerOSC.gain(0, 0.5);
         mMixerOSC.gain(1, 1.0);

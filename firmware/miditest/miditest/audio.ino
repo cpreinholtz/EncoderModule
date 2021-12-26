@@ -34,7 +34,7 @@ void initAudio(){
 
     audioShield.enable();
     //audioShield.inputSelect(myInput);
-    audioShield.volume(0.5);
+    audioShield.volume(1.0);
     
     int i;
     
