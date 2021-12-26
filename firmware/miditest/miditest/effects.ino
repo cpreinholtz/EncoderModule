@@ -40,18 +40,25 @@ AudioConnection patchFxDelayR (gAmpDelay, 0, gMixerFxR , 1);
 
 //Reverb
 AudioMixer4              gMixerDelayFf;   //xy=254.666748046875,765.3333740234375
-AudioEffectFreeverbStereo gFreeverb;     //xy=871.666748046875,590.3333740234375
+//AudioEffectFreeverbStereo gFreeverb;     //xy=871.666748046875,590.3333740234375
+AudioEffectFlange        flange1;        //xy=1167,1198.5
 AudioAmplifier           gAmpReverbL;         //xy=1921.6666717529297,833.3333129882812
 AudioAmplifier           gAmpReverbR;         //xy=1921.6666717529297,833.3333129882812
 AudioConnection patchFxRvbDry (gVoiceMixer, 0, gMixerDelayFf , 0);
 AudioConnection patchFxRvbDly (gAmpDelay, 0, gMixerDelayFf , 1);
 
-AudioConnection patchFxRvbIn (gMixerDelayFf, 0, gFreeverb , 0);
-AudioConnection patchFxRvbAmpL (gFreeverb, 0, gAmpReverbL , 0);
-AudioConnection patchFxRvbAmpR (gFreeverb, 1, gAmpReverbR , 0);
+
+
+//AudioConnection patchFxRvbIn (gMixerDelayFf, 0, gFreeverb , 0);
+//AudioConnection patchFxRvbAmpL (gFreeverb, 0, gAmpReverbL , 0);
+//AudioConnection patchFxRvbAmpR (gFreeverb, 1, gAmpReverbR , 0);
+
+AudioConnection patchFxRvbIn (gMixerDelayFf, 0, flange1 , 0);
+AudioConnection patchFxRvbAmpL (flange1, 0, gAmpReverbL , 0);
+AudioConnection patchFxRvbAmpR (flange1, 0, gAmpReverbR , 0);
+
 AudioConnection patchFxRvbL (gAmpReverbL, 0, gMixerFxL , 2);
 AudioConnection patchFxRvbR (gAmpReverbR, 0, gMixerFxR , 2);
-
 
 
 
@@ -71,6 +78,18 @@ AudioConnection patchFxBcR (gAmpBitcrush, 0, gMixerFxR , 3);
 
 
 
+// Number of samples in each delay line
+#define FLANGE_DELAY_LENGTH (6*AUDIO_BLOCK_SAMPLES)
+// Allocate the delay lines for left and right channels
+short flange_delayline[FLANGE_DELAY_LENGTH];
+
+
+int s_idx = FLANGE_DELAY_LENGTH/4;
+int s_depth = FLANGE_DELAY_LENGTH/4;
+double s_freq = .5;
+
+
+
 void setFxScalers(){
 
     gControls[DryMix].setScaler(0.0, 0.5);
@@ -83,8 +102,11 @@ void setFxScalers(){
 
     gControls[ReverbMix].setScaler(0.0, 0.5);
     gControls[ReverbPan].setScaler(0.0, 1.0);    
-    gControls[ReverbDamping].setScaler(1.0, 0.01);
-    gControls[ReverbRoomSize].setScaler(0.0, 0.75);
+    //gControls[ReverbDamping].setScaler(1.0, 0.01);
+    //gControls[ReverbRoomSize].setScaler(0.0, 0.75);
+
+    gControls[ReverbDamping].setScaler(0.1, (float) FLANGE_DELAY_LENGTH/4.0); //flange depth
+    gControls[ReverbRoomSize].setScaler(0.5, 4.0); //flange freq
 
     gControls[BitcrushMix].setScaler(0.0, 0.5);
     gControls[BitcrushPan].setScaler(0.0, 1.0);
@@ -97,6 +119,9 @@ void setFxScalers(){
 
 
 void setFxDefaults(){
+
+    flange1.begin(flange_delayline,FLANGE_DELAY_LENGTH,s_idx,s_depth,s_freq);
+    //flange1.voices(FLANGE_DELAY_PASSTHRU,0,0);
 
     gControls[DryMix].setValPercent(1.0);
     gControls[DryPan].setValPercent(0.5);
@@ -150,16 +175,21 @@ void applyAllFx(){
     setDelayFeedback(gControls[DelayFeedBack].getScaled());
     setDelayRate(gControls[DelayRate].getScaled());
 
+
     setReverbMix(gControls[ReverbMix].getScaled());
     setReverbPan(gControls[ReverbPan].getScaled());
-    setReverbRoomSize(gControls[ReverbRoomSize].getScaled());
-    setReverbDamping(gControls[ReverbDamping].getScaled());
+    //setReverbRoomSize(gControls[ReverbRoomSize].getScaled());
+    //setReverbDamping(gControls[ReverbDamping].getScaled());    
+    setFlange(gControls[ReverbDamping].getScaled(),gControls[ReverbRoomSize].getScaled());
 
+
+    
     setBitcrushMix(gControls[BitcrushMix].getScaled());
     setBitcrushPan(gControls[BitcrushPan].getScaled());
     setBitcrushBits(gControls[BitcrushBits].getScaled());
     setBitcrushSampleRate(gControls[BitcrushSampleRate].getScaled());
 
+    
 
     
 }
@@ -198,7 +228,6 @@ void setDelayRate(float val){
 
 
 
-
 //Reverb
 void setReverbMix(float val){
     gAmpReverbR.gain(val);
@@ -210,13 +239,39 @@ void setReverbPan(float val){
     gMixerFxR.gain(2,val);
 }
 
-void setReverbRoomSize(float val){
+/*void setReverbRoomSize(float val){
     gFreeverb.roomsize(val);
+    
 }
 
 void setReverbDamping(float val){
     gFreeverb.damping(val);
+}*/
+
+void setFlange(float depth, float dly){
+
+
+    static float lastDepth =-1.0;
+    static float lastDly =-1.0;
+
+    if (depth!= lastDepth or dly !=lastDly ){
+        lastDepth = depth;
+        lastDly = dly;
+
+        //gFreeverb.roomsize(val);
+        flange1.voices(s_idx, (int) depth, dly);
+        Serial.println("flange gepth and dly");
+        Serial.println((int) depth);
+        Serial.println(dly);
+    }
+    
+
+
+    //flange1.voices(s_idx,s_depth,s_freq);
+    
 }
+
+
 
 
 //Reverb
