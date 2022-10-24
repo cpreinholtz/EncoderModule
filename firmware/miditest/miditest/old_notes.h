@@ -2,7 +2,7 @@
 #define NOTES_H
 
 //#pragma once
-
+/*
 #include <inttypes.h>
 
 //typedef uint8_t byte;
@@ -191,7 +191,7 @@ public:
     
 
     void dbg(){
-        /*
+        
         Serial.println("noteslist ordered from last (left) to first (right)");
         int i;
         for (i = 0 ; i<kListMax; i++){
@@ -200,7 +200,7 @@ public:
             Serial.print("\t");
         }
         Serial.println("");
-        */
+        
     }
 
 
@@ -215,5 +215,5 @@ public:
     }
     
 };
-
+*/
 #endif

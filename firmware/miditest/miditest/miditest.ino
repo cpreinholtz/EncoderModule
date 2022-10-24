@@ -1,3 +1,5 @@
+#define ARDUINO_TARGET 1
+
 
 #include <Audio.h>
 #include <Wire.h>
@@ -5,9 +7,12 @@
 #include <SD.h>
 #include <SerialFlash.h>
 
+
 #include <MIDI.h>
-#include "notes.h"
+#include <notes.h>
 #include "voices.h"
+
+
 
 
 
@@ -36,8 +41,10 @@ void setup()
     MIDI.setHandleNoteOff(handleNoteOff);    
     MIDI.setHandleControlChange(handleControlChange);
     MIDI.setHandlePitchBend(handlePitchBend);
+    MIDI.setHandleClock(handleClock);
+    MIDI.setHandleAfterTouchPoly(handleAfterTouchPoly);
     
-    MIDI.begin(4); //channel
+    MIDI.begin(MIDI_CHANNEL_OMNI); //channel
     Serial.begin(115200);
     Serial.println("here");
     
@@ -52,7 +59,6 @@ void setup()
 }
 
 
-
 void loop()
 { 
 
@@ -61,4 +67,5 @@ void loop()
     if (knobTimer.pollAndReset()){
         getKnobs();
     }
+    serviceAudio();
 }

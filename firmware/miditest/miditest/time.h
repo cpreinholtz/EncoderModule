@@ -1,7 +1,7 @@
 #ifndef TIME_H
 #define TIME_H
 
-
+/*
 float bpmToFreq(float bpm){
     float bps = bpm / 60.0;
     return bps;
@@ -63,7 +63,7 @@ private:
 };
 
 
-
+*/
 
 
 #endif

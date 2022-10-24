@@ -10,7 +10,7 @@
 #include <SerialFlash.h>
 */
 
-#include "time.h"
+#include <timer.h>
 
 class Voice
 {
@@ -509,7 +509,7 @@ public:
     void setLfoRate(float val){
         int i;
         for (i=0; i<kNumVoices ; i++){
-            mVoices[i].mLfoWave.frequency(bpmToFreq(val));
+            mVoices[i].mLfoWave.frequency(bpmToBps(val));
         }
     }    
 
@@ -591,7 +591,7 @@ public:
     void setFilterLfoRate(float val){
         int i;
         for (i=0; i<kNumVoices ; i++){
-            mVoices[i].mLfoFilter.frequency(bpmToFreq(val));
+            mVoices[i].mLfoFilter.frequency(bpmToBps(val));
         }
     }
 

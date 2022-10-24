@@ -2,6 +2,8 @@
 This repo contains several PCB designs and teensy firmware for building a digital sythesiser.
 
 
+
+
 **Directory structure:**
 * cad (empty...)
 * doc (mostly datasheets and links to research sources)
@@ -140,8 +142,9 @@ All you should need is arduino IDE with the teensy 3.6 board installed.
 Teensy 1.53 seems to work much faster than the latest versions, Note to self: I have a copy of the 1.53 installer on my google drive main folder "installexes.rar" 
 Arduino 1.8.13 works with this version of Teensy, I think I had issues with 1.8.16 and that teensy version.
 
+
 #### Firmware Dependencies
-TBD
+must have https://github.com/cpreinholtz/midi.git   fd90aac installed in Docs/Arduino/Libraries
 
 
 #### Firmware Limitations

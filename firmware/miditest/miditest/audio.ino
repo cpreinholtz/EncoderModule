@@ -1,5 +1,15 @@
 #include <chord_maker.h>
 
+#include <arpegio.h>
+#include <midi_clk.h>
+
+
+//limitations
+//turning on arp while playing a note would be bad, should not really be possible currently
+//
+//
+
+
 AudioOutputI2S      audioOutput;        // audio shield: headphones & line-out
 AudioControlSGTL5000 audioShield;
 
@@ -32,10 +42,12 @@ AudioConnection patchOut1 (gMixerFxR, 0, audioOutput , 1);
 bool chordMode;
 bool dummyMode;
 bool splitMode;
+bool arpMode;
 byte splitKey;
 extern const int LED_PIN;
 ChordMaker chordMaker;
-
+Arpegio arp;
+byte arpDiv;
 
 
 void initAudio(){
@@ -55,13 +67,24 @@ void initAudio(){
 
     gVoices.initAudio();
     chordMode = false;
+    arpMode=false;
     dummyMode = false;
     splitMode = false;
     splitKey = 0;
 }
 
 
-
+void serviceAudio(){
+    if (arp.service()==true){
+        if (arp.getGateStatus()==true) {
+            gNotes.noteOn(arp.get().mNote, arp.get().mVel);
+            updateNotes();
+        } else {
+            gNotes.noteOff(arp.get().mNote);
+            gVoices.unset(arp.get().mNote);
+        }
+    }
+}
 
 // -----------------------------------------------------------------------------
 
@@ -107,6 +130,19 @@ void toggleSettings(byte note){
             splitMode = !splitMode;
             digitalWrite(LED_PIN,splitMode);
             break;
+        case 9:
+            arpMode = !arpMode;
+            if (arpMode == true){
+                arp.start();
+            } else {
+                arp.stop();
+                if(arp.getGateStatus() ==true){
+                    gNotes.noteOff(arp.get().mNote);
+                    gVoices.unset(arp.get().mNote);
+                }
+            }
+            digitalWrite(LED_PIN,arpMode);
+            break;
         default:
             Serial.println("bad toggle signal");
             break;            
@@ -119,32 +155,51 @@ void defaultNoteOn(byte note, byte vel){
     //check for dummys
     if ( dummyMode ==true and chordMaker.getValid() ==false) return; //do nothing!!! prevent dummy from playing bad note
 
-    //else valid chord, or dummy mode disabled
-    gNotes.noteOn(note, vel);
-    
-    //check if we want to make this a chord
-    if (chordMode==true and chordMaker.getValid() ==true and splitMode==false or (splitMode==true and note<splitKey) ){
-        gNotes.noteOn(chordMaker.getTriadMiddle(), vel);
-        gNotes.noteOn(chordMaker.getTriadLast(), vel);
+    if (arpMode == false){
+        gNotes.noteOn(note, vel);
+         //check if we want to make this a chord
+        if (chordMode==true and chordMaker.getValid() ==true and splitMode==false or (splitMode==true and note<splitKey) ){
+            gNotes.noteOn(chordMaker.getTriadMiddle(), vel);
+            gNotes.noteOn(chordMaker.getTriadLast(), vel);
+        }
+        updateNotes();//this contains voices.set
+    //arpMode==true
+    } else {        
+        if (chordMode==true and chordMaker.getValid() ==true and splitMode==false or (splitMode==true and note<splitKey) ){
+            arp.noteOn(chordMaker.getTriadLast(), vel);
+            arp.noteOn(chordMaker.getTriadMiddle(), vel);
+            arp.noteOn(note, vel);            
+        }
     }
-    updateNotes();//this contains voices.set
+
+    
+   
+    
 }
 
 
 void defaultNoteOff(byte note){
+
     chordMaker.setRoot(note);
     //check for dummys
     //if ( dummyMode ==true and chordMaker.getValid() ==false) return; //do nothing!!! prevent dummy from playing bad note
-
-    //else valid chord, or dummy mode disabled
-    gNotes.noteOff(note);
-    gVoices.unset(note);
-    //check if we wanted to make this a chord
-    if (chordMode==true and chordMaker.getValid() ==true and splitMode==false or (splitMode==true and note<splitKey) ){
-        gNotes.noteOff(chordMaker.getTriadMiddle()); 
-        gVoices.unset(chordMaker.getTriadMiddle());
-        gNotes.noteOff(chordMaker.getTriadLast());
-        gVoices.unset(chordMaker.getTriadLast());
+    if (arpMode == false){
+        //else valid chord, or dummy mode disabled
+        gNotes.noteOff(note);
+        gVoices.unset(note);
+        //check if we wanted to make this a chord
+        if (chordMode==true and chordMaker.getValid() ==true and splitMode==false or (splitMode==true and note<splitKey) ){
+            gNotes.noteOff(chordMaker.getTriadMiddle()); 
+            gVoices.unset(chordMaker.getTriadMiddle());
+            gNotes.noteOff(chordMaker.getTriadLast());
+            gVoices.unset(chordMaker.getTriadLast());
+        }
+    } else{
+        if (chordMode==true and chordMaker.getValid() ==true and splitMode==false or (splitMode==true and note<splitKey) ){
+            arp.noteOff(chordMaker.getTriadLast());
+            arp.noteOff(chordMaker.getTriadMiddle());
+            arp.noteOff(note);            
+        }
     }
 }
 
@@ -163,6 +218,10 @@ void handleNoteOn(byte ch, byte note, byte vel){
                 break;
             case 13://for setting split
                 splitKey = note;
+                break;
+            case 12:
+                arpDiv = note%12;
+                arp.setDiv(arpDiv);
                 break;
             default:
                 defaultNoteOn(note, vel);
@@ -184,6 +243,8 @@ void handleNoteOff(byte ch, byte note, byte vel){
         case 13://for setting split
             //splitKey = note;
             break;
+        case 12:
+            break;
         default:
             defaultNoteOff(note);
             break;
@@ -204,4 +265,18 @@ void handlePitchBend(byte ch, int bend){
     //Serial.println(bend);  
     gVoices.updateBend(bend);
 }
+
+MidiClk clk;
+void handleClock(){
+    clk.tickIn();
+    arp.setBpm(clk.getQuarterNoteBpm()); //24 midi clks in a quarter note
+}
+
+void handleAfterTouchPoly(byte ch, byte note, byte preassure){
+    //TODO
+    if (arpMode ==true and chordMaker.getRoot()==note ){
+        arp.setDiv(map(preassure, 1,255,arpDiv,64));        
+    }
+}
+
 // -----------------------------------------------------------------------------
