@@ -71,6 +71,7 @@ void initAudio(){
     dummyMode = false;
     splitMode = false;
     splitKey = 0;
+    Serial.println("Audio init");
 }
 
 
@@ -158,17 +159,22 @@ void defaultNoteOn(byte note, byte vel){
     if (arpMode == false){
         gNotes.noteOn(note, vel);
          //check if we want to make this a chord
-        if (chordMode==true and chordMaker.getValid() ==true and splitMode==false or (splitMode==true and note<splitKey) ){
+        if (chordMode==true and chordMaker.getValid() ==true and (splitMode==false or (splitMode==true and note<splitKey)) ){
             gNotes.noteOn(chordMaker.getTriadMiddle(), vel);
             gNotes.noteOn(chordMaker.getTriadLast(), vel);
         }
         updateNotes();//this contains voices.set
     //arpMode==true
     } else {        
-        if (chordMode==true and chordMaker.getValid() ==true and splitMode==false or (splitMode==true and note<splitKey) ){
+        //is a valid chord
+        if (chordMode==true and chordMaker.getValid() ==true and (splitMode==false or (splitMode==true and note<splitKey)) ){
             arp.noteOn(chordMaker.getTriadLast(), vel);
             arp.noteOn(chordMaker.getTriadMiddle(), vel);
             arp.noteOn(note, vel);            
+        } else {
+            //not a valid chord, but not a dummy
+            gNotes.noteOn(note, vel);  
+            updateNotes();//this contains voices.set
         }
     }
 
@@ -188,17 +194,23 @@ void defaultNoteOff(byte note){
         gNotes.noteOff(note);
         gVoices.unset(note);
         //check if we wanted to make this a chord
-        if (chordMode==true and chordMaker.getValid() ==true and splitMode==false or (splitMode==true and note<splitKey) ){
+        if (chordMode==true and chordMaker.getValid() ==true and (splitMode==false or (splitMode==true and note<splitKey)) ){
             gNotes.noteOff(chordMaker.getTriadMiddle()); 
             gVoices.unset(chordMaker.getTriadMiddle());
             gNotes.noteOff(chordMaker.getTriadLast());
             gVoices.unset(chordMaker.getTriadLast());
         }
-    } else{
-        if (chordMode==true and chordMaker.getValid() ==true and splitMode==false or (splitMode==true and note<splitKey) ){
+    } else {
+        if (chordMode==true and chordMaker.getValid() ==true and (splitMode==false or (splitMode==true and note<splitKey)) ){
+            //gVoices.unset(arp.get().mNote);
+            gNotes.noteOff(arp.get().mNote);
+            gVoices.unset(arp.get().mNote);
             arp.noteOff(chordMaker.getTriadLast());
             arp.noteOff(chordMaker.getTriadMiddle());
             arp.noteOff(note);            
+        } else {
+            gNotes.noteOff(note);
+            gVoices.unset(note);
         }
     }
 }
@@ -270,6 +282,9 @@ MidiClk clk;
 void handleClock(){
     clk.tickIn();
     arp.setBpm(clk.getQuarterNoteBpm()); //24 midi clks in a quarter note
+    //Serial.println("clkin");
+    //Serial.println(clk.getQuarterNoteBpm()); //TODO REMOVE ME
+    //Serial.println();
 }
 
 void handleAfterTouchPoly(byte ch, byte note, byte preassure){
