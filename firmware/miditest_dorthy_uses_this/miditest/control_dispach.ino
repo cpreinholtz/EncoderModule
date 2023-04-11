@@ -77,7 +77,7 @@ void setScalersVoices(){
     gControls[VoiceEnvSustain].setScaler(0.0, 1.0);
     gControls[VoiceEnvRelease].setScaler(5.0, 2000.0);
     
-    gControls[GlideSteps].setScaler(0.0, 1000.0);
+    gControls[GlideSteps].setScaler(1.0, 9.0);//true max steps is 2^scaler so really 2^9 = 512 steps,,, * 20ms = ~ 10 sec
 
 
     gControls[VoiceLfoShapeMix].setScaler(0.0, 1.0);

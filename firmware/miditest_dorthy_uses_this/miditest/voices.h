@@ -136,6 +136,9 @@ AudioConnection          patchCord20;
         clear();
         mSetTime = 0;
         mOffTime = 0;
+        mCurrentFrequency = 0;
+        mGlideSteps = 0;
+        mGlideCurrentStep=0;
     }
 
 
@@ -207,9 +210,11 @@ AudioConnection          patchCord20;
         //mBend = bend;
         mEndFrequency = getNoteFrequency(note);
         mCurrentFrequency = glideStartFrequency;
+        mStartFrequency = glideStartFrequency;
+        mGlideCurrentStep = 0;
         mSetTime = millis();
         if (vel >0){
-            updateVoiceFrequency(bend);
+            updateGlide(bend);
             mEnvOsc.noteOn();
             mEnvFilter.noteOn();
         } else {
@@ -232,17 +237,28 @@ AudioConnection          patchCord20;
 
     //update note freq by one step
     void updateGlide(int bend){
-        if( mGlideRate > 0 ){
-            mCurrentFrequency = mCurrentFrequency * pow(2, 1/mGlideRate *  (mEndFrequency-mCurrentFrequency))  ; 
+        if( mGlideCurrentStep < mGlideSteps ){
+            //https://forum.arduino.cc/t/exponential-interpolation-between-two-points-for-glide-portamento/984516/5
+            mCurrentFrequency = mStartFrequency * pow(pow( mEndFrequency/mStartFrequency,1/(float)mGlideSteps), (float)mGlideCurrentStep);
+            mGlideCurrentStep = mGlideCurrentStep +1;
         } else {
             mCurrentFrequency = mEndFrequency;
-        }        
+        }
         updateVoiceFrequency(bend);
     }
 
     
     void setGlide(int g){
-        mGlideRate = g;
+        Serial.print("setting glide steps to : ");
+        Serial.println(g);
+        if ( mGlideCurrentStep >= mGlideSteps){// not mid glide
+            mGlideSteps = g;
+            mGlideCurrentStep = g;
+            //mStartFrequency = mCurrentFrequency;
+        } else { // mid glide
+            mGlideCurrentStep = map(mGlideCurrentStep, 0, mGlideSteps, 0, g);
+            mGlideSteps = g;
+        }        
     }
 
     void clear(){
@@ -284,9 +300,10 @@ private:
 
     //freq of current not (with glide) (without bend)
     float mCurrentFrequency;
+    float mStartFrequency; //glide start
     float mEndFrequency; //glide end
-    int mGlideRate;// 
-
+    int mGlideCurrentStep;// 
+    int mGlideSteps;// 
     
     static const int nWaves = 4;
 
@@ -543,9 +560,15 @@ public:
     }    
 
     void setGlide(float val){
-        int i;
+        int i,g;
+        
+        if (val <=1.0){
+            g = 0;
+        } else {
+            g = int(pow(2,val));
+        }
         for (i=0; i<kNumVoices ; i++){
-            mVoices[i].setGlide(int(val));
+            mVoices[i].setGlide(g);
         }
     }    
 
