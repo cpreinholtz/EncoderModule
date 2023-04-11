@@ -42,7 +42,13 @@ void setup()
     MIDI.setHandleControlChange(handleControlChange);
     MIDI.setHandlePitchBend(handlePitchBend);
     MIDI.setHandleClock(handleClock);
+    
     MIDI.setHandleAfterTouchPoly(handleAfterTouchPoly);
+    MIDI.setHandleAfterTouchChannel(handleAfterTouch);
+    
+    MIDI.setHandleStart(handleStart);
+    MIDI.setHandleContinue(handleContinue);
+    MIDI.setHandleStop(handleStop);
     
     MIDI.begin(MIDI_CHANNEL_OMNI); //channel
     Serial.begin(115200);

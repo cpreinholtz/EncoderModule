@@ -110,7 +110,7 @@ void updateNotes(){
             break;
         }
     }
-    dbgNotes();
+    //dbgNotes();
 }
   
 
@@ -121,15 +121,15 @@ void toggleSettings(byte note){
     switch(note%12){
         case 0: 
             chordMode = !chordMode;
-            digitalWrite(LED_PIN,chordMode);
+            analogWrite(LED_PIN, map(chordMode,0,1, 0,255));
             break;
         case 2:
             dummyMode = !dummyMode;
-            digitalWrite(LED_PIN,dummyMode);
+            analogWrite(LED_PIN, map(dummyMode,0,1, 0,255));
             break;
         case 4:
             splitMode = !splitMode;
-            digitalWrite(LED_PIN,splitMode);
+            analogWrite(LED_PIN, map(splitMode,0,1, 0,255));
             break;
         case 9:
             arpMode = !arpMode;
@@ -142,7 +142,7 @@ void toggleSettings(byte note){
                     gVoices.unset(arp.get().mNote);
                 }
             }
-            digitalWrite(LED_PIN,arpMode);
+            analogWrite(LED_PIN,map(arpMode,0,1, 0,255)); 
             break;
         default:
             Serial.println("bad toggle signal");
@@ -203,8 +203,17 @@ void defaultNoteOff(byte note){
     } else {
         if (chordMode==true and chordMaker.getValid() ==true and (splitMode==false or (splitMode==true and note<splitKey)) ){
             //gVoices.unset(arp.get().mNote);
-            gNotes.noteOff(arp.get().mNote);
-            gVoices.unset(arp.get().mNote);
+            //gNotes.noteOff(arp.get().mNote);
+            //gVoices.unset(arp.get().mNote);
+
+            gNotes.noteOff(note);
+            gVoices.unset(note);
+            gNotes.noteOff(chordMaker.getTriadMiddle()); 
+            gVoices.unset(chordMaker.getTriadMiddle());
+            gNotes.noteOff(chordMaker.getTriadLast());
+            gVoices.unset(chordMaker.getTriadLast());
+
+            
             arp.noteOff(chordMaker.getTriadLast());
             arp.noteOff(chordMaker.getTriadMiddle());
             arp.noteOff(note);            
@@ -265,6 +274,7 @@ void handleNoteOff(byte ch, byte note, byte vel){
 }
 
 
+
 void handleControlChange(byte ch, byte cc, byte val){
     //Serial.println(ch);
     //Serial.println(cc);  
@@ -289,9 +299,38 @@ void handleClock(){
 
 void handleAfterTouchPoly(byte ch, byte note, byte preassure){
     //TODO
-    if (arpMode ==true and chordMaker.getRoot()==note ){
-        arp.setDiv(map(preassure, 1,255,arpDiv,64));        
+    
+    if (arpMode ==true ){
+        //Serial.println("Aftertouch poly");//TODO REMOVE ME
+        //Serial.println(map(preassure, 1,255,arpDiv,64));//TODO REMOVE ME
+        //arp.setDiv(map(preassure, 1,255,arpDiv,64));        
+    } else {
+        //Serial.println("Aftertouch poly not arp mode");
     }
 }
+
+void handleAfterTouch(byte ch, byte preassure){
+    //TODO
+    
+    if (arpMode ==true ){
+        //Serial.println("Aftertouch");//TODO REMOVE ME
+        arp.setDiv(map(preassure, 1,255,arpDiv,16));        
+    } 
+}
+
+void handleStop(){
+    //TODO make this better, maybe by debouncing and requiring double tap
+    //gNotes.clear();
+    //gVoices.clear();
+    Serial.println("Stop");//TODO REMOVE ME
+}
+
+void handleContinue(){
+    Serial.println("handleContinue");//TODO REMOVE ME
+}
+void handleStart(){
+    Serial.println("handleStart");//TODO REMOVE ME
+}
+
 
 // -----------------------------------------------------------------------------

@@ -144,7 +144,7 @@ Arduino 1.8.13 works with this version of Teensy, I think I had issues with 1.8.
 
 
 #### Firmware Dependencies
-must have https://github.com/cpreinholtz/midi.git   fd90aac installed in Docs/Arduino/Libraries
+must have https://github.com/cpreinholtz/midi.git   installed in Docs/Arduino/Libraries, look at the dates, its being developed in tandem but for now the latest woriking commit is 7a53122
 
 
 #### Firmware Limitations
