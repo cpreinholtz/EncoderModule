@@ -35,7 +35,7 @@ enum tCtrlList {
     VoiceFilterEnvAmmount,
     //2,1    
     DelayMix,
-    DelayPan,
+    GlideSteps,
     DelayFeedBack,
     DelayRate,
     
@@ -53,6 +53,7 @@ enum tCtrlList {
     //relics of the past
     VoiceFilterEnvRelease,
     DryPan,
+    DelayPan,
     
     CtrlLast //always keep this at the bottom!
 };
@@ -75,6 +76,8 @@ void setScalersVoices(){
     gControls[VoiceEnvDecay].setScaler(5.0, 2000.0);
     gControls[VoiceEnvSustain].setScaler(0.0, 1.0);
     gControls[VoiceEnvRelease].setScaler(5.0, 2000.0);
+    
+    gControls[GlideSteps].setScaler(0.0, 1000.0);
 
 
     gControls[VoiceLfoShapeMix].setScaler(0.0, 1.0);
@@ -112,7 +115,7 @@ void setDefaultsVoices(){
     gControls[VoiceEnvDecay].setValPercent(.25);
     gControls[VoiceEnvSustain].setValPercent(.7);
     gControls[VoiceEnvRelease].setValPercent(.49);
-
+    gControls[GlideSteps].setValPercent(0);
 
     gControls[VoiceLfoShapeMix].setValPercent(0);
     gControls[VoiceLfoRate].setValPercent(.1);
@@ -144,7 +147,7 @@ void applyAllVoices(){
     gVoices.setEnvDecay(gControls[VoiceEnvDecay].getScaled());
     gVoices.setEnvSustain(gControls[VoiceEnvSustain].getScaled());
     gVoices.setEnvRelease(gControls[VoiceEnvRelease].getScaled());
-
+    gVoices.setGlide(gControls[GlideSteps].getScaled());
 
 
     gVoices.setLfoShapeMix(gControls[VoiceLfoShapeMix].getScaled());

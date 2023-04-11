@@ -2,7 +2,7 @@
 
 #include <arpegio.h>
 #include <midi_clk.h>
-
+#include <timer.h>
 
 //limitations
 //turning on arp while playing a note would be bad, should not really be possible currently
@@ -47,6 +47,7 @@ byte splitKey;
 extern const int LED_PIN;
 ChordMaker chordMaker;
 Arpegio arp;
+Timer glide(20000); //micros period
 byte arpDiv;
 
 
@@ -84,6 +85,8 @@ void serviceAudio(){
             gNotes.noteOff(arp.get().mNote);
             gVoices.unset(arp.get().mNote);
         }
+    } else if(glide.pollAndReset()==true){
+        gVoices.updateGlide();       
     }
 }
 

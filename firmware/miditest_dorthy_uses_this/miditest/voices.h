@@ -190,7 +190,10 @@ AudioConnection          patchCord20;
         initLfoWave();
     }
 
-    
+    float getCurrentFrequency(){
+        return mCurrentFrequency;
+    }
+   
     
 
 
@@ -198,9 +201,12 @@ AudioConnection          patchCord20;
     //**************************************************************
     // setters
     //**************************************************************
-    void set(byte note, byte vel, int bend){
+    void set(byte note, byte vel, int bend, float glideStartFrequency){
         mVel = vel;
         mNote = note;
+        //mBend = bend;
+        mEndFrequency = getNoteFrequency(note);
+        mCurrentFrequency = glideStartFrequency;
         mSetTime = millis();
         if (vel >0){
             updateVoiceFrequency(bend);
@@ -217,9 +223,26 @@ AudioConnection          patchCord20;
         mWave0.frequency(freq);
         mWave1.frequency(freq);
         mWave2.frequency(freq);
-        mWave3.frequency(freq/2.0); 
+        mWave3.frequency(freq/2.0);
+        //mBend=bend;
         //Serial.println("freq");   
         //Serial.println(freq); 
+    }
+
+
+    //update note freq by one step
+    void updateGlide(int bend){
+        if( mGlideRate > 0 ){
+            mCurrentFrequency = mCurrentFrequency * pow(2, 1/mGlideRate *  (mEndFrequency-mCurrentFrequency))  ; 
+        } else {
+            mCurrentFrequency = mEndFrequency;
+        }        
+        updateVoiceFrequency(bend);
+    }
+
+    
+    void setGlide(int g){
+        mGlideRate = g;
     }
 
     void clear(){
@@ -247,8 +270,9 @@ AudioConnection          patchCord20;
     unsigned long long getOffTime(){
         return mOffTime;
     }  
-
-
+    float getFrequency(){
+        return mCurrentFrequency;
+    }
 
 private:
     //**************************************************************
@@ -256,6 +280,14 @@ private:
     //**************************************************************
     bool mVel;
     byte mNote;
+    //int mBend;
+
+    //freq of current not (with glide) (without bend)
+    float mCurrentFrequency;
+    float mEndFrequency; //glide end
+    int mGlideRate;// 
+
+    
     static const int nWaves = 4;
 
 
@@ -274,17 +306,16 @@ private:
         //actual bend is 2^ ((bendHalfSteps /12.0) * (bend/fullBend))
         //therefore if half steps is 12 (one octave) and bend is max or min, your pitch will be multiplied by 2^-1 or 2^1 (0.5 or 2)            
         float bendMultiplier = pow(2, (float) bend * kBbendScaler );
-        return ( getNoteFrequency() * bendMultiplier);        
+        return ( mCurrentFrequency * bendMultiplier);        
     }
     
     //get note frequency (before bending)
-    float getNoteFrequency(){        
-        return ( ((float)kA) / 32.0) * ( pow(2,(((float)mNote - 9.0) / 12.0)) )  ;
+    float getNoteFrequency(byte note){        
+        return ( ((float)kA) / 32.0) * ( pow(2,(((float)note - 9.0) / 12.0)) )  ;
     }
 
-    
 
-
+ 
 
 
 
@@ -370,6 +401,7 @@ public:
     // setters
     //**************************************************************
     void set(byte note, byte vel){
+        float lastFrequency = mVoices[mNextVoice].getFrequency();
 
         if (vel <= 0 ){
             unset(note);
@@ -385,18 +417,25 @@ public:
             }
             
             pickNext(note); 
-            mVoices[mNextVoice].set(note,vel,mBend);
+            mVoices[mNextVoice].set(note,vel,mBend, lastFrequency);
             
         }    
     }
 
     void updateBend(int bend){
         int i;
+        mBend=bend;
         for (i=0; i<kNumVoices ; i++){           
             mVoices[i].updateVoiceFrequency(bend);
         }
     }
-
+    
+    void updateGlide(){
+        int i;
+        for (i=0; i<kNumVoices ; i++){           
+            mVoices[i].updateGlide(mBend);
+        }
+    }
     void unset(byte note){
         int i;
         for (i=0; i<kNumVoices ; i++){
@@ -500,6 +539,13 @@ public:
         int i;
         for (i=0; i<kNumVoices ; i++){
             mVoices[i].mEnvOsc.release(val);
+        }
+    }    
+
+    void setGlide(float val){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].setGlide(int(val));
         }
     }    
 
