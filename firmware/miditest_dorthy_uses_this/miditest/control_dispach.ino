@@ -57,6 +57,7 @@ enum tCtrlList {
     CtrlLast //always keep this at the bottom!
 };
 
+int Control::nControls=0;
 Control gControls[CtrlLast]; //Never exceed control.kControlMax!!!
 
 

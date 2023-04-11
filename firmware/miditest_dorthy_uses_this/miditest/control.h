@@ -1,6 +1,6 @@
 #ifndef CONTROL_H
 #define CONTROL_H
-
+#include <EEPROM.h>
 
 
 
@@ -29,7 +29,7 @@ private:
 
     int mOffset;
 
-    static int nControls = 0;
+    static int nControls;
 
 
 
@@ -130,14 +130,14 @@ public:
         return shifted;
     }
 
-    saveControl(int patchNum){
+    void saveControl(int patchNum){
         //ADDR , Data
-        EEPROM.write(patchNum*kControlMax+nOffset, byte(getVal()));        
+        if (patchNum*kControlMax+mOffset < 1024) EEPROM.write(patchNum*kControlMax+mOffset, byte(getVal()));        
     }
 
-    loadControl(int patchNum){
+    void loadControl(int patchNum){
         //ADDR , Data
-        setVal(long(EEPROM.read(patchNum*kControlMax+nOffset)));        
+        if (patchNum*kControlMax+mOffset < 1024) setVal(long(EEPROM.read(patchNum*kControlMax+mOffset)));        
     }
 
 };

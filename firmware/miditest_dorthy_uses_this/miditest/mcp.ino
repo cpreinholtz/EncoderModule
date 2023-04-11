@@ -133,7 +133,7 @@ void getKnobs(){
                     
                 }
 
-                applyAll();
+                applyAllVoices();
             }            
         }            
     }
