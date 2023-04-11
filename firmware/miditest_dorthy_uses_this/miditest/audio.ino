@@ -244,6 +244,10 @@ void handleNoteOn(byte ch, byte note, byte vel){
                 arpDiv = note%12;
                 arp.setDiv(arpDiv);
                 break;
+            case 11:    
+                loadPatch(note%12);
+            case 10:
+                savePatch(note%12);               
             default:
                 defaultNoteOn(note, vel);
                 break;

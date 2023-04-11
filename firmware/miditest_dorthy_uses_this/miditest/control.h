@@ -16,7 +16,7 @@ private:
     //lfoRate value check in "applyAllVoices" and the led brightness mapping in mcp get knobs
     static const int kMin = 0; 
     static const int kMax = 40;  
-
+    static const int kControlMax=64;
     //min and max val, inclusive
     float mScaleMin; 
     float mScaleMax;
@@ -26,6 +26,10 @@ private:
     
     //current control value
     long mVal;
+
+    int mOffset;
+
+    static int nControls = 0;
 
 
 
@@ -48,6 +52,8 @@ public:
         mVal =setVal;
         mTick = 0;
         setScaler(scaleMin, scaleMax);
+        mOffset = nControls;
+        nControls = nControls + 1;
     }
 
     
@@ -124,7 +130,15 @@ public:
         return shifted;
     }
 
+    saveControl(int patchNum){
+        //ADDR , Data
+        EEPROM.write(patchNum*kControlMax+nOffset, byte(getVal()));        
+    }
 
+    loadControl(int patchNum){
+        //ADDR , Data
+        setVal(long(EEPROM.read(patchNum*kControlMax+nOffset)));        
+    }
 
 };
 

@@ -57,7 +57,8 @@ enum tCtrlList {
     CtrlLast //always keep this at the bottom!
 };
 
-Control gControls[CtrlLast];
+Control gControls[CtrlLast]; //Never exceed control.kControlMax!!!
+
 
 
 void setScalersVoices(){
@@ -173,24 +174,36 @@ void applyAllVoices(){
 }
 
 
-void applyAll(){
-    applyAllVoices();
-    applyAllFx();
-}
+//void applyAll(){
+    //applyAllVoices();
+    //applyAllFx();  //already in voices
+//}
 
 void initControl(){
-
-
     setScalersVoices();
     setDefaultsVoices();
     setFxScalers();
     setFxDefaults();
-    applyAll();
-
-
-
+    applyAllVoices();
 }
 
+
+void loadPatch(int patch){
+    if (patch < 16){
+        for (int i = 0; i < CtrlLast; i++){
+            gControls[i].loadControl(patch);
+        }
+    }
+    applyAllVoices();
+}
+
+void savePatch(int patch){
+    if (patch < 16){
+        for (int i = 0; i < CtrlLast; i++){
+            gControls[i].saveControl(patch);
+        }
+    }
+}
 
 
 
