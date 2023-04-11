@@ -27,12 +27,6 @@ private:
     //current control value
     long mVal;
 
-    int mOffset;
-
-    static int nControls;
-
-
-
 
 public:
 
@@ -52,8 +46,6 @@ public:
         mVal =setVal;
         mTick = 0;
         setScaler(scaleMin, scaleMax);
-        mOffset = nControls;
-        nControls = nControls + 1;
     }
 
     
@@ -130,14 +122,22 @@ public:
         return shifted;
     }
 
-    void saveControl(int patchNum){
+    void saveControl(int patchIndex, int controlIndex){
         //ADDR , Data
-        if (patchNum*kControlMax+mOffset < 1024) EEPROM.write(patchNum*kControlMax+mOffset, byte(getVal()));        
+        int addr = patchIndex*kControlMax+controlIndex;
+        if (addr < 1024){
+            byte val = byte(getVal());
+            //Serial.print("addr: ");Serial.print(addr); Serial.print(" \t val : "); Serial.println(val);
+            EEPROM.write(addr, val);      
+        }
     }
 
-    void loadControl(int patchNum){
+    void loadControl(int patchIndex, int controlIndex){
         //ADDR , Data
-        if (patchNum*kControlMax+mOffset < 1024) setVal(long(EEPROM.read(patchNum*kControlMax+mOffset)));        
+        int addr = patchIndex*kControlMax+controlIndex;
+        if (addr < 1024) {
+            setVal(long(EEPROM.read(addr)));        
+        }
     }
 
 };

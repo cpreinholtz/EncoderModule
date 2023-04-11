@@ -249,8 +249,8 @@ AudioConnection          patchCord20;
 
     
     void setGlide(int g){
-        Serial.print("setting glide steps to : ");
-        Serial.println(g);
+        //Serial.print("setting glide steps to : ");
+        //Serial.println(g);
         if ( mGlideCurrentStep >= mGlideSteps){// not mid glide
             mGlideSteps = g;
             mGlideCurrentStep = g;

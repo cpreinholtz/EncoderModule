@@ -228,7 +228,7 @@ void defaultNoteOff(byte note){
 }
 
 void handleNoteOn(byte ch, byte note, byte vel){
-    Serial.println("on");
+    //Serial.println("on");
     if (vel <= 0){
         Serial.println("Velocity 0!!!!!!!!!!!!!!");
         handleNoteOff(ch, note, vel);
@@ -249,8 +249,10 @@ void handleNoteOn(byte ch, byte note, byte vel){
                 break;
             case 11:    
                 loadPatch(note%12);
+                break;
             case 10:
-                savePatch(note%12);               
+                savePatch(note%12);
+                break;              
             default:
                 defaultNoteOn(note, vel);
                 break;
@@ -322,7 +324,11 @@ void handleAfterTouch(byte ch, byte preassure){
     if (arpMode ==true ){
         //Serial.println("Aftertouch");//TODO REMOVE ME
         arp.setDiv(map(preassure, 1,255,arpDiv,16));        
-    } 
+    } else {
+        Serial.println("Aftertouch");//TODO REMOVE ME
+        
+                
+    }
 }
 
 void handleStop(){

@@ -58,7 +58,6 @@ enum tCtrlList {
     CtrlLast //always keep this at the bottom!
 };
 
-int Control::nControls=0;
 Control gControls[CtrlLast]; //Never exceed control.kControlMax!!!
 
 
@@ -184,18 +183,25 @@ void applyAllVoices(){
 //}
 
 void initControl(){
-    setScalersVoices();
-    setDefaultsVoices();
+    //this sets the max / min for each control value
+    setScalersVoices();    
     setFxScalers();
-    setFxDefaults();
-    applyAllVoices();
+    //this used to set default control values (
+    //setDefaultsVoices();
+    //setFxDefaults();
+    //applyAllVoices();
+
+    //now defaults are loaded from EEPROM
+    loadPatch(0); //includes apply all voices()
+    
+    
 }
 
 
 void loadPatch(int patch){
     if (patch < 16){
         for (int i = 0; i < CtrlLast; i++){
-            gControls[i].loadControl(patch);
+            gControls[i].loadControl(patch,i);
         }
     }
     applyAllVoices();
@@ -204,7 +210,7 @@ void loadPatch(int patch){
 void savePatch(int patch){
     if (patch < 16){
         for (int i = 0; i < CtrlLast; i++){
-            gControls[i].saveControl(patch);
+            gControls[i].saveControl(patch,i);
         }
     }
 }
