@@ -41,7 +41,7 @@ enum tCtrlList {
     
     //3,0    
     ReverbMix,
-    ReverbPan,    
+    FrequencyDrift,    
     ReverbDamping,
     ReverbRoomSize,
     //3,1
@@ -54,13 +54,15 @@ enum tCtrlList {
     VoiceFilterEnvRelease,
     DryPan,
     DelayPan,
-    
+    ReverbPan,
     CtrlLast //always keep this at the bottom!
 };
 
 Control gControls[CtrlLast]; //Never exceed control.kControlMax!!!
 
-
+void modulateFrequency(float preassure){
+    gControls[FrequencyDrift].modulateVal(preassure);
+}
 
 void setScalersVoices(){
 
@@ -77,7 +79,7 @@ void setScalersVoices(){
     gControls[VoiceEnvRelease].setScaler(5.0, 2000.0);
     
     gControls[GlideSteps].setScaler(1.0, 9.0);//true max steps is 2^scaler so really 2^9 = 512 steps,,, * 20ms = ~ 10 sec
-
+    gControls[FrequencyDrift].setScaler(0.0, 1.0);
 
     gControls[VoiceLfoShapeMix].setScaler(0.0, 1.0);
     //gControls[VoiceLfoFreqMix].setScaler(0.0, .001);
@@ -102,39 +104,6 @@ void setScalersVoices(){
 
 }
 
-void setDefaultsVoices(){
-
-    gControls[VoiceWave0Mix].setValPercent(.95);
-    gControls[VoiceWave1Mix].setValPercent(.24);
-    gControls[VoiceWave2Mix].setValPercent(.5);
-    gControls[VoiceWave3Mix].setValPercent(.9);
-    
-
-    gControls[VoiceEnvAttack].setValPercent(.2);
-    gControls[VoiceEnvDecay].setValPercent(.25);
-    gControls[VoiceEnvSustain].setValPercent(.7);
-    gControls[VoiceEnvRelease].setValPercent(.49);
-    gControls[GlideSteps].setValPercent(0);
-
-    gControls[VoiceLfoShapeMix].setValPercent(0);
-    gControls[VoiceLfoRate].setValPercent(.1);
-    gControls[VoiceAllMix].setValPercent(.6);
-    
-    gControls[VoiceFilterCutoff].setValPercent(.7);
-    gControls[VoiceFilterRes].setValPercent(.1);
-    gControls[VoiceFilterLfoAmmount].setValPercent(0);
-    gControls[VoiceFilterLfoRate].setValPercent(.4); 
-    
-
-    gControls[VoiceFilterEnvAttack].setValPercent(.2);
-    gControls[VoiceFilterEnvDecay].setValPercent(.2);
-    gControls[VoiceFilterEnvSustain].setValPercent(.5);
-    gControls[VoiceFilterEnvRelease].setValPercent(0);     
-    
-    gControls[VoiceFilterEnvAmmount].setValPercent(0);
-
-}
-
 void applyAllVoices(){
 
     gVoices.setWave0Mix(gControls[VoiceWave0Mix].getScaled());
@@ -147,6 +116,7 @@ void applyAllVoices(){
     gVoices.setEnvSustain(gControls[VoiceEnvSustain].getScaled());
     gVoices.setEnvRelease(gControls[VoiceEnvRelease].getScaled());
     gVoices.setGlide(gControls[GlideSteps].getScaled());
+    gVoices.setNoiseMultiplier(gControls[FrequencyDrift].getScaled());
 
 
     gVoices.setLfoShapeMix(gControls[VoiceLfoShapeMix].getScaled());

@@ -212,6 +212,8 @@ AudioConnection          patchCord20;
         mCurrentFrequency = glideStartFrequency;
         mStartFrequency = glideStartFrequency;
         mGlideCurrentStep = 0;
+        mNoise = 0;
+        mNoiseMultiplier = 0;
         mSetTime = millis();
         if (vel >0){
             updateGlide(bend);
@@ -244,6 +246,7 @@ AudioConnection          patchCord20;
         } else {
             mCurrentFrequency = mEndFrequency;
         }
+        updateNoise();
         updateVoiceFrequency(bend);
     }
 
@@ -259,6 +262,9 @@ AudioConnection          patchCord20;
             mGlideCurrentStep = map(mGlideCurrentStep, 0, mGlideSteps, 0, g);
             mGlideSteps = g;
         }        
+    }
+    void setNoiseMultiplier(float setTo){
+        mNoiseMultiplier = setTo;
     }
 
     void clear(){
@@ -296,34 +302,40 @@ private:
     //**************************************************************
     bool mVel;
     byte mNote;
-    //int mBend;
-
+    unsigned long long mSetTime;
+    unsigned long long mOffTime;
+    
     //freq of current not (with glide) (without bend)
     float mCurrentFrequency;
     float mStartFrequency; //glide start
     float mEndFrequency; //glide end
     int mGlideCurrentStep;// 
     int mGlideSteps;// 
-    
-    static const int nWaves = 4;
 
-
+    //noise params
+    float mNoise;
+    float mNoiseMultiplier;
     
-    unsigned long long mSetTime;
-    unsigned long long mOffTime;
-
-    
+    //constants
+    static const int nWaves = 4; 
     static const int kA = 440; // a is 440 hz...
     static const int kFullBend = 8191;
     static const int kBendHalfSteps = 2.0;
     static constexpr float kBbendScaler = ((float) kBendHalfSteps) / ( 12.0 * ((float)kFullBend) ) ;
 
-    //get note frequency * bendMultiplier
+    void updateNoise(){
+        float kp = -0.01;
+        float ki = 0.001 * mCurrentFrequency;
+        mNoise = mNoise + float(random(-50,50)) * ki;
+        mNoise = mNoise + mNoise * kp; //included to keep near 0 (bibo)        
+    }
+
+    //get note frequency(with noise * bendMultiplier
     float getBendedFrequency(int bend){    
         //actual bend is 2^ ((bendHalfSteps /12.0) * (bend/fullBend))
         //therefore if half steps is 12 (one octave) and bend is max or min, your pitch will be multiplied by 2^-1 or 2^1 (0.5 or 2)            
         float bendMultiplier = pow(2, (float) bend * kBbendScaler );
-        return ( mCurrentFrequency * bendMultiplier);        
+        return ( (mCurrentFrequency+mNoise*mNoiseMultiplier) * bendMultiplier);        
     }
     
     //get note frequency (before bending)
@@ -559,6 +571,9 @@ public:
         }
     }    
 
+    ///////////////////////////////////////////////////////////
+    //LFO wave
+    ///////////////////////////////////////////////////////////
     void setGlide(float val){
         int i,g;
         
@@ -571,6 +586,12 @@ public:
             mVoices[i].setGlide(g);
         }
     }    
+    void setNoiseMultiplier(float setTo){
+        int i;
+        for (i=0; i<kNumVoices ; i++){
+            mVoices[i].setNoiseMultiplier(setTo);
+        }
+    }
 
     ///////////////////////////////////////////////////////////
     //LFO wave

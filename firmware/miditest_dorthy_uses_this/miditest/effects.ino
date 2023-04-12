@@ -88,8 +88,6 @@ int s_idx = FLANGE_DELAY_LENGTH/4;
 int s_depth = FLANGE_DELAY_LENGTH/4;
 double s_freq = .5;
 
-
-
 void setFxScalers(){
 
     gControls[DryMix].setScaler(0.0, 0.5);
@@ -113,36 +111,12 @@ void setFxScalers(){
     gControls[BitcrushBits].setScaler(15.0, 2.0); //sample bits, reverse polarity
     gControls[BitcrushSampleRate].setScaler(16000, 100);  //in Hz, reverse polarity
 
-}
-
-
-
-
-void setFxDefaults(){
-
-    flange1.begin(flange_delayline,FLANGE_DELAY_LENGTH,s_idx,s_depth,s_freq);
+    
+     flange1.begin(flange_delayline,FLANGE_DELAY_LENGTH,s_idx,s_depth,s_freq);
     //flange1.voices(FLANGE_DELAY_PASSTHRU,0,0);
 
-    gControls[DryMix].setValPercent(1.0);
-    gControls[DryPan].setValPercent(0.5);
-
-    gControls[DelayMix].setValPercent(0.0);
-    gControls[DelayPan].setValPercent(0.4);
-    gControls[DelayFeedBack].setValPercent(0.3);
-    gControls[DelayRate].setValPercent(0.7);
-
-    gControls[ReverbMix].setValPercent(0.0);
-    gControls[ReverbPan].setValPercent(0.2);
-    gControls[ReverbRoomSize].setValPercent(0.5);
-    gControls[ReverbDamping].setValPercent(0.5);
-
-    gControls[BitcrushMix].setValPercent(0);
-    gControls[BitcrushPan].setValPercent(0.7);
-    gControls[BitcrushBits].setValPercent(.5);
-    gControls[BitcrushSampleRate].setValPercent(0.5);
-
+    
     //other defaults
-
     gMixerDelayFb.gain(0,1.0);
     gMixerDelayFb.gain(1,0.0);  //set in contol functions
     gMixerDelayFb.gain(2,0.0);
@@ -162,7 +136,6 @@ void setFxDefaults(){
     gDelay.disable(5);
     gDelay.disable(6);
     gDelay.disable(7);
-    
 }
 
 void applyAllFx(){

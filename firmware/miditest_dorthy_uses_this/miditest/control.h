@@ -3,7 +3,7 @@
 #include <EEPROM.h>
 
 
-
+extern const int kCtrlLast;
 class Control
 {
     
@@ -26,6 +26,7 @@ private:
     
     //current control value
     long mVal;
+    long mModulator;
 
 
 public:
@@ -45,6 +46,7 @@ public:
     Control(int setVal, float scaleMin, float scaleMax){
         mVal =setVal;
         mTick = 0;
+        mModulator = 0;
         setScaler(scaleMin, scaleMax);
     }
 
@@ -86,17 +88,30 @@ public:
         //Serial.println(mScaleMin);
         //Serial.println(mScaleMax);
     }
+
+
+    void modulateVal(float modulator){
+        mModulator = modulator;
+    }
     
 
     //**************************************************************
     // getters
     //**************************************************************
 
+    long getModulatedVal(){
+        if (mVal+mModulator > kMax){
+            return kMax;
+        } else if( mVal+mModulator < kMin){
+            return kMin;
+        }else {
+            return mVal+mModulator;
+        }
+    }
+
     long getVal(){
         return mVal;
     }
-
-
 
 
 
@@ -107,7 +122,7 @@ public:
         //Serial.println(mScaleMax);
         
         
-        float dif =(float)(mVal - kMin);
+        float dif =(float)(getModulatedVal() - kMin);
         //Serial.println(dif);
         
         float scaledDif = dif  / ( (float) kMax - (float) kMin );
