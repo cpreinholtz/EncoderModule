@@ -50,6 +50,7 @@ enum tCtrlList {
     BitcrushBits,
     BitcrushSampleRate,
 
+
     //relics of the past
     VoiceFilterEnvRelease,
     DryPan,
@@ -62,6 +63,7 @@ Control gControls[CtrlLast]; //Never exceed control.kControlMax!!!
 
 void modulateFrequency(float preassure){
     gControls[FrequencyDrift].modulateVal(preassure);
+    gVoices.setNoiseMultiplier(gControls[FrequencyDrift].getScaled());//this is needed for aftertouch becaus apply all is not called
 }
 
 void setScalersVoices(){
@@ -79,7 +81,7 @@ void setScalersVoices(){
     gControls[VoiceEnvRelease].setScaler(5.0, 2000.0);
     
     gControls[GlideSteps].setScaler(1.0, 9.0);//true max steps is 2^scaler so really 2^9 = 512 steps,,, * 20ms = ~ 10 sec
-    gControls[FrequencyDrift].setScaler(0.0, 1.0);
+    gControls[FrequencyDrift].setScaler(1.0, 4.0);
 
     gControls[VoiceLfoShapeMix].setScaler(0.0, 1.0);
     //gControls[VoiceLfoFreqMix].setScaler(0.0, .001);
@@ -100,6 +102,9 @@ void setScalersVoices(){
     
     gControls[VoiceFilterEnvAmmount].setScaler(0.0, 0.5);
 
+    //defaults
+    
+
 
 
 }
@@ -115,6 +120,8 @@ void applyAllVoices(){
     gVoices.setEnvDecay(gControls[VoiceEnvDecay].getScaled());
     gVoices.setEnvSustain(gControls[VoiceEnvSustain].getScaled());
     gVoices.setEnvRelease(gControls[VoiceEnvRelease].getScaled());
+
+    
     gVoices.setGlide(gControls[GlideSteps].getScaled());
     gVoices.setNoiseMultiplier(gControls[FrequencyDrift].getScaled());
 
@@ -158,11 +165,16 @@ void initControl(){
     setFxScalers();
     //this used to set default control values (
     //setDefaultsVoices();
-    //setFxDefaults();
+    
     //applyAllVoices();
 
     //now defaults are loaded from EEPROM
     loadPatch(0); //includes apply all voices()
+
+    
+    //need to keep this becuase patch contains dry mix, whoops
+    setFxDefaults();
+    applyAllVoices();
     
     
 }

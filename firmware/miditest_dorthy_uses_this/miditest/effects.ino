@@ -116,7 +116,9 @@ void setFxScalers(){
     //flange1.voices(FLANGE_DELAY_PASSTHRU,0,0);
 
     
-    //other defaults
+}
+void setFxDefaults(){
+        //other defaults
     gMixerDelayFb.gain(0,1.0);
     gMixerDelayFb.gain(1,0.0);  //set in contol functions
     gMixerDelayFb.gain(2,0.0);
@@ -136,8 +138,12 @@ void setFxScalers(){
     gDelay.disable(5);
     gDelay.disable(6);
     gDelay.disable(7);
-}
 
+    gControls[DryPan].setValPercent(0.5);
+    gControls[DelayPan].setValPercent(0.4);
+     gControls[ReverbPan].setValPercent(0.6);
+     gControls[BitcrushPan].setValPercent(0.55);
+}
 void applyAllFx(){
 
     setDryMix(gControls[DryMix].getScaled());

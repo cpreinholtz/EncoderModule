@@ -139,6 +139,8 @@ AudioConnection          patchCord20;
         mCurrentFrequency = 0;
         mGlideSteps = 0;
         mGlideCurrentStep=0;
+        mNoise=0;
+        mNoiseMultiplier = 0;
     }
 
 
@@ -212,8 +214,8 @@ AudioConnection          patchCord20;
         mCurrentFrequency = glideStartFrequency;
         mStartFrequency = glideStartFrequency;
         mGlideCurrentStep = 0;
-        mNoise = 0;
-        mNoiseMultiplier = 0;
+        mNoise = 0; //consider removing this?
+        //mNoiseMultiplier = 0;
         mSetTime = millis();
         if (vel >0){
             updateGlide(bend);
@@ -324,8 +326,8 @@ private:
     static constexpr float kBbendScaler = ((float) kBendHalfSteps) / ( 12.0 * ((float)kFullBend) ) ;
 
     void updateNoise(){
-        float kp = -0.01;
-        float ki = 0.001 * mCurrentFrequency;
+        float kp = -0.02;
+        float ki = 0.00001 * mCurrentFrequency;
         mNoise = mNoise + float(random(-50,50)) * ki;
         mNoise = mNoise + mNoise * kp; //included to keep near 0 (bibo)        
     }
@@ -588,8 +590,10 @@ public:
     }    
     void setNoiseMultiplier(float setTo){
         int i;
+        float expon =  pow(2,setTo)-2;
+        //Serial.println(expon);
         for (i=0; i<kNumVoices ; i++){
-            mVoices[i].setNoiseMultiplier(setTo);
+            mVoices[i].setNoiseMultiplier(expon);
         }
     }
 

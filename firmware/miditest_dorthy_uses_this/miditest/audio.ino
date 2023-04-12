@@ -327,8 +327,8 @@ void handleAfterTouch(byte ch, byte preassure){
         //Serial.println("Aftertouch");//TODO REMOVE ME
         arp.setDiv(map(preassure, 1,255,arpDiv,16));        
     } else {
-        Serial.println("Aftertouch");//TODO REMOVE ME
-        modulateFrequency(preassure);       
+        //Serial.println("Aftertouch");//TODO REMOVE ME
+        modulateFrequency(preassure/4);       
     }
 }
 
