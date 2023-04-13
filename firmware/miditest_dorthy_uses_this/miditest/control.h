@@ -16,7 +16,7 @@ private:
     //lfoRate value check in "applyAllVoices" and the led brightness mapping in mcp get knobs
     static const int kMin = 0; 
     static const int kMax = 40;  
-    static const int kControlMax=64;
+    static const int kControlTotal=64; //contral values and keys
     //min and max val, inclusive
     float mScaleMin; 
     float mScaleMax;
@@ -30,8 +30,9 @@ private:
 
 
 public:
-
-
+    static const int kControlMax=61; //control values 0 to 61
+    static const int kKey0=kControlMax+1;//key0=62
+    static const int kKey1=kControlMax+2;//key1=63
     //**************************************************************
     // constructors
     //**************************************************************
@@ -137,23 +138,62 @@ public:
         return shifted;
     }
 
+
+
+
+
+    int calcAddr(int patchIndex, int controlIndex){
+        return patchIndex*kControlTotal+controlIndex;
+    }
+    
+    byte readEeprom(int addr){
+        if (addr < 1024) {
+            return EEPROM.read(addr);        
+        } else { 
+            return 0;
+        }
+    }
+    void writeEeprom(int addr, byte val){
+        if (addr < 1024) {
+            EEPROM.write(addr, val);        
+        } 
+    }
+
     void saveControl(int patchIndex, int controlIndex){
         //ADDR , Data
-        int addr = patchIndex*kControlMax+controlIndex;
+        int addr = calcAddr(patchIndex, controlIndex);
         if (addr < 1024){
-            byte val = byte(getVal());
-            //Serial.print("addr: ");Serial.print(addr); Serial.print(" \t val : "); Serial.println(val);
-            EEPROM.write(addr, val);      
+            writeEeprom(addr, byte(getVal()));
         }
     }
 
     void loadControl(int patchIndex, int controlIndex){
         //ADDR , Data
-        int addr = patchIndex*kControlMax+controlIndex;
+        int addr = calcAddr(patchIndex, controlIndex);
         if (addr < 1024) {
-            setVal(long(EEPROM.read(addr)));        
+            setVal(long(readEeprom(addr)));        
         }
     }
+    
+
+    //lets make this protected
+    bool readKeys(int patchIndex){
+        if( readEeprom(calcAddr(patchIndex, kKey0)) == 42 and readEeprom(calcAddr(patchIndex, kKey1)) == 69 ){
+            return true;
+        } else {
+            return false;
+        }
+    }  
+    
+    void writeKeys(int patchIndex){
+        writeEeprom(calcAddr(patchIndex, kKey0), 42);
+        writeEeprom(calcAddr(patchIndex, kKey1), 69);        
+    }
+    
+
+
+    
+
 
 };
 

@@ -74,4 +74,5 @@ void loop()
         getKnobs();
     }
     serviceAudio();
+    serviceEffects();
 }

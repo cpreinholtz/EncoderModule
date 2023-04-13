@@ -46,7 +46,7 @@ enum tCtrlList {
     ReverbRoomSize,
     //3,1
     BitcrushMix,
-    BitcrushPan,
+    FxLfoAmmount,
     BitcrushBits,
     BitcrushSampleRate,
 
@@ -56,6 +56,7 @@ enum tCtrlList {
     DryPan,
     DelayPan,
     ReverbPan,
+    BitcrushPan,
     CtrlLast //always keep this at the bottom!
 };
 
@@ -102,11 +103,41 @@ void setScalersVoices(){
     
     gControls[VoiceFilterEnvAmmount].setScaler(0.0, 0.5);
 
-    //defaults
-    
+  
+
+}
+
+//these SHOULD be overwritten in patch loading
+void setDefaultsVoices(){
+
+    gControls[VoiceWave0Mix].setValPercent(.95);
+    gControls[VoiceWave1Mix].setValPercent(.24);
+    gControls[VoiceWave2Mix].setValPercent(.5);
+    gControls[VoiceWave3Mix].setValPercent(.9);
 
 
+    gControls[VoiceEnvAttack].setValPercent(.2);
+    gControls[VoiceEnvDecay].setValPercent(.25);
+    gControls[VoiceEnvSustain].setValPercent(.7);
+    gControls[VoiceEnvRelease].setValPercent(.49);
+    gControls[GlideSteps].setValPercent(0);
 
+    gControls[VoiceLfoShapeMix].setValPercent(0);
+    gControls[VoiceLfoRate].setValPercent(.1);
+    gControls[VoiceAllMix].setValPercent(.6);
+
+    gControls[VoiceFilterCutoff].setValPercent(.7);
+    gControls[VoiceFilterRes].setValPercent(.1);
+    gControls[VoiceFilterLfoAmmount].setValPercent(0);
+    gControls[VoiceFilterLfoRate].setValPercent(.4); 
+
+
+    gControls[VoiceFilterEnvAttack].setValPercent(.2);
+    gControls[VoiceFilterEnvDecay].setValPercent(.2);
+    gControls[VoiceFilterEnvSustain].setValPercent(.5);
+    gControls[VoiceFilterEnvRelease].setValPercent(0);
+
+    gControls[VoiceFilterEnvAmmount].setValPercent(0);
 }
 
 void applyAllVoices(){
@@ -163,10 +194,11 @@ void initControl(){
     //this sets the max / min for each control value
     setScalersVoices();    
     setFxScalers();
-    //this used to set default control values (
-    //setDefaultsVoices();
     
-    //applyAllVoices();
+    //this used to set default control values (most are overwritten if loading patch completes successfully)
+    setDefaultsVoices();
+    setFxDefaults();    
+    applyAllVoices();
 
     //now defaults are loaded from EEPROM
     loadPatch(0); //includes apply all voices()
@@ -181,12 +213,12 @@ void initControl(){
 
 
 void loadPatch(int patch){
-    if (patch < 16){
+    if (patch < 16 and gControls[0].readKeys(patch) == true) {        
         for (int i = 0; i < CtrlLast; i++){
             gControls[i].loadControl(patch,i);
         }
-    }
-    applyAllVoices();
+        applyAllVoices();
+    }    
 }
 
 void savePatch(int patch){
@@ -194,11 +226,9 @@ void savePatch(int patch){
         for (int i = 0; i < CtrlLast; i++){
             gControls[i].saveControl(patch,i);
         }
-    }
+        gControls[0].writeKeys(patch);
+    }    
 }
-
-
-
 
 
 

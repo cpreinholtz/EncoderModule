@@ -493,6 +493,10 @@ public:
         return kNumVoices;
     }
 
+    int getBend(){
+        return mBend;
+    }
+
     void dbg(){
         /*
         Serial.println("voicelist");

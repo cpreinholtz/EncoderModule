@@ -4,14 +4,6 @@
 #include <SD.h>
 #include <SerialFlash.h>
 
-#include <Audio.h>
-#include <Wire.h>
-#include <SPI.h>
-#include <SD.h>
-#include <SerialFlash.h>
-
-
-
 // GUItool: begin automatically generated code
 
 
@@ -110,13 +102,15 @@ void setFxScalers(){
     gControls[BitcrushPan].setScaler(0.0, 1.0);
     gControls[BitcrushBits].setScaler(15.0, 2.0); //sample bits, reverse polarity
     gControls[BitcrushSampleRate].setScaler(16000, 100);  //in Hz, reverse polarity
-
+    
+    gControls[FxLfoAmmount].setScaler(0, 1.0);
     
      flange1.begin(flange_delayline,FLANGE_DELAY_LENGTH,s_idx,s_depth,s_freq);
     //flange1.voices(FLANGE_DELAY_PASSTHRU,0,0);
 
     
 }
+
 void setFxDefaults(){
         //other defaults
     gMixerDelayFb.gain(0,1.0);
@@ -139,11 +133,34 @@ void setFxDefaults(){
     gDelay.disable(6);
     gDelay.disable(7);
 
-    gControls[DryPan].setValPercent(0.5);
+    
+    gControls[DryMix].setValPercent(1.0);
+    //gControls[DryPan].setValPercent(0.5);
+
+    gControls[DelayMix].setValPercent(0.0);
+    //gControls[DelayPan].setValPercent(0.4);
+    gControls[DelayFeedBack].setValPercent(0.3);
+    gControls[DelayRate].setValPercent(0.7);
+
+    gControls[ReverbMix].setValPercent(0.0);
+    //gControls[ReverbPan].setValPercent(0.2);
+    gControls[ReverbRoomSize].setValPercent(0.5);
+    gControls[ReverbDamping].setValPercent(0.5);
+
+    gControls[BitcrushMix].setValPercent(0);
+    //gControls[BitcrushPan].setValPercent(0.7);
+    gControls[BitcrushBits].setValPercent(.5);
+    gControls[BitcrushSampleRate].setValPercent(0.5);
+
+    //I find that for "ballanced" inputs, center pan means a loss of volume... pan all slightly
+    gControls[DryPan].setValPercent(0.45);
     gControls[DelayPan].setValPercent(0.4);
-     gControls[ReverbPan].setValPercent(0.6);
-     gControls[BitcrushPan].setValPercent(0.55);
+    gControls[ReverbPan].setValPercent(0.6);
+    gControls[BitcrushPan].setValPercent(0.55);
+
+    gControls[FxLfoAmmount].setValPercent(0.8);
 }
+
 void applyAllFx(){
 
     setDryMix(gControls[DryMix].getScaled());
@@ -167,6 +184,8 @@ void applyAllFx(){
     setBitcrushPan(gControls[BitcrushPan].getScaled());
     setBitcrushBits(gControls[BitcrushBits].getScaled());
     setBitcrushSampleRate(gControls[BitcrushSampleRate].getScaled());
+
+    setFxLfoAmmount(gControls[FxLfoAmmount].getScaled());
 
     
 
@@ -200,10 +219,37 @@ void setDelayFeedback(float val){
     gMixerDelayFb.gain(1,val);
 }
 
+
+//FX LFO
+float gFxLfoAmmount;
+const int kDelayLookup = 16;
+const float kDelayMult = 1000/kDelayLookup*2; //for each delay, get through half of the lookup table (*2)
+const float delayLookup[kDelayLookup] = {.1,.2,.3,.4,.5,.6,.7,.8,.9,.8,.7,.6,.5,.4,.3,.2};
+#include <timer.h>
+Timer gDelayPan(1000);
+
 //inMs !!~!!!
 void setDelayRate(float val){
-    gDelay.delay(0,val);
+    gDelay.delay(0,val);//delay rate (not pan)
+    val = val * 1000/8; //convert to micros, then make 1/4 period
+    if (val < 10000) val = 10000;//cap at n ms
+    gDelayPan.setPeriodMicros(val);//period por panning delay
 }
+
+void serviceEffects(){
+    static int pan = 0;
+    if ( gDelayPan.pollAndReset()){
+        pan = pan + 1;
+        if (pan >= kDelayLookup) pan = 0;
+        setDelayPan((delayLookup[pan]-0.5)*gFxLfoAmmount+0.5);
+    }
+}
+
+void setFxLfoAmmount(float val){
+    gFxLfoAmmount=val;
+}
+
+
 
 
 

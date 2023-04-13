@@ -247,11 +247,17 @@ void handleNoteOn(byte ch, byte note, byte vel){
                 arpDiv = note%12;
                 arp.setDiv(arpDiv);
                 break;
-            case 11:    
-                loadPatch(note%12);
+            case 11: 
+                //Serial.println(gVoices.getBend());   
+                if (gVoices.getBend() < -4000) { //dummy switch down (Load Low)         
+                    loadPatch(note%12);
+                }
                 break;
             case 10:
-                savePatch(note%12);
+                //Serial.println(gVoices.getBend());
+                if (gVoices.getBend() > 4000) { //dummy switch up (Save Subir)             
+                    savePatch(note%12);
+                }                
                 break;              
             default:
                 defaultNoteOn(note, vel);
