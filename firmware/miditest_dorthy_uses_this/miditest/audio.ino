@@ -43,6 +43,8 @@ bool chordMode;
 bool dummyMode;
 bool splitMode;
 bool arpMode;
+bool clkDivMode;
+bool glideFromClosest;
 byte splitKey;
 extern const int LED_PIN;
 ChordMaker chordMaker;
@@ -69,8 +71,10 @@ void initAudio(){
     gVoices.initAudio();
     chordMode = false;
     arpMode=false;
+    clkDivMode=false;
     dummyMode = false;
     splitMode = false;
+    glideFromClosest = false;
     splitKey = 0;
     Serial.println("Audio init");
 }
@@ -118,23 +122,39 @@ void updateNotes(){
   
 
 
-
-
+extern int gLastKnobTouched;
 void toggleSettings(byte note){
     switch(note%12){
-        case 0: 
+        case 0: //C
             chordMode = !chordMode;
             analogWrite(LED_PIN, map(chordMode,0,1, 0,255));
             break;
-        case 2:
+        case 1: //C#
+            clkDivMode = !clkDivMode;
+            analogWrite(LED_PIN, map(clkDivMode,0,1, 0,255));
+            setDelayScaler();
+            setLfoScaler();
+            applyAllVoices();
+            break;
+        case 2: //D
             dummyMode = !dummyMode;
             analogWrite(LED_PIN, map(dummyMode,0,1, 0,255));
             break;
-        case 4:
+        case 4: //E
             splitMode = !splitMode;
             analogWrite(LED_PIN, map(splitMode,0,1, 0,255));
             break;
-        case 9:
+        case 6: //F#
+            setModWheelDestination(gLastKnobTouched);
+            break;
+        case 7: //G
+            glideFromClosest = !glideFromClosest;
+            analogWrite(LED_PIN, map(glideFromClosest,0,1, 0,255));
+            break;
+        case 8: //G#
+            setAftertouchDestination(gLastKnobTouched);
+            break;
+        case 9: //A
             arpMode = !arpMode;
             if (arpMode == true){
                 arp.start();
@@ -312,20 +332,6 @@ void handleClock(){
     //Serial.println();
 }
 
-void handleAfterTouchPoly(byte ch, byte note, byte preassure){
-    //TODO
-    
-    if (arpMode ==true ){
-        //Serial.println("Aftertouch poly");//TODO REMOVE ME
-        //Serial.println(map(preassure, 1,255,arpDiv,64));//TODO REMOVE ME
-        //arp.setDiv(map(preassure, 1,255,arpDiv,64));        
-    } else {
-        //Serial.println("Aftertouch poly not arp mode");
-    }
-}
-
-
-
 void handleAfterTouch(byte ch, byte preassure){
     //TODO
     
@@ -333,8 +339,7 @@ void handleAfterTouch(byte ch, byte preassure){
         //Serial.println("Aftertouch");//TODO REMOVE ME
         arp.setDiv(map(preassure, 1,255,arpDiv,16));        
     } else {
-        //Serial.println("Aftertouch");//TODO REMOVE ME
-        modulateFrequency(preassure/4);       
+        setAftertouch(preassure);
     }
 }
 

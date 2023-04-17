@@ -79,7 +79,7 @@ void initAllKnobs(){
 
 
 
-
+int gLastKnobTouched = 0;
 
 
 
@@ -125,6 +125,7 @@ void getKnobs(){
 
                 if (tCtrlIndex < CtrlLast){
                     long val = gControls[tCtrlIndex].getVal();
+                    gLastKnobTouched = tCtrlIndex;
                     
                     Serial.println(val);                  
                     Serial.println(gControls[tCtrlIndex].getScaled());                    

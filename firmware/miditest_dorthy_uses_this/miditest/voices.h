@@ -11,6 +11,7 @@
 */
 
 #include <timer.h>
+#include <arpegio.h>
 
 class Voice
 {
@@ -174,6 +175,7 @@ AudioConnection          patchCord20;
         mMixerFilter.gain(2, 0.0);
         mMixerFilter.gain(3, 0.0);
         mLfoFilter.begin(1.0, 100, WAVEFORM_SINE); //level freq, wave
+        mLfoFilter.phase(90);
         mEnvFilter.delay(0);
         mEnvFilter.hold(0);
         mEnvFilter.attack(200);
@@ -297,7 +299,12 @@ AudioConnection          patchCord20;
     float getFrequency(){
         return mCurrentFrequency;
     }
-
+    
+    //get note frequency (before bending)
+    float getNoteFrequency(byte note){        
+        return ( ((float)kA) / 32.0) * ( pow(2,(((float)note - 9.0) / 12.0)) )  ;
+    }
+    
 private:
     //**************************************************************
     // members
@@ -340,10 +347,7 @@ private:
         return ( (mCurrentFrequency+mNoise*mNoiseMultiplier) * bendMultiplier);        
     }
     
-    //get note frequency (before bending)
-    float getNoteFrequency(byte note){        
-        return ( ((float)kA) / 32.0) * ( pow(2,(((float)note - 9.0) / 12.0)) )  ;
-    }
+
 
 
  
@@ -355,6 +359,8 @@ private:
 
 
 
+extern bool glideFromClosest, clkDivMode;
+extern Arpegio arp;
 
 
 class Voices
@@ -378,7 +384,7 @@ private:
     void pickNext(byte note){
         int i;    
         unsigned long long lowestTime = millis();   
-        unsigned long long lowestOffTime = lowestTime; 
+        unsigned long long hightestOffTime = 0; 
         bool foundOff = false;
         
         for (i=0; i<kNumVoices ; i++){
@@ -388,11 +394,11 @@ private:
                 mNextVoice = i;
                 return;
                 
-            //pick the lowest off time of the off notesby default
+            //pick the highest off time of the off notes by default
             } else if (mVoices[i].getVel() <= 0 ){
                 foundOff = true;
-                if (mVoices[i].getOffTime() < lowestOffTime){
-                    lowestOffTime = mVoices[i].getOffTime();
+                if (mVoices[i].getOffTime() > hightestOffTime){
+                    hightestOffTime = mVoices[i].getOffTime();
                     mNextVoice = i;
                 }
 
@@ -432,23 +438,30 @@ public:
     // setters
     //**************************************************************
     void set(byte note, byte vel){
-        float lastFrequency = mVoices[mNextVoice].getFrequency();
+
+
 
         if (vel <= 0 ){
             unset(note);
         } else {
 
-            //check if the note is already being played, only really an issue if using sequencer or multiple keyboards for some reason
-            int i;                 
-            for (i=0; i<kNumVoices ; i++){           
-                if (mVoices[i].getVel() > 0  and mVoices[i].getNote() == note) {
-                    //Serial.println("repeat");
-                    return;
-                }
-            }
+            //get the glide start frequency, default to the last note played
+            float glideStartFrequency = mVoices[mNextVoice].getFrequency();
+            float desiredFrequency = mVoices[0].getNoteFrequency(note);
+            float smallestDiff = abs(desiredFrequency - glideStartFrequency);
+            for (int i=0; i<kNumVoices ; i++){
+                //check if the desired note is already being played, and if so, exit this function. only really an issue if using sequencer or multiple keyboards for some reason
+                if (mVoices[i].getVel() > 0 and mVoices[i].getNote() == note ) return;
+
+                //else, check if this voices current frequency is closer to the desired, comment this out to always defualt to the last note played
+                if (glideFromClosest and abs(desiredFrequency - mVoices[i].getFrequency()) < smallestDiff) glideStartFrequency = mVoices[i].getFrequency();
+            }            
+
+            //pick the next unused voice, this is sort of redundant and should probably be handled in the loop above for optimum speed but it would only save a microsecond or so anyways...
+            pickNext(note);
             
-            pickNext(note); 
-            mVoices[mNextVoice].set(note,vel,mBend, lastFrequency);
+            //not that we calculated the next voice and glide start, play that note!
+            mVoices[mNextVoice].set(note, vel, mBend, glideStartFrequency);
             
         }    
     }
@@ -606,6 +619,10 @@ public:
     ///////////////////////////////////////////////////////////
     void setLfoRate(float val){
         int i;
+        if (clkDivMode) {
+            if (val >= 33.0) val = 0;
+            else val = arp.getBpm() / round(val)/16;
+        }
         for (i=0; i<kNumVoices ; i++){
             mVoices[i].mLfoWave.frequency(bpmToBps(val));
         }
@@ -688,6 +705,10 @@ public:
     }
     void setFilterLfoRate(float val){
         int i;
+        if (clkDivMode) {
+            if (val >= 33.0) val = 0;
+            else val = arp.getBpm() / round(val)/16;
+        }
         for (i=0; i<kNumVoices ; i++){
             mVoices[i].mLfoFilter.frequency(bpmToBps(val));
         }

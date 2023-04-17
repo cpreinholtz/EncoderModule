@@ -80,6 +80,13 @@ int s_idx = FLANGE_DELAY_LENGTH/4;
 int s_depth = FLANGE_DELAY_LENGTH/4;
 double s_freq = .5;
 
+void setDelayScaler(){
+    if (clkDivMode==true){
+        gControls[DelayRate].setScaler(32.0, 1.0); //this is in clk periods *8 , I want faster rate to the right
+    } else {
+        gControls[DelayRate].setScaler(500.0, 100.0); //this is in ms , I want faster rate to the right
+    }
+}
 void setFxScalers(){
 
     gControls[DryMix].setScaler(0.0, 0.5);
@@ -88,7 +95,7 @@ void setFxScalers(){
     gControls[DelayMix].setScaler(0.0, 0.5);
     gControls[DelayPan].setScaler(0.0, 1.0);
     gControls[DelayFeedBack].setScaler(0.0, .9);
-    gControls[DelayRate].setScaler(500.0, 100.0); //this is in ms , I want faster rate to the right
+    setDelayScaler();
 
     gControls[ReverbMix].setScaler(0.0, 0.5);
     gControls[ReverbPan].setScaler(0.0, 1.0);    
@@ -228,8 +235,13 @@ const float delayLookup[kDelayLookup] = {.1,.2,.3,.4,.5,.6,.7,.8,.9,.8,.7,.6,.5,
 #include <timer.h>
 Timer gDelayPan(1000);
 
+
 //inMs !!~!!!
 void setDelayRate(float val){
+    //convert to clk divs to millis
+    if (clkDivMode){
+        val = bpmToMillis(arp.getBpm()) * round(val)/16;
+    }
     gDelay.delay(0,val);//delay rate (not pan)
     val = val * 1000/8; //convert to micros, then make 1/4 period
     if (val < 10000) val = 10000;//cap at n ms

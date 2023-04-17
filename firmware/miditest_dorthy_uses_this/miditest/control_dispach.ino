@@ -60,17 +60,26 @@ enum tCtrlList {
     CtrlLast //always keep this at the bottom!
 };
 
+//default destinations
+int gModWheelDestination = VoiceFilterCutoff;
+int gAftertouchDestination = FrequencyDrift;
+
 Control gControls[CtrlLast]; //Never exceed control.kControlMax!!!
 
-void modulateFrequency(float preassure){
-    gControls[FrequencyDrift].modulateVal(preassure);
-    gVoices.setNoiseMultiplier(gControls[FrequencyDrift].getScaled());//this is needed for aftertouch becaus apply all is not called
+
+void setLfoScaler(){
+    if (clkDivMode==true){
+        gControls[VoiceLfoRate].setScaler(33.0, 1.0); //this is in clk periods *8 , I want faster rate to the right
+        gControls[VoiceFilterLfoRate].setScaler(33.0, 1.0); //this is in clk periods *8 , I want faster rate to the right
+    } else {
+        gControls[VoiceLfoRate].setScaler(0.0, 60*6);
+        gControls[VoiceFilterLfoRate].setScaler(0.0, 60*36);
+    }
 }
 
+
 void setScalersVoices(){
-
     
-
     gControls[VoiceWave0Mix].setScaler(0.0, 0.5);
     gControls[VoiceWave1Mix].setScaler(0.0, .5);
     gControls[VoiceWave2Mix].setScaler(0.0, .5);
@@ -86,15 +95,15 @@ void setScalersVoices(){
 
     gControls[VoiceLfoShapeMix].setScaler(0.0, 1.0);
     //gControls[VoiceLfoFreqMix].setScaler(0.0, .001);
-    gControls[VoiceLfoRate].setScaler(0.0, 60*6);
+    //gControls[VoiceLfoRate].setScaler(0.0, 60*6);
     gControls[VoiceAllMix].setScaler(0.1, 0.5);
 
     
     gControls[VoiceFilterCutoff].setScaler(100.0, 4000.0);
     gControls[VoiceFilterRes].setScaler(0.0, 4.9);
     gControls[VoiceFilterLfoAmmount].setScaler(0.0, 0.5);
-    gControls[VoiceFilterLfoRate].setScaler(6.0, 60*36); 
-    
+    //gControls[VoiceFilterLfoRate].setScaler(0.0, 60*36); 
+    setLfoScaler();
 
     gControls[VoiceFilterEnvAttack].setScaler(5.0, 2000.0);
     gControls[VoiceFilterEnvDecay].setScaler(5.0, 2000.0);
@@ -128,8 +137,8 @@ void setDefaultsVoices(){
 
     gControls[VoiceFilterCutoff].setValPercent(.7);
     gControls[VoiceFilterRes].setValPercent(.1);
-    gControls[VoiceFilterLfoAmmount].setValPercent(0);
-    gControls[VoiceFilterLfoRate].setValPercent(.4); 
+    gControls[VoiceFilterLfoAmmount].setValPercent(.99);
+    gControls[VoiceFilterLfoRate].setValPercent(0);
 
 
     gControls[VoiceFilterEnvAttack].setValPercent(.2);
@@ -212,11 +221,27 @@ void initControl(){
 }
 
 
+////////////////////////////////////////////////////////////
+//patch saving and loading
+////////////////////////////////////////////////////////////
 void loadPatch(int patch){
     if (patch < 16 and gControls[0].readKeys(patch) == true) {        
         for (int i = 0; i < CtrlLast; i++){
             gControls[i].loadControl(patch,i);
         }
+        
+        int addr = gControls[0].calcAddr(patch, CtrlLast);
+        byte ctrl = gControls[0].readEeprom(addr+1);        
+        //setModWheelDestination(gControls[0].readEeprom(addr+2);
+        //setAftertouchDestination(gControls[0].readEeprom(addr+3);
+        //splitKey = gControls[0].readEeprom(addr+4);
+        
+        Serial.println(ctrl);
+        //if (ctrl && (1 << 0)) chordMode = true; else chordMode = false;
+        //if (ctrl && (1 << 1)) dummyMode = true; else dummyMode = false;
+        //if (ctrl && (1 << 2)) arpMode = true; else arpMode = false;
+        //if (ctrl && (1 << 3)) splitMode = true; else splitMode = false;        
+        //if (ctrl && (1 << 3)) glideFromClosest = true; else glideFromClosest = false;
         applyAllVoices();
     }    
 }
@@ -226,6 +251,19 @@ void savePatch(int patch){
         for (int i = 0; i < CtrlLast; i++){
             gControls[i].saveControl(patch,i);
         }
+        
+        byte ctrl = 0;
+        if (chordMode) ctrl = ctrl || (1 << 0);
+        if (dummyMode) ctrl = ctrl || (1 << 1);
+        if (arpMode) ctrl = ctrl || (1 << 2);
+        if (splitMode) ctrl = ctrl || (1 << 3);
+        if (glideFromClosest) ctrl = ctrl || (1 << 4);
+        
+        int addr = gControls[0].calcAddr(patch, CtrlLast);
+        gControls[0].writeEeprom(addr+1, ctrl);
+        gControls[0].writeEeprom(addr+2, gModWheelDestination);
+        gControls[0].writeEeprom(addr+3, gAftertouchDestination);
+        gControls[0].writeEeprom(addr+4, splitKey);
         gControls[0].writeKeys(patch);
     }    
 }
@@ -233,6 +271,20 @@ void savePatch(int patch){
 
 
 
+
+////////////////////////////////////////////////////////////
+//mod wheel and after touch
+////////////////////////////////////////////////////////////
+
+
+
+void setModWheelDestination(int ctrlIndex){
+    if (ctrlIndex < CtrlLast) gModWheelDestination = ctrlIndex;
+}
+
+void setAftertouchDestination(int ctrlIndex){
+    if (ctrlIndex < CtrlLast) gAftertouchDestination = ctrlIndex;
+}
 
 const int kCcModWheel = 1;
 
@@ -243,9 +295,16 @@ void setCc(byte ch, byte cc, byte val){
             //gControls[VoiceLfoFreqMix].setVal(val); 
             //gVoices.setLfoFreqMix(gControls[VoiceLfoFreqMix].getScaled());
             
-            gControls[VoiceFilterCutoff].setValPercent((float)val / 128.0);            
-            gVoices.setFilterCutoff(gControls[VoiceFilterCutoff].getScaled());
+            //gControls[VoiceFilterCutoff].setValPercent((float)val / 128.0);            
+            //gVoices.setFilterCutoff(gControls[VoiceFilterCutoff].getScaled());
             
+            gControls[gModWheelDestination].setValPercent((float)val / 128.0);
+            applyAllVoices();
             break;
     }
+}
+
+void setAftertouch(int preassure){
+    gControls[gAftertouchDestination].modulateVal(preassure/4);
+    applyAllVoices();
 }

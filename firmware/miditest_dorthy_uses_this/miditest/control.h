@@ -143,7 +143,8 @@ public:
 
 
     int calcAddr(int patchIndex, int controlIndex){
-        return patchIndex*kControlTotal+controlIndex;
+        if (controlIndex > kControlMax) return 5000;
+        else return patchIndex*kControlTotal+controlIndex;
     }
     
     byte readEeprom(int addr){

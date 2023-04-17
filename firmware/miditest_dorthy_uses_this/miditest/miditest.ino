@@ -43,7 +43,7 @@ void setup()
     MIDI.setHandlePitchBend(handlePitchBend);
     MIDI.setHandleClock(handleClock);
     
-    MIDI.setHandleAfterTouchPoly(handleAfterTouchPoly);
+    //MIDI.setHandleAfterTouchPoly(handleAfterTouchPoly);
     MIDI.setHandleAfterTouchChannel(handleAfterTouch);
     
     MIDI.setHandleStart(handleStart);
