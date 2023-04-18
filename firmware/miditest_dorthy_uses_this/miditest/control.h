@@ -83,8 +83,10 @@ public:
     }
 
     void setScaler(float scaleMin, float scaleMax){
+        long newVal = map(mVal, mScaleMin, mScaleMax, scaleMin, scaleMax);
         mScaleMin = scaleMin;
         mScaleMax = scaleMax;
+        setVal(newVal);
         //Serial.println("setting Scaler");
         //Serial.println(mScaleMin);
         //Serial.println(mScaleMax);
@@ -146,6 +148,10 @@ public:
         if (controlIndex > kControlMax) return 5000;
         else return patchIndex*kControlTotal+controlIndex;
     }
+    int calcKeyAddr(int patchIndex, int controlIndex){
+        if (controlIndex <= kControlMax or controlIndex >= kControlTotal) return 5000;
+        else return patchIndex*kControlTotal+controlIndex;
+    }
     
     byte readEeprom(int addr){
         if (addr < 1024) {
@@ -179,16 +185,21 @@ public:
 
     //lets make this protected
     bool readKeys(int patchIndex){
-        if( readEeprom(calcAddr(patchIndex, kKey0)) == 42 and readEeprom(calcAddr(patchIndex, kKey1)) == 69 ){
+        if( readEeprom(calcKeyAddr(patchIndex, kKey0)) == 42 and readEeprom(calcKeyAddr(patchIndex, kKey1)) == 69 ){
             return true;
         } else {
-            return false;
+            Serial.println("key values wrong");
+            Serial.println(calcKeyAddr(patchIndex, kKey0));
+            Serial.println(readEeprom(calcAddr(patchIndex, kKey0)));
+            Serial.println(calcKeyAddr(patchIndex, kKey1));
+            Serial.println(readEeprom(calcAddr(patchIndex, kKey1)) == 69);
+            return true;
         }
     }  
     
     void writeKeys(int patchIndex){
-        writeEeprom(calcAddr(patchIndex, kKey0), 42);
-        writeEeprom(calcAddr(patchIndex, kKey1), 69);        
+        writeEeprom(calcKeyAddr(patchIndex, kKey0), 42);
+        writeEeprom(calcKeyAddr(patchIndex, kKey1), 69);        
     }
     
 

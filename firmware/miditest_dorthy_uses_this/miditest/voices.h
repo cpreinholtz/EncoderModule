@@ -371,7 +371,7 @@ private:
     //**************************************************************
     // members
     //**************************************************************
-    static const int kNumVoices = 4; 
+    static const int kNumVoices = 6; 
     int mNextVoice;
     int mBend;
 
@@ -384,7 +384,7 @@ private:
     void pickNext(byte note){
         int i;    
         unsigned long long lowestTime = millis();   
-        unsigned long long hightestOffTime = 0; 
+        unsigned long long offTime = lowestTime; 
         bool foundOff = false;
         
         for (i=0; i<kNumVoices ; i++){
@@ -397,8 +397,8 @@ private:
             //pick the highest off time of the off notes by default
             } else if (mVoices[i].getVel() <= 0 ){
                 foundOff = true;
-                if (mVoices[i].getOffTime() > hightestOffTime){
-                    hightestOffTime = mVoices[i].getOffTime();
+                if (mVoices[i].getOffTime() < offTime){
+                    offTime = mVoices[i].getOffTime();
                     mNextVoice = i;
                 }
 
@@ -409,9 +409,12 @@ private:
                     mNextVoice = i;
                 }                
             }
+
             
             
         }  
+        Serial.println("next voice");
+        Serial.println(mNextVoice);
     }
 
 
@@ -451,7 +454,10 @@ public:
             float smallestDiff = abs(desiredFrequency - glideStartFrequency);
             for (int i=0; i<kNumVoices ; i++){
                 //check if the desired note is already being played, and if so, exit this function. only really an issue if using sequencer or multiple keyboards for some reason
-                if (mVoices[i].getVel() > 0 and mVoices[i].getNote() == note ) return;
+                if (mVoices[i].getVel() > 0 and mVoices[i].getNote() == note ) {
+                    Serial.println("found on");
+                    return;
+                }
 
                 //else, check if this voices current frequency is closer to the desired, comment this out to always defualt to the last note played
                 if (glideFromClosest and abs(desiredFrequency - mVoices[i].getFrequency()) < smallestDiff) glideStartFrequency = mVoices[i].getFrequency();
@@ -620,8 +626,14 @@ public:
     void setLfoRate(float val){
         int i;
         if (clkDivMode) {
+            Serial.println("setLFO rate");
+            Serial.println(val);
+            Serial.println(arp.getBpm());
             if (val >= 33.0) val = 0;
-            else val = arp.getBpm() / round(val)/16;
+            else val = arp.getBpm() / (round(val)/16.0);
+            Serial.println("new val bpm");
+            Serial.println(val);
+            
         }
         for (i=0; i<kNumVoices ; i++){
             mVoices[i].mLfoWave.frequency(bpmToBps(val));
@@ -707,7 +719,7 @@ public:
         int i;
         if (clkDivMode) {
             if (val >= 33.0) val = 0;
-            else val = arp.getBpm() / round(val)/16;
+            else val = arp.getBpm() / (round(val)/16.0);
         }
         for (i=0; i<kNumVoices ; i++){
             mVoices[i].mLfoFilter.frequency(bpmToBps(val));

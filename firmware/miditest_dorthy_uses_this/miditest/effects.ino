@@ -242,10 +242,13 @@ void setDelayRate(float val){
     if (clkDivMode){
         val = bpmToMillis(arp.getBpm()) * round(val)/16;
     }
-    gDelay.delay(0,val);//delay rate (not pan)
-    val = val * 1000/8; //convert to micros, then make 1/4 period
-    if (val < 10000) val = 10000;//cap at n ms
-    gDelayPan.setPeriodMicros(val);//period por panning delay
+    if (val < 1600 and val > 20) {
+        gDelay.delay(0,val);//delay rate (not pan)
+        val = val * 1000/8; //convert to micros, then make 1/4 period
+        if (val < 10000) val = 10000;//cap at 10 ms
+        gDelayPan.setPeriodMicros(val);//period por panning delay
+    }
+
 }
 
 void serviceEffects(){

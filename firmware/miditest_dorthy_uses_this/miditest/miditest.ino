@@ -32,7 +32,7 @@ MIDI_CREATE_DEFAULT_INSTANCE();
 
 void setup()
 {
-    AudioMemory(600);
+    AudioMemory(800);
     //pinMode(sGatePin,     OUTPUT);
     //pinMode(sAudioOutPin, OUTPUT);
 

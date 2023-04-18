@@ -18,11 +18,15 @@ AudioControlSGTL5000 audioShield;
 
 //mix all voices
 AudioMixer4              gVoiceMixer;         //xy=900,337
+AudioMixer4              gVoiceMixer2;         //xy=900,337
 AudioConnection patchVoices0 (gVoices.mVoices[0].mFilter, 0, gVoiceMixer , 0);
 AudioConnection patchVoices1 (gVoices.mVoices[1].mFilter, 0, gVoiceMixer , 1);
 AudioConnection patchVoices2 (gVoices.mVoices[2].mFilter, 0, gVoiceMixer , 2);
-AudioConnection patchVoices3 (gVoices.mVoices[3].mFilter, 0, gVoiceMixer , 3);
+AudioConnection patchVoices345 (gVoiceMixer2, 0, gVoiceMixer , 3);
 
+AudioConnection patchVoices3 (gVoices.mVoices[3].mFilter, 0, gVoiceMixer2 , 0);
+AudioConnection patchVoices4 (gVoices.mVoices[4].mFilter, 0, gVoiceMixer2 , 1);
+AudioConnection patchVoices5 (gVoices.mVoices[5].mFilter, 0, gVoiceMixer2 , 2);
 
 
 //Efects out
@@ -60,13 +64,13 @@ void initAudio(){
     audioShield.volume(1.0);
     
     int i;
-    
-    for ( i=0; i<gVoices.getNumVoices(); i++){
+
+    for ( i=0; i<4; i++){
         gVoiceMixer.gain(i,0.5);
+        gVoiceMixer2.gain(i,0.5);
     }    
-    for ( i=gVoices.getNumVoices(); i<4; i++){
-        gVoiceMixer.gain(i,0.0);
-    }
+    gVoiceMixer.gain(3,1.0);// mix the voices from mixer 2 in fully
+
 
     gVoices.initAudio();
     chordMode = false;
@@ -327,6 +331,9 @@ MidiClk clk;
 void handleClock(){
     clk.tickIn();
     arp.setBpm(clk.getQuarterNoteBpm()); //24 midi clks in a quarter note
+    if (clkDivMode){
+        //setLfoRates();
+    }
     //Serial.println("clkin");
     //Serial.println(clk.getQuarterNoteBpm()); //TODO REMOVE ME
     //Serial.println();

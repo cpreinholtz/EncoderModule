@@ -149,6 +149,12 @@ void setDefaultsVoices(){
     gControls[VoiceFilterEnvAmmount].setValPercent(0);
 }
 
+void setLfoRates(){
+    gVoices.setFilterLfoRate(gControls[VoiceFilterLfoRate].getScaled());
+    gVoices.setLfoRate(gControls[VoiceLfoRate].getScaled());
+    setDelayRate(gControls[DelayRate].getScaled());
+
+}
 void applyAllVoices(){
 
     gVoices.setWave0Mix(gControls[VoiceWave0Mix].getScaled());
@@ -208,13 +214,16 @@ void initControl(){
     setDefaultsVoices();
     setFxDefaults();    
     applyAllVoices();
-
+    
+    //uncomment this when you make changes to patch saving and loading in order to fix the patch stuff
+    //for (int i=0; i < 16; i++){ loadPatch(i); savePatch(i); }
+    
     //now defaults are loaded from EEPROM
     loadPatch(0); //includes apply all voices()
+    
 
     
-    //need to keep this becuase patch contains dry mix, whoops
-    setFxDefaults();
+
     applyAllVoices();
     
     
@@ -232,18 +241,21 @@ void loadPatch(int patch){
         
         int addr = gControls[0].calcAddr(patch, CtrlLast);
         byte ctrl = gControls[0].readEeprom(addr+1);        
-        //setModWheelDestination(gControls[0].readEeprom(addr+2);
-        //setAftertouchDestination(gControls[0].readEeprom(addr+3);
-        //splitKey = gControls[0].readEeprom(addr+4);
+        if (ctrl & (1 << 0)) chordMode = true; else chordMode = false;
+        if (ctrl & (1 << 1)) dummyMode = true; else dummyMode = false;
+        if (ctrl & (1 << 2)) arpMode = true; else arpMode = false;
+        if (ctrl & (1 << 3)) splitMode = true; else splitMode = false;        
+        if (ctrl & (1 << 4)) glideFromClosest = true; else glideFromClosest = false;
+        if (ctrl & (1 << 5)) clkDivMode = true; else clkDivMode = false;
         
-        Serial.println(ctrl);
-        //if (ctrl && (1 << 0)) chordMode = true; else chordMode = false;
-        //if (ctrl && (1 << 1)) dummyMode = true; else dummyMode = false;
-        //if (ctrl && (1 << 2)) arpMode = true; else arpMode = false;
-        //if (ctrl && (1 << 3)) splitMode = true; else splitMode = false;        
-        //if (ctrl && (1 << 3)) glideFromClosest = true; else glideFromClosest = false;
+        setModWheelDestination(gControls[0].readEeprom(addr+2));
+        setAftertouchDestination(gControls[0].readEeprom(addr+3));
+        splitKey = gControls[0].readEeprom(addr+4);
+        
         applyAllVoices();
-    }    
+    } else if (patch < 16 and gControls[0].readKeys(patch) == false ){
+        Serial.println("error reading key");
+    }
 }
 
 void savePatch(int patch){
@@ -253,11 +265,12 @@ void savePatch(int patch){
         }
         
         byte ctrl = 0;
-        if (chordMode) ctrl = ctrl || (1 << 0);
-        if (dummyMode) ctrl = ctrl || (1 << 1);
-        if (arpMode) ctrl = ctrl || (1 << 2);
-        if (splitMode) ctrl = ctrl || (1 << 3);
-        if (glideFromClosest) ctrl = ctrl || (1 << 4);
+        if (chordMode) ctrl = ctrl | (1 << 0);
+        if (dummyMode) ctrl = ctrl | (1 << 1);
+        if (arpMode) ctrl = ctrl | (1 << 2);
+        if (splitMode) ctrl = ctrl | (1 << 3);
+        if (glideFromClosest) ctrl = ctrl | (1 << 4);
+        if (clkDivMode) ctrl = ctrl | (1 << 5);
         
         int addr = gControls[0].calcAddr(patch, CtrlLast);
         gControls[0].writeEeprom(addr+1, ctrl);
